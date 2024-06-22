@@ -8,6 +8,17 @@
     <meta content="" name="description">
 </head>
 <body>
+
+<?php 
+
+    $routes = array();
+    $route = null;
+
+    if(isset($_GET["ruta"])){
+        $routes = explode("/", $_GET["ruta"]);
+    }
+
+?>
     
 </body>
 </html>
