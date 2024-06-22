@@ -6,6 +6,12 @@
     <title>Farmacia Vernhes</title>
     <meta content="" name="keywords">
     <meta content="" name="description">
+    <?php 
+        session_start();
+        $url = Route::GetFrontendRoute();
+
+        $server = Route::GetBackendRoute();
+    ?>
 </head>
 <body>
 
