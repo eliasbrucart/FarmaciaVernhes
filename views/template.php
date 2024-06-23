@@ -12,19 +12,28 @@
 
         $server = Route::GetBackendRoute();
     ?>
+
+    <input type="hidden" value="<?php echo $url; ?>" id="hiddenPath">
+
 </head>
 <body>
 
-<?php 
+    <?php 
 
-    $routes = array();
-    $route = null;
+        $routes = array();
+        $route = null;
 
-    if(isset($_GET["ruta"])){
-        $routes = explode("/", $_GET["ruta"]);
-    }
+        include "modules/header/header_module.php"; //temp
 
-?>
+        if(isset($_GET["ruta"])){
+            $routes = explode("/", $_GET["ruta"]);
+
+            include "modules/header/header_module.php";
+        }else{
+
+        }
+
+    ?>
     
 </body>
 </html>
