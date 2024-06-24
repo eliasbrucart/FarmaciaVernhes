@@ -71,7 +71,7 @@
       <!-- SidebarSearch Form -->
       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Buscar" aria-label="Search">
           <div class="input-group-append">
             <button class="btn btn-sidebar">
               <i class="fas fa-search fa-fw"></i>
@@ -82,7 +82,7 @@
 
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item menu-open">
+         <!-- <li class="nav-item menu-open">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
@@ -110,13 +110,12 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li>-->
             <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
-                  Widgets
-                  <span class="right badge badge-danger">New</span>
+                  Panel
                 </p>
               </a>
             </li>
