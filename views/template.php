@@ -49,6 +49,7 @@
 
         include "modules/header/header_module.php"; //temp
         include "modules/admin/admin_module.php";
+        include "modules/footer/footer_module.php";
 
         if(isset($_GET["ruta"])){
             $routes = explode("/", $_GET["ruta"]);
