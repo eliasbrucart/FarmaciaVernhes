@@ -35,6 +35,8 @@
     <!-- summernote -->
     <link rel="stylesheet" href="<?php echo $url; ?>views/plugins/summernote/summernote-bs4.min.css">
 
+    <link rel="stylesheet" href="<?php echo $url; ?>views/plugins/fullcalendar/main.css">
+
     <input type="hidden" value="<?php echo $url; ?>" id="hiddenPath">
 
 </head>
@@ -46,6 +48,7 @@
         $route = null;
 
         include "modules/header/header_module.php"; //temp
+        include "modules/admin/admin_module.php";
 
         if(isset($_GET["ruta"])){
             $routes = explode("/", $_GET["ruta"]);
@@ -87,10 +90,14 @@
     <script src="<?php echo $url; ?>views/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo $url; ?>views/js/adminlte.js"></script>
+
+    <script src="<?php echo $url; ?>views/plugins/moment/moment.min.js"></script>
+    <script src="<?php echo $url; ?>views/plugins/fullcalendar/main.js"></script>
     <!-- AdminLTE for demo purposes -->
     <!--<script src="<?php echo $url; ?>views/js/demo.js"></script>-->
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo $url; ?>views/js/pages/dashboard.js"></script>
+    <script src="<?php echo $url; ?>views/js/calendar/calendar.js"></script>
     
 </body>
 </html>

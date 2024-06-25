@@ -54,3 +54,9 @@
 [23-Jun-2024 05:57:33 Europe/Berlin] PHP Warning:  Undefined variable $url in D:\xampp\htdocs\FarmaciaVernhes\views\template.php on line 25
 [23-Jun-2024 05:57:33 Europe/Berlin] PHP Warning:  Undefined variable $url in D:\xampp\htdocs\FarmaciaVernhes\views\template.php on line 27
 [23-Jun-2024 05:57:33 Europe/Berlin] PHP Warning:  Undefined variable $url in D:\xampp\htdocs\FarmaciaVernhes\views\template.php on line 29
+[24-Jun-2024 21:42:54 Europe/Berlin] PHP Warning:  include(modules/admin_module.php): Failed to open stream: No such file or directory in D:\xampp\htdocs\FarmaciaVernhes\views\template.php on line 49
+[24-Jun-2024 21:42:54 Europe/Berlin] PHP Warning:  include(): Failed opening 'modules/admin_module.php' for inclusion (include_path='D:\xampp\php\PEAR') in D:\xampp\htdocs\FarmaciaVernhes\views\template.php on line 49
+[24-Jun-2024 21:42:54 Europe/Berlin] PHP Warning:  include(modules/admin_module.php): Failed to open stream: No such file or directory in D:\xampp\htdocs\FarmaciaVernhes\views\template.php on line 49
+[24-Jun-2024 21:42:54 Europe/Berlin] PHP Warning:  include(): Failed opening 'modules/admin_module.php' for inclusion (include_path='D:\xampp\php\PEAR') in D:\xampp\htdocs\FarmaciaVernhes\views\template.php on line 49
+[25-Jun-2024 01:40:21 Europe/Berlin] PHP Warning:  include(modules/admin_module.php): Failed to open stream: No such file or directory in D:\xampp\htdocs\FarmaciaVernhes\views\template.php on line 49
+[25-Jun-2024 01:40:21 Europe/Berlin] PHP Warning:  include(): Failed opening 'modules/admin_module.php' for inclusion (include_path='D:\xampp\php\PEAR') in D:\xampp\htdocs\FarmaciaVernhes\views\template.php on line 49
