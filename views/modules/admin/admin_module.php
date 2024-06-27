@@ -30,7 +30,7 @@
               <!-- /.card -->
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Create Event</h3>
+                  <h3 class="card-title">Agregar Farmacia</h3>
                 </div>
                 <div class="card-body">
                   <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
@@ -44,10 +44,10 @@
                   </div>
                   <!-- /btn-group -->
                   <div class="input-group">
-                    <input id="new-event" type="text" class="form-control" placeholder="Event Title">
+                    <input id="new-event addPharmacy" name="addPharmacy" type="text" class="form-control" placeholder="Farmacia">
 
                     <div class="input-group-append">
-                      <button id="add-new-event" type="button" class="btn btn-primary">Add</button>
+                      <button id="add-new-event" type="button" class="btn btn-primary" onclick="AddPharmacy()">Agregar</button>
                     </div>
                     <!-- /btn-group -->
                   </div>

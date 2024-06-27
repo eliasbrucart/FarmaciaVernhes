@@ -99,6 +99,7 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo $url; ?>views/js/pages/dashboard.js"></script>
     <script src="<?php echo $url; ?>views/js/calendar/calendar.js"></script>
+    <script src="<?php echo $url; ?>views/js/admin_module.js"></script>
     
 </body>
 </html>

@@ -47,6 +47,7 @@ $(function () {
     new Draggable(containerEl, {
       itemSelector: '.external-event',
       eventData: function(eventEl) {
+        //console.log("Entro en el evento drag!");
         return {
           title: eventEl.innerText,
           backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
@@ -105,6 +106,7 @@ $(function () {
       }
     ];
 
+    //Calendario, configuracion, data, botones, etc.
     var calendar = new Calendar(calendarEl, {
       headerToolbar: {
         left  : 'prev,next today',
@@ -164,9 +166,11 @@ $(function () {
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {
+        console.log("Entro al evento drop!" + info);
         // is the "remove after drop" checkbox checked?
         if (checkbox.checked) {
           // if so, remove the element from the "Draggable Events" list
+          console.log("Entro al evento drop 2!");
           info.draggedEl.parentNode.removeChild(info.draggedEl);
         }
       }
@@ -188,6 +192,7 @@ $(function () {
         'border-color'    : currColor
       })
     })
+    //Crear eventos, cambiar por logica de agregar farmacia
     $('#add-new-event').click(function (e) {
       e.preventDefault()
       // Get value and make sure it is not null
