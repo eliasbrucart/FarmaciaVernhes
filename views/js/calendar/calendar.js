@@ -97,8 +97,8 @@ $(function () {
       },
       {
         title          : 'Click for Google',
-        start          : new Date(y, m, 1),
-        end            : new Date(y, m, 10),
+        start          : new Date(y, 6, d),
+        end            : new Date(y, 6, d),
         allDay         : false,
         url            : 'https://www.google.com/',
         backgroundColor: '#3c8dbc', //Primary (light-blue)
