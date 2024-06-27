@@ -1,9 +1,14 @@
-<?php 
+<?php
+
+require "../controllers/pharmacy_controller.php";
+require "../models/pharmacy_model.php";
 
 class AdminModuleAjax{
     public $namePharmacyToAdd;
     public function AddPharmacy(){
-        $response = "";
+        $data = array();
+
+        $response = PharmacyController::AddPharmacy($data);
 
         echo json_encode($response);
     }
