@@ -6,7 +6,7 @@ require "../models/pharmacy_model.php";
 class AdminModuleAjax{
     public $namePharmacyToAdd;
     public function AddPharmacy(){
-        $data = array();
+        $data = array("namePharmacyToAdd"=>$this->namePharmacyToAdd);
 
         $response = PharmacyController::AddPharmacy($data);
 

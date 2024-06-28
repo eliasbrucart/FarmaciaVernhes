@@ -94,6 +94,9 @@
 
     <script src="<?php echo $url; ?>views/plugins/moment/moment.min.js"></script>
     <script src="<?php echo $url; ?>views/plugins/fullcalendar/main.js"></script>
+
+    <script src="<?php echo $url; ?>views/js/template.js"></script>
+
     <!-- AdminLTE for demo purposes -->
     <!--<script src="<?php echo $url; ?>views/js/demo.js"></script>-->
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
