@@ -25,6 +25,14 @@ class PharmacyController{
         }
 
     }
+
+    static public function GetPharmacies(){
+        $table = "pharmacy";
+
+        $response = PharmacyModel::GetPharmacies($table);
+
+        return $response;
+    }
 }
 
 ?>

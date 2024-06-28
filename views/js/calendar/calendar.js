@@ -179,6 +179,8 @@ $(function () {
     calendar.render();
     // $('#calendar').fullCalendar()
 
+    ShowPharmacies();
+
     /* ADDING EVENTS */
     var currColor = '#3c8dbc' //Red by default
     // Color chooser button
@@ -201,20 +203,57 @@ $(function () {
         return
       }
 
+      ShowPharmacies();
+
       // Create events
-      var event = $('<div />')
+     var event = $('<div />')
       event.css({
         'background-color': currColor,
         'border-color'    : currColor,
         'color'           : '#fff'
       }).addClass('external-event')
-      event.text(val)
-      $('#external-events').prepend(event)
+      event.text(val)//nombre del evento, es el que se muestra a la derecha
+      $('#external-events').prepend(event) //hacer hijo a event de external-events
+
 
       // Add draggable funtionality
-      ini_events(event)
+      //ini_events(event)
 
       // Remove event from text input
       $('#new-event').val('')
     })
+    function ShowPharmacies(){
+      //Get Pharmacies
+      var validateData = new FormData();
+      validateData.append("getPharmacies", true);
+  
+      //var eventData = "";
+  
+      $.ajax({
+        url:hiddenPath+"ajax/admin_module_ajax.php",
+        method: "POST",
+        data: validateData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:(response)=>{
+          var parsePharmaciesJSON = JSON.parse(response);
+          //console.log("Get Pharmacies response " + parsePharmaciesJSON[3].name_pharmacy);
+          for(var i = 0; i < parsePharmaciesJSON.length; i++){
+            var event = $('<div />');
+            event.css({
+              'background-color': currColor,
+              'border-color'    : currColor,
+              'color'           : '#fff'
+            }).addClass('external-event')
+            event.text(parsePharmaciesJSON[i].name_pharmacy)//nombre del evento, es el que se muestra a la derecha
+            $('#external-events').prepend(event) //hacer hijo a event de external-events
+  
+            ini_events(event);
+            // Remove event from text input
+            $('#new-event').val('');
+          }
+        }
+    })
+  }
   })

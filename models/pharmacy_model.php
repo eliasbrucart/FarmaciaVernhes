@@ -33,6 +33,18 @@ class PharmacyModel{
 
         $stmt = null;
     }
+
+    static public function GetPharmacies($table){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table");
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

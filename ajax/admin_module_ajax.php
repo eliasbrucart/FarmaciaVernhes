@@ -14,6 +14,12 @@ class AdminModuleAjax{
 
         echo json_encode($response);
     }
+
+    public function GetPharmacies(){
+        $response = PharmacyController::GetPharmacies();
+
+        echo json_encode($response);
+    }
 }
 
 if(isset($_POST["namePharmacyToAdd"])){
@@ -21,6 +27,11 @@ if(isset($_POST["namePharmacyToAdd"])){
     $addPharmacy->namePharmacyToAdd = $_POST["namePharmacyToAdd"];
     $addPharmacy->addressPharmacyToAdd = $_POST["addressPharmacyToAdd"];
     $addPharmacy->AddPharmacy();
+}
+
+if(isset($_POST["getPharmacies"])){
+    $getPharmacies = new AdminModuleAjax();
+    $getPharmacies->GetPharmacies();
 }
 
 ?>
