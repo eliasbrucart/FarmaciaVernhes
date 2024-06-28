@@ -18,6 +18,20 @@ class PharmacyModel{
 
         $stmt = null;
     }
+
+    static public function ShowPharmacy($table, $pharmacy){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE name_$table= :name_$table");
+
+        $stmt->bindParam(":name_".$table, $pharmacy, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>
