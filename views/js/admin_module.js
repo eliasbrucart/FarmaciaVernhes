@@ -1,8 +1,10 @@
 function AddPharmacy(){
     var namePharmacy = $('.addPharmacy').val();
+    var addressPharmacy = $('.addressPharmacy').val();
 
     var validateData = new FormData();
     validateData.append("namePharmacyToAdd", namePharmacy);
+    validateData.append("addressPharmacyToAdd", addressPharmacy);
 
     $.ajax({
         url:hiddenPath+"ajax/admin_module_ajax.php",

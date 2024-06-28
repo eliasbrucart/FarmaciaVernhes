@@ -5,8 +5,10 @@ require "../models/pharmacy_model.php";
 
 class AdminModuleAjax{
     public $namePharmacyToAdd;
+    public $addressPharmacyToAdd;
     public function AddPharmacy(){
-        $data = array("namePharmacyToAdd"=>$this->namePharmacyToAdd);
+        $data = array("namePharmacyToAdd"=>$this->namePharmacyToAdd,
+                      "addressPharmacyToAdd"=>$this->addressPharmacyToAdd);
 
         $response = PharmacyController::AddPharmacy($data);
 
@@ -17,6 +19,7 @@ class AdminModuleAjax{
 if(isset($_POST["namePharmacyToAdd"])){
     $addPharmacy = new AdminModuleAjax();
     $addPharmacy->namePharmacyToAdd = $_POST["namePharmacyToAdd"];
+    $addPharmacy->addressPharmacyToAdd = $_POST["addressPharmacyToAdd"];
     $addPharmacy->AddPharmacy();
 }
 
