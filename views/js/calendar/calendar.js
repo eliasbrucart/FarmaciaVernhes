@@ -47,7 +47,7 @@ $(function () {
     new Draggable(containerEl, {
       itemSelector: '.external-event',
       eventData: function(eventEl) {
-        //console.log("Entro en el evento drag!");
+        console.log("Entro en el evento drag!");
         return {
           title: eventEl.innerText,
           backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
@@ -166,7 +166,7 @@ $(function () {
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {
-        console.log("Entro al evento drop!" + info);
+        console.log("Entro al evento drop!" + info.date);
         // is the "remove after drop" checkbox checked?
         if (checkbox.checked) {
           // if so, remove the element from the "Draggable Events" list
