@@ -170,12 +170,22 @@ $(function () {
         const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
         const formattedDate = formatter.format(info.date);
         console.log("Fecha del evento drop formateada " + formattedDate);
+        var externalEvent = $('.external-event').text();
+
+        
         // is the "remove after drop" checkbox checked?
         if (checkbox.checked) {
           // if so, remove the element from the "Draggable Events" list
           console.log("Entro al evento drop 2!");
           info.draggedEl.parentNode.removeChild(info.draggedEl);
         }
+      },
+      eventDrop   : function(info){
+        console.log("eventDrop event name " + info.event.title);
+      },
+      eventReceive : function(info){
+        console.log("Event Receive event name " + info.event.title);
+        console.log("Event Receive event date " + info.event.date);
       }
     });
 
