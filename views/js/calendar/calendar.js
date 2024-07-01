@@ -170,8 +170,6 @@ $(function () {
         const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
         const formattedDate = formatter.format(info.date);
         console.log("Fecha del evento drop formateada " + formattedDate);
-        var externalEvent = $('.external-event').text();
-
         
         // is the "remove after drop" checkbox checked?
         if (checkbox.checked) {
@@ -180,12 +178,16 @@ $(function () {
           info.draggedEl.parentNode.removeChild(info.draggedEl);
         }
       },
-      eventDrop   : function(info){
+      eventDrop   : function(info, revertFunc){
         console.log("eventDrop event name " + info.event.title);
+
+        const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        var CurrentPositionDate= formatter.format(info.event.start);
+        
+        console.log("eventDrop current position date " + CurrentPositionDate);
       },
       eventReceive : function(info){
         console.log("Event Receive event name " + info.event.title);
-        console.log("Event Receive event date " + info.event.date);
       }
     });
 
