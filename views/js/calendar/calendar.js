@@ -107,6 +107,10 @@ $(function () {
     ];
 
     //Calendario, configuracion, data, botones, etc.
+
+    var dropDate = "";
+    var recieveEventName = "";
+    var eventDropDate = "";
     var calendar = new Calendar(calendarEl, {
       headerToolbar: {
         left  : 'prev,next today',
@@ -167,9 +171,11 @@ $(function () {
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {
         console.log("Entro al evento drop!" + info.date);
-        const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        const formattedDate = formatter.format(info.date);
+        var formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        var formattedDate = formatter.format(info.date);
         console.log("Fecha del evento drop formateada " + formattedDate);
+
+        dropDate = formattedDate;
         
         // is the "remove after drop" checkbox checked?
         if (checkbox.checked) {
@@ -178,16 +184,18 @@ $(function () {
           info.draggedEl.parentNode.removeChild(info.draggedEl);
         }
       },
-      eventDrop   : function(info, revertFunc){
+      eventDrop   : function(info){
         console.log("eventDrop event name " + info.event.title);
 
         const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
         var CurrentPositionDate= formatter.format(info.event.start);
-        
+
         console.log("eventDrop current position date " + CurrentPositionDate);
       },
       eventReceive : function(info){
-        console.log("Event Receive event name " + info.event.title);
+        recieveEventName = info.event.title;
+        console.log("Receive Event name " + info.event.title);
+        CreateTurner();
       }
     });
 
@@ -237,6 +245,28 @@ $(function () {
       // Remove event from text input
       $('#new-event').val('')
     })
+    function CreateTurner(){
+        var validateData = new FormData();
+        validateData.append("createTurner", true);
+        validateData.append("recieveEventName", recieveEventName);
+        validateData.append("dropDate", dropDate);
+        //cambiar mas adelante
+        validateData.append("pharmacy24hs", 1);
+
+        $.ajax({
+          url:hiddenPath+"ajax/admin_module_ajax.php",
+          method: "POST",
+          data: validateData,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success:(response)=>{
+            console.log("response create turner " + response);
+          }
+        });
+
+    }
+
     function ShowPharmacies(){
       //Get Pharmacies
       var validateData = new FormData();
