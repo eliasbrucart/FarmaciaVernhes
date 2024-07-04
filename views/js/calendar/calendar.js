@@ -57,15 +57,17 @@ $(function () {
       }
     });
 
-    var calendarEvents = [
+    /*calendarEvents = [
       {
+        id_calendar    : 0,
         title          : 'All Day Event',
-        start          : new Date(y, m, 1),
+        start          : new Date("2024/07/20"),
         backgroundColor: '#f56954', //red
         borderColor    : '#f56954', //red
         allDay         : true
       },
       {
+        id_calendar    : 0,
         title          : 'Long Event',
         start          : new Date(y, m, d - 5),
         end            : new Date(y, m, d - 2),
@@ -73,6 +75,7 @@ $(function () {
         borderColor    : '#f39c12' //yellow
       },
       {
+        id_calendar    : 0,
         title          : 'Meeting',
         start          : new Date(y, m, d, 10, 30),
         allDay         : false,
@@ -80,6 +83,7 @@ $(function () {
         borderColor    : '#0073b7' //Blue
       },
       {
+        id_calendar    : 0,
         title          : 'Lunch',
         start          : new Date(y, m, d, 12, 0),
         end            : new Date(y, m, d, 14, 0),
@@ -88,6 +92,7 @@ $(function () {
         borderColor    : '#00c0ef' //Info (aqua)
       },
       {
+        id_calendar    : 0,
         title          : 'Birthday Party',
         start          : new Date(y, m, d + 1, 19, 0),
         end            : new Date(y, m, d + 1, 22, 30),
@@ -96,6 +101,7 @@ $(function () {
         borderColor    : '#00a65a' //Success (green)
       },
       {
+        id_calendar    : 0,
         title          : 'Click for Google',
         start          : new Date(y, 6, d),
         end            : new Date(y, 6, d),
@@ -104,13 +110,20 @@ $(function () {
         backgroundColor: '#3c8dbc', //Primary (light-blue)
         borderColor    : '#3c8dbc' //Primary (light-blue)
       }
-    ];
+    ];*/
+
+    //var calendarEventsToJSON = JSON.stringify(calendarEvents);
+    //console.log("calendar events to json " + calendarEventsToJSON);
 
     //Calendario, configuracion, data, botones, etc.
 
     var dropDate = "";
     var recieveEventName = "";
     var eventDropDate = "";
+
+    var calendarEvents = new Array();
+
+    ShowEvents();
     var calendar = new Calendar(calendarEl, {
       headerToolbar: {
         left  : 'prev,next today',
@@ -196,7 +209,7 @@ $(function () {
         recieveEventName = info.event.title;
         console.log("Receive Event name " + info.event.title);
         CreateTurner();
-      }
+      },
     });
 
     calendar.render();
@@ -267,6 +280,42 @@ $(function () {
 
     }
 
+    function ShowEvents(){
+      var dataEvents = [];
+  
+      var validateData = new FormData();
+      validateData.append("getPharmaciesRegistered",true);
+  
+      $.ajax({
+        url:hiddenPath+"ajax/admin_module_ajax.php",
+        method: "POST",
+        data: validateData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:(response)=>{
+          console.log("response pharmacies data" + response);
+          var parseResponse = JSON.parse(response);
+          //var parseResponse = response.data;
+  
+          for(var i = 0; i < parseResponse.data.length; i++){
+  
+            calendarEvents.push({
+              event_id: parseResponse.data[i].id_event,
+              title: parseResponse.data[i].title,
+              start: parseResponse.data[i].start,
+              backgroundColor: parseResponse.data[i].color,
+              borderColor: parseResponse.data[i].color,
+              allDay: true
+            });
+
+            calendar.addEvent(calendarEvents[i]);
+          }
+          console.log("calendar events " + calendarEvents.length);
+        }
+      })
+    }
+
     function ShowPharmacies(){
       //Get Pharmacies
       var validateData = new FormData();
@@ -301,4 +350,4 @@ $(function () {
         }
     })
   }
-  })
+})

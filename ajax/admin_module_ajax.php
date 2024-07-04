@@ -36,6 +36,33 @@ class AdminModuleAjax{
 
         echo json_encode($response);
     }
+
+    public function GetPharmaciesRegistered(){
+        $response = TurnerController::GetPharmaciesRegistered();
+
+        if(is_array($response)){
+            $data_arr = array();
+            $i = 1;
+
+            for($i = 0; $i < count($response); $i++){
+                $data_arr[$i]['event_id'] = $response[$i]['event_id'];
+                $data_arr[$i]['title'] = $response[$i]['event_name'];
+                $data_arr[$i]['start'] = date("Y-m-d", strtotime($response[$i]['event_start_date']));
+                $data_arr[$i]['end'] = date("Y-m-d", strtotime($response[$i]['event_end_date']));
+                $data_arr[$i]['color'] = '#'.substr(uniqid(),-6); // 'green'; pass colour name
+                $data_arr[$i]['url'] = 'https://www.shinerweb.com';
+            }
+
+            $data = array('status' => true,
+                          'msg' => 'successfully!',
+                          'data' => $data_arr);
+        }else{
+            $data = array('status' => false,
+                          'msg' => 'Error!');
+        }
+
+        echo json_encode($data);
+    }
 }
 
 if(isset($_POST["namePharmacyToAdd"])){
@@ -56,6 +83,11 @@ if(isset($_POST["createTurner"])){
     $createTurner->dateTurner = $_POST["dropDate"];
     $createTurner->pharmacy24hs = $_POST["pharmacy24hs"];
     $createTurner->CreateTurner();
+}
+
+if(isset($_POST["getPharmaciesRegistered"])){
+    $getPharmaciesRegistered = new AdminModuleAjax();
+    $getPharmaciesRegistered->GetPharmaciesRegistered();
 }
 
 ?>

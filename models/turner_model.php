@@ -33,6 +33,18 @@ class TurnerModel{
 
         $stmt = null;
     }
+
+    static public function GetPharmaciesRegistered($table){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table");
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

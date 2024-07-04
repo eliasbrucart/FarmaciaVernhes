@@ -19,6 +19,14 @@ class TurnerController{
 
         return $response;
     }
+
+    static public function GetPharmaciesRegistered(){
+        $table = "calendar_event_master";
+
+        $response = TurnerModel::GetPharmaciesRegistered($table);
+
+        return $response;
+    }
 }
 
 ?>
