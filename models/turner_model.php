@@ -2,10 +2,11 @@
 
 class TurnerModel{
     static public function CreateTurner($table, $data){
-        $stmt = Connection::Connect()->prepare("INSERT INTO $table(id_pharmacy, date_turner, 24hs_turner) VALUES(:id_pharmacy, :date_turner, :24hs_turner)");
+        $stmt = Connection::Connect()->prepare("INSERT INTO $table(id_pharmacy, name_pharmacy, date_turner, 24hs_turner) VALUES(:id_pharmacy, :name_pharmacy, :date_turner, :24hs_turner)");
 
         //bind params
         $stmt->bindParam(":id_pharmacy", $data["idPharmacyTurner"], PDO::PARAM_INT);
+        $stmt->bindParam(":name_pharmacy", $data["namePharmacy"], PDO::PARAM_STR);
         $stmt->bindParam(":date_".$table, $data["dateTurner"], PDO::PARAM_STR);
         $stmt->bindParam(":24hs_".$table, $data["pharmacy24hs"], PDO::PARAM_INT);
 
@@ -40,6 +41,20 @@ class TurnerModel{
         $stmt->execute();
 
         return $stmt->fetchAll();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+    static public function GetPharmacyName($table, $id){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE id_$table = :id_$table");
+
+        $stmt->bindParam("id_".$table, $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchColumn(1); //columna name_pharmacy
 
         $stmt->close();
 

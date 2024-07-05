@@ -45,10 +45,10 @@ class AdminModuleAjax{
             $i = 1;
 
             for($i = 0; $i < count($response); $i++){
-                $data_arr[$i]['event_id'] = $response[$i]['event_id'];
-                $data_arr[$i]['title'] = $response[$i]['event_name'];
-                $data_arr[$i]['start'] = date("Y-m-d", strtotime($response[$i]['event_start_date']));
-                $data_arr[$i]['end'] = date("Y-m-d", strtotime($response[$i]['event_end_date']));
+                $data_arr[$i]['event_id'] = $response[$i]['id_turner'];
+                $data_arr[$i]['title'] = $response[$i]['name_pharmacy'];
+                $data_arr[$i]['start'] = date("Y-m-d", strtotime($response[$i]['date_turner']));
+                $data_arr[$i]['end'] = date("Y-m-d", strtotime($response[$i]['date_turner']));
                 $data_arr[$i]['color'] = '#'.substr(uniqid(),-6); // 'green'; pass colour name
                 $data_arr[$i]['url'] = 'https://www.shinerweb.com';
             }
