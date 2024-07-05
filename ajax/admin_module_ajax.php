@@ -45,7 +45,7 @@ class AdminModuleAjax{
             $i = 1;
 
             for($i = 0; $i < count($response); $i++){
-                $data_arr[$i]['event_id'] = $response[$i]['id_turner'];
+                $data_arr[$i]['id'] = $response[$i]['id_turner'];
                 $data_arr[$i]['title'] = $response[$i]['name_pharmacy'];
                 $data_arr[$i]['start'] = date("Y-m-d", strtotime($response[$i]['date_turner']));
                 $data_arr[$i]['end'] = date("Y-m-d", strtotime($response[$i]['date_turner']));
@@ -62,6 +62,17 @@ class AdminModuleAjax{
         }
 
         echo json_encode($data);
+    }
+
+    public $eventDropID;
+    public $eventDropDate;
+    public function UpdateTurner(){
+        $data = array("eventDropID"=>$this->eventDropID,
+                      "eventDropDate"=>$this->eventDropDate);
+
+        $response = TurnerController::UpdateTurner($data);
+
+        echo json_encode($response);
     }
 }
 
@@ -88,6 +99,13 @@ if(isset($_POST["createTurner"])){
 if(isset($_POST["getPharmaciesRegistered"])){
     $getPharmaciesRegistered = new AdminModuleAjax();
     $getPharmaciesRegistered->GetPharmaciesRegistered();
+}
+
+if(isset($_POST["updateTurner"])){
+    $updateTurner = new AdminModuleAjax();
+    $updateTurner->eventDropID = $_POST["eventDropID"];
+    $updateTurner->eventDropDate = $_POST["eventDropDate"];
+    $updateTurner->UpdateTurner();
 }
 
 ?>

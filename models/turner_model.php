@@ -60,6 +60,23 @@ class TurnerModel{
 
         $stmt = null;
     }
+
+    static public function UpdateTurner($table, $data){
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET date_turner = :date_turner WHERE id_turner = :id_turner");
+
+        $stmt->bindParam(":id_turner", $data["eventDropID"], PDO::PARAM_STR);
+        $stmt->bindParam(":date_turner", $data["eventDropDate"], PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

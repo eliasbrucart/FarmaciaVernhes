@@ -119,6 +119,8 @@ $(function () {
 
     var dropDate = "";
     var recieveEventName = "";
+
+    var eventDropID = "";
     var eventDropDate = "";
 
     var calendarEvents = new Array();
@@ -198,16 +200,26 @@ $(function () {
         }
       },
       eventDrop   : function(info){
+        //var infoResources = info.event.getResources();                
         console.log("eventDrop event name " + info.event.title);
+        //console.log("eventDrop event id " + infoResources[0]._resource.id);
+        console.log("eventDrop event id " + info.event.id);
 
         const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        var CurrentPositionDate= formatter.format(info.event.start);
+        var currentPositionDate = formatter.format(info.event.start);
 
-        console.log("eventDrop current position date " + CurrentPositionDate);
+        eventDropDate = currentPositionDate;
+        eventDropID = info.event.id;
+
+        console.log("eventDrop current position date " + currentPositionDate);
+        
+        UpdateTurner();
       },
       eventReceive : function(info){
         recieveEventName = info.event.title;
+        //info.event.id = 2;
         console.log("Receive Event name " + info.event.title);
+        console.log("Receive Event id " + info.event.event_id);
         CreateTurner();
       },
     });
@@ -280,6 +292,26 @@ $(function () {
 
     }
 
+    function UpdateTurner(){
+      var validateData = new FormData();
+      validateData.append("updateTurner", true);
+      validateData.append("eventDropID", eventDropID);
+      validateData.append("eventDropDate", eventDropDate);
+
+      $.ajax({
+        url:hiddenPath+"ajax/admin_module_ajax.php",
+        method: "POST",
+        data: validateData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:(response)=>{
+          console.log("response update turner " + response);
+        }
+      });
+
+    }
+
     function ShowEvents(){
       var dataEvents = [];
   
@@ -301,7 +333,7 @@ $(function () {
           for(var i = 0; i < parseResponse.data.length; i++){
   
             calendarEvents.push({
-              event_id: parseResponse.data[i].id_event,
+              id: parseResponse.data[i].id,
               title: parseResponse.data[i].title,
               start: parseResponse.data[i].start,
               backgroundColor: parseResponse.data[i].color,

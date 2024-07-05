@@ -45,6 +45,14 @@ class TurnerController{
 
         return $response;
     }
+
+    static public function UpdateTurner($data){
+        $table = "turner";
+
+        $response = TurnerModel::UpdateTurner($table, $data);
+
+        return $response;
+    }
 }
 
 ?>
