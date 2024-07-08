@@ -37,6 +37,8 @@
 
     <link rel="stylesheet" href="<?php echo $url; ?>views/plugins/fullcalendar/main.css">
 
+    <link rel="stylesheet" href="<?php echo $url; ?>views/css/turner/turner_module.css">
+
     <input type="hidden" value="<?php echo $url; ?>" id="hiddenPath">
 
 </head>
@@ -47,16 +49,26 @@
         $routes = array();
         $route = null;
 
-        include "modules/header/header_module.php"; //temp
+        /*include "modules/header/header_module.php"; //temp
         include "modules/admin/admin_module.php";
-        include "modules/footer/footer_module.php";
+        include "modules/footer/footer_module.php";*/
 
         if(isset($_GET["ruta"])){
             $routes = explode("/", $_GET["ruta"]);
 
-            include "modules/header/header_module.php";
-        }else{
+            if($route != null || $routes[0] == "turner"){
+                include "modules/".$routes[0]."/".$routes[0]."_module.php";
+            }else if($routes[0] == "home" || $routes[0] == "admin"){
+                include "modules/header/header_module.php"; //temp
+                include "modules/admin/admin_module.php";
+                include "modules/footer/footer_module.php";
+                }
 
+            //include "modules/header/header_module.php";
+        }else{
+            include "modules/header/header_module.php"; //temp
+            include "modules/admin/admin_module.php";
+            include "modules/footer/footer_module.php";
         }
 
     ?>
