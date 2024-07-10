@@ -1,5 +1,7 @@
 <?php
 
+require_once "connection.php";
+
 class TurnerModel{
     static public function CreateTurner($table, $data){
         $stmt = Connection::Connect()->prepare("INSERT INTO $table(id_pharmacy, name_pharmacy, date_turner, 24hs_turner) VALUES(:id_pharmacy, :name_pharmacy, :date_turner, :24hs_turner)");
@@ -72,6 +74,20 @@ class TurnerModel{
         }else{
             return "error";
         }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+    static public function GetTodayPharmacies($table, $actualDateToDBFormat){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE date_$table = :date_$table");
+
+        $stmt->bindParam(":date_".$table, $actualDateToDBFormat, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
 
         $stmt->close();
 

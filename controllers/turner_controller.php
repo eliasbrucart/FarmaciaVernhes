@@ -23,25 +23,8 @@ class TurnerController{
 
     static public function GetPharmaciesRegistered(){
         $table = "turner";
-        //$table = "calendar_event_master";
 
         $response = TurnerModel::GetPharmaciesRegistered($table);
-
-        /*var_dump($response);
-
-        $pharmacyTable = "pharmacy";
-        $data = array();
-
-        if(is_array($response)){
-
-            for($i = 0; $i < count($response); $i++){
-                $namePharmacy = TurnerModel::GetPharmacyName($pharmacyTable, $response[$i]["id_pharmacy"]);
-                array_push($data, $namePharmacy);
-            }
-
-        }
-
-        var_dump($data)*/
 
         return $response;
     }
@@ -50,6 +33,14 @@ class TurnerController{
         $table = "turner";
 
         $response = TurnerModel::UpdateTurner($table, $data);
+
+        return $response;
+    }
+
+    static public function GetTodayPharmacies($actualDateToDBFormat){
+        $table = "turner";
+
+        $response = TurnerModel::GetTodayPharmacies($table, $actualDateToDBFormat);
 
         return $response;
     }

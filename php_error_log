@@ -62,3 +62,4 @@
 [25-Jun-2024 01:40:21 Europe/Berlin] PHP Warning:  include(): Failed opening 'modules/admin_module.php' for inclusion (include_path='D:\xampp\php\PEAR') in D:\xampp\htdocs\FarmaciaVernhes\views\template.php on line 49
 [02-Jul-2024 06:48:21 Europe/Berlin] PHP Fatal error:  Cannot declare class Connection, because the name is already in use in D:\xampp\htdocs\FarmaciaVernhes\models\connection.php on line 3
 [02-Jul-2024 06:50:03 Europe/Berlin] PHP Fatal error:  Cannot declare class Connection, because the name is already in use in D:\xampp\htdocs\FarmaciaVernhes\models\connection.php on line 3
+[10-Jul-2024 18:20:58 Europe/Berlin] PHP Fatal error:  Cannot declare class Connection, because the name is already in use in D:\xampp\htdocs\FarmaciaVernhes\models\connection.php on line 3
