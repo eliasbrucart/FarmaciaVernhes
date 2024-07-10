@@ -1,0 +1,48 @@
+.turnerTitleHeaderBox{
+    background-color: rgb(51, 51, 52);
+    border-radius: 2px;
+}
+.turnerTitleHeader{
+    color: #ffffff;
+    text-align: center;
+}
+.turnerTitleHeader{
+    margin-top: 10px;
+}
+.actualDate{
+    text-align: center;
+    margin: 15px 0px;
+}
+.actualDateSpan{
+    color: #ffffff;
+}
+.pharmacyName{
+    font-weight: bold;
+}
+.pharmacyAddress{
+    color: #ffffff;
+}
+.typeTurnerPharmacy{
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 35px;
+}
+/*=============================================
+ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
+=============================================*/
+
+@media (max-width:1199px) and (min-width:992px) {}
+
+
+/*=============================================
+ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
+=============================================*/
+
+@media (max-width:991px) and (min-width:768px) {}
+
+
+/*=============================================
+MOVIL (XS revisamos en 320px)
+=============================================*/
+
+@media (max-width:767px) {}

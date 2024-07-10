@@ -62,7 +62,7 @@
                 include "modules/header/header_module.php"; //temp
                 include "modules/admin/admin_module.php";
                 include "modules/footer/footer_module.php";
-                }
+            }
 
             //include "modules/header/header_module.php";
         }else{
@@ -115,6 +115,7 @@
     <script src="<?php echo $url; ?>views/js/pages/dashboard.js"></script>
     <script src="<?php echo $url; ?>views/js/calendar/calendar.js"></script>
     <script src="<?php echo $url; ?>views/js/admin_module.js"></script>
+    <script src="<?php echo $url; ?>views/js/turner/turner_module.js"></script>
     
 </body>
 </html>
