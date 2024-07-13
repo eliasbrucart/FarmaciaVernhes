@@ -13,8 +13,8 @@
         <!-- small card -->
         <div class="small-box bg-success">
             <div class="inner">
-                <h1 class="pharmacyName">Farmacia Vernhes</h1>
-                <h3 class="pharmacyAddress">Oro 123</h3>
+                <h1 class="pharmacy24Name">Farmacia Vernhes</h1>
+                <h3 class="pharmacy24Address">Oro 123</h3>
             </div>
             <div class="icon">
                 <!--<i class="fas fa-user-plus"></i>-->

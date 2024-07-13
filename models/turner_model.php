@@ -4,13 +4,13 @@ require_once "connection.php";
 
 class TurnerModel{
     static public function CreateTurner($table, $data){
-        $stmt = Connection::Connect()->prepare("INSERT INTO $table(id_pharmacy, name_pharmacy, date_turner, 24hs_turner) VALUES(:id_pharmacy, :name_pharmacy, :date_turner, :24hs_turner)");
+        $stmt = Connection::Connect()->prepare("INSERT INTO $table(id_pharmacy, name_pharmacy, date_turner, fullDay) VALUES(:id_pharmacy, :name_pharmacy, :date_turner, :fullDay)");
 
         //bind params
         $stmt->bindParam(":id_pharmacy", $data["idPharmacyTurner"], PDO::PARAM_INT);
         $stmt->bindParam(":name_pharmacy", $data["namePharmacy"], PDO::PARAM_STR);
         $stmt->bindParam(":date_".$table, $data["dateTurner"], PDO::PARAM_STR);
-        $stmt->bindParam(":24hs_".$table, $data["pharmacy24hs"], PDO::PARAM_INT);
+        $stmt->bindParam(":fullDay", $data["pharmacy24hs"], PDO::PARAM_INT);
 
         if($stmt->execute()){
             return "ok";

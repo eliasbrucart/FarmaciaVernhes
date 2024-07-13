@@ -1,6 +1,6 @@
 <?php
 
-require "connection.php";
+require_once "connection.php";
 
 class PharmacyModel{
     static public function AddPharmacy($table, $data){
@@ -40,6 +40,20 @@ class PharmacyModel{
         $stmt->execute();
 
         return $stmt->fetchAll();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+    static public function GetPharmacyAddress($table, $idTodayPharmacy){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE id_pharmacy = :id_pharmacy");
+
+        $stmt->bindParam("id_pharmacy", $idTodayPharmacy, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchColumn(2); //Columna address_pharmacy
 
         $stmt->close();
 

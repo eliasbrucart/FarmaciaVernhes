@@ -33,6 +33,14 @@ class PharmacyController{
 
         return $response;
     }
+
+    static public function GetPharmacyAddress($idTodayPharmacy){
+        $table = "pharmacy";
+
+        $response = PharmacyModel::GetPharmacyAddress($table, $idTodayPharmacy);
+
+        return $response;
+    }
 }
 
 ?>
