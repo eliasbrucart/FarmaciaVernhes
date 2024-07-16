@@ -2,28 +2,65 @@ $(function(){
     var date = new Date();
 
     var monthToCalendar = date.getMonth()+1;
-
+    
     var actualDate = date.getDate()+"/"+monthToCalendar+"/"+date.getFullYear();
-
+    
     console.log("actualDate" + actualDate.toString());
-
+    
     $(".actualDateSpan").text(actualDate);
-
+    
     //var actualDateToDBFormat = monthToCalendar+"/"+date.getDate()+"/"+date.getFullYear();
     const actualDateToDBFormat = date.toLocaleDateString("en-US", { // you can use undefined as first argument
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
-      })
-
+    })
+    
     console.log("actualDateToDBFormat " + actualDateToDBFormat);
 
-    GetTodayPharmacies();
+    //UpdateDate();
 
-    function GetTodayPharmacies(){
+    //SaveDate(); //dentro de interval
+    //console.log("Check Date Changed " + CheckDateChanged());
+
+    //console.log("new date DB Format " + newDateDBFormat);
+
+    //CheckDateChanged(actualDateToDBFormat);
+
+    setInterval(function(){
+        if(CheckDateChanged(actualDateToDBFormat)){
+            console.log("Cambio la fecha!");
+
+            actualDate = date.getDate()+"/"+monthToCalendar+"/"+date.getFullYear();
+
+            $(".actualDateSpan").text(actualDate);
+
+            var newDateDBFormat = 0;
+    
+            newDateDBFormat = UpdateDate();
+    
+            SaveDate(newDateDBFormat);
+
+            GetTodayPharmacies(actualDateToDBFormat);
+        }
+        console.log("Chequeando cambio de fecha a cada minuto!");
+    }, 60000); //minute
+
+    GetTodayPharmacies(actualDateToDBFormat);
+
+    console.log("GetSavedDate func " + GetSavedDate());
+
+    /*setInterval(function(){
+        console.log("Me ejecuto al iniciar el dia!");
+        if(actualDateToDBFormat != GetSavedDate()){
+            SaveDate();
+        }
+    }, 60000);*/
+
+    function GetTodayPharmacies(actualDate){
         var validateData = new FormData();
         validateData.append("getTodayPharmacies", true);
-        validateData.append("actualDateToDBFormat", actualDateToDBFormat);
+        validateData.append("actualDateToDBFormat", actualDate);
 
         $.ajax({
             url:hiddenPath+"ajax/turner_module_ajax.php",
@@ -70,5 +107,45 @@ $(function(){
             }
         });
 
+    }
+
+    function SaveDate(date){
+        localStorage.setItem("actualDate", date);
+
+        console.log("Save Date in local storage " + localStorage.getItem("actualDate"));
+    }
+
+    function GetSavedDate(){
+        return localStorage.getItem("actualDate");
+    }
+
+    function UpdateDate(){
+        var date = new Date();
+
+        const actualDateToDBFormat = date.toLocaleDateString("en-US", { // you can use undefined as first argument
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+        })
+
+        return actualDateToDBFormat;
+    }
+    
+    function CheckDateChanged(actualDate){
+        var date = new Date();
+
+        const actualDateToDBFormat = date.toLocaleDateString("en-US", { // you can use undefined as first argument
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+        })
+
+        console.log("actualDateToDBFormat in checkDateChanged " + actualDateToDBFormat);
+
+        if(actualDateToDBFormat != actualDate){
+            return true;
+        }else{
+            return false;
+        }
     }
 });
