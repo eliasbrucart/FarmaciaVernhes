@@ -41,10 +41,12 @@ $(function(){
     
             SaveDate(newDateDBFormat);
 
-            GetTodayPharmacies(actualDateToDBFormat);
+            GetTodayPharmacies(newDateDBFormat);
+
+            location.reload();
         }
         console.log("Chequeando cambio de fecha a cada minuto!");
-    }, 60000); //minute
+    }, 1800000); //half hour
 
     GetTodayPharmacies(actualDateToDBFormat);
 
