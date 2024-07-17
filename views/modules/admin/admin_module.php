@@ -18,10 +18,10 @@
                     <div class="external-event bg-primary">Work on UI design</div>
                     <div class="external-event bg-danger">Sleep tight</div>-->
                     <div class="checkbox">
-                      <label for="drop-remove">
+                      <!--<label for="drop-remove">
                         <input type="checkbox" id="drop-remove">
                         remove after drop
-                      </label>
+                      </label>-->
                     </div>
                   </div>
                 </div>
