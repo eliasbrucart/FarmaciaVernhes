@@ -223,14 +223,10 @@ $(function () {
         CreateTurner();
       },
       eventClick: function(info){
-        alert("Name " + info.event.title);
-        alert("id " + info.event.id);
         var idTurner = info.event.id;
 
         var validateData = new FormData();
-        validateData.append("setTurnerFullDay", true);
-        validateData.append("idTurnerFullDay", idTurner);
-        //validateData.append("idTurnerFullDay", idTurner);
+        validateData.append("getFullDayState", true);
 
         $.ajax({
           url:hiddenPath+"ajax/turner_module_ajax.php",
@@ -240,9 +236,11 @@ $(function () {
           contentType: false,
           processData: false,
           success:(response)=>{
-            console.log("Set Turner Full Day " + response);
+            console.log("Get Full Day State " + response);
           }
         });
+
+        SetEventInFullDay(idTurner);
       }
     });
 
@@ -403,5 +401,24 @@ $(function () {
           }
         }
     })
+  }
+
+  function SetEventInFullDay(idTurner){
+    var validateData = new FormData();
+    validateData.append("setTurnerFullDay", true);
+    validateData.append("idTurnerFullDay", idTurner);
+    //validateData.append("idTurnerFullDay", idTurner);
+
+    $.ajax({
+      url:hiddenPath+"ajax/turner_module_ajax.php",
+      method: "POST",
+      data: validateData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success:(response)=>{
+        console.log("Set Turner Full Day " + response);
+      }
+    });
   }
 })
