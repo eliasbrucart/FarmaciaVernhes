@@ -225,22 +225,32 @@ $(function () {
       eventClick: function(info){
         var idTurner = info.event.id;
 
+        var stateTurner = 0;
+
         var validateData = new FormData();
         validateData.append("getFullDayState", true);
+        validateData.append("idTurnerGetFullDay", idTurner);
 
-        $.ajax({
-          url:hiddenPath+"ajax/turner_module_ajax.php",
-          method: "POST",
-          data: validateData,
-          cache: false,
-          contentType: false,
-          processData: false,
-          success:(response)=>{
-            console.log("Get Full Day State " + response);
-          }
-        });
-
-        SetEventInFullDay(idTurner);
+        setTimeout(function(){
+          $.ajax({
+            url:hiddenPath+"ajax/turner_module_ajax.php",
+            method: "POST",
+            data: validateData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:(response)=>{
+              console.log("Get Full Day State " + response);
+              if(response == 1){
+                stateTurner = 0;
+              }else if(response == 0){
+                stateTurner = 1;
+              }
+              SetEventInFullDay(idTurner, stateTurner);
+            }
+          });
+        }, 2000);
+        
       }
     });
 
@@ -403,11 +413,11 @@ $(function () {
     })
   }
 
-  function SetEventInFullDay(idTurner){
+  function SetEventInFullDay(idTurner, stateTurner){
     var validateData = new FormData();
     validateData.append("setTurnerFullDay", true);
     validateData.append("idTurnerFullDay", idTurner);
-    //validateData.append("idTurnerFullDay", idTurner);
+    validateData.append("stateTurner", stateTurner);
 
     $.ajax({
       url:hiddenPath+"ajax/turner_module_ajax.php",

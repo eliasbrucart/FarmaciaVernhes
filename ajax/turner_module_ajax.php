@@ -22,8 +22,16 @@ class TurnerModuleAjax{
     }
 
     public $idTurnerFullDay;
+    public $stateTurner;
     public function SetTurnerFullDay(){
-        $response = TurnerController::SetTurnerFullDay($this->idTurnerFullDay);
+        $response = TurnerController::SetTurnerFullDay($this->idTurnerFullDay, $this->stateTurner);
+
+        echo json_encode($response);
+    }
+
+    public $idTurnerGetFullDay;
+    public function GetFullDayState(){
+        $response = TurnerController::GetFullDayState($this->idTurnerGetFullDay);
 
         echo json_encode($response);
     }
@@ -44,7 +52,14 @@ if(isset($_POST["getTodayPharmacyAddress"])){
 if(isset($_POST["setTurnerFullDay"])){
     $turnerFullDay = new TurnerModuleAjax();
     $turnerFullDay->idTurnerFullDay = $_POST["idTurnerFullDay"];
+    $turnerFullDay->stateTurner = $_POST["stateTurner"];
     $turnerFullDay->SetTurnerFullDay();
+}
+
+if(isset($_POST["getFullDayState"])){
+    $getFullDayState = new TurnerModuleAjax();
+    $getFullDayState->idTurnerGetFullDay = $_POST["idTurnerGetFullDay"];
+    $getFullDayState->GetFullDayState();
 }
 
 ?>

@@ -94,19 +94,31 @@ class TurnerModel{
         $stmt = null;
     }
 
-    static public function SetTurnerFullDay($table, $idTurnerFullDay){
+    static public function SetTurnerFullDay($table, $idTurnerFullDay, $stateTurner){
         $stmt = Connection::Connect()->prepare("UPDATE $table SET fullDay = :fullDay WHERE id_turner = :id_turner");
 
-        $fullDayValue = 1;
-
         $stmt->bindParam(":id_turner", $idTurnerFullDay, PDO::PARAM_INT);
-        $stmt->bindParam(":fullDay", $fullDayValue, PDO::PARAM_INT);
+        $stmt->bindParam(":fullDay", $stateTurner, PDO::PARAM_INT);
 
         if($stmt->execute()){
             return "ok";
         }else{
             return "error";
         }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+    static public function GetFullDayState($table, $idTurnerGetFullDay){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE id_turner = :id_turner");
+
+        $stmt->bindParam(":id_turner", $idTurnerGetFullDay, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchColumn(4);
 
         $stmt->close();
 
