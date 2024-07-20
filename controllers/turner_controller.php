@@ -44,6 +44,14 @@ class TurnerController{
 
         return $response;
     }
+
+    static public function SetTurnerFullDay($idTurnerFullDay){
+        $table = "turner";
+
+        $response = TurnerModel::SetTurnerFullDay($table, $idTurnerFullDay);
+
+        return $response;
+    }
 }
 
 ?>

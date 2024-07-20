@@ -193,11 +193,11 @@ $(function () {
         dropDate = formattedDate;
         
         // is the "remove after drop" checkbox checked?
-        if (checkbox.checked) {
+        /*if (checkbox.checked) {
           // if so, remove the element from the "Draggable Events" list
           console.log("Entro al evento drop 2!");
           info.draggedEl.parentNode.removeChild(info.draggedEl);
-        }
+        }*/
       },
       eventDrop   : function(info){
         //var infoResources = info.event.getResources();                
@@ -222,6 +222,28 @@ $(function () {
         console.log("Receive Event id " + info.event.event_id);
         CreateTurner();
       },
+      eventClick: function(info){
+        alert("Name " + info.event.title);
+        alert("id " + info.event.id);
+        var idTurner = info.event.id;
+
+        var validateData = new FormData();
+        validateData.append("setTurnerFullDay", true);
+        validateData.append("idTurnerFullDay", idTurner);
+        //validateData.append("idTurnerFullDay", idTurner);
+
+        $.ajax({
+          url:hiddenPath+"ajax/turner_module_ajax.php",
+          method: "POST",
+          data: validateData,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success:(response)=>{
+            console.log("Set Turner Full Day " + response);
+          }
+        });
+      }
     });
 
     calendar.render();
