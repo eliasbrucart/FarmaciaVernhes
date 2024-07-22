@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="<?php echo $url; ?>views/plugins/fullcalendar/main.css">
 
     <link rel="stylesheet" href="<?php echo $url; ?>views/css/turner/turner_module.css">
+    
+    <link rel="stylesheet" href="<?php echo $url; ?>views/css/admin/admin_module.css">
 
     <input type="hidden" value="<?php echo $url; ?>" id="hiddenPath">
 

@@ -32,7 +32,7 @@
                 <div class="card-header">
                   <h3 class="card-title">Agregar Farmacia</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body clearfix">
                   <!--<div class="btn-group" style="width: 100%; margin-bottom: 10px;">
                     <ul class="fc-color-picker" id="color-chooser">
                       <li><a class="text-primary" href="#"><i class="fas fa-square"></i></a></li>
@@ -43,14 +43,11 @@
                     </ul>
                   </div>-->
                   <!-- /btn-group -->
-                  <div class="input-group">
-                    <input id="new-event" name="addPharmacy" type="text" class="form-control addPharmacy" placeholder="Farmacia">
-                    <input type="text" name="addressPharmacy" class="form-control addressPharmacy" placeholder="Direccion">
+                  <input id="new-event" name="addPharmacy" type="text" class="form-control addPharmacy" placeholder="Farmacia">
+                  <input type="text" name="addressPharmacy" class="form-control addressPharmacy" placeholder="Direccion">
 
-                    <div class="input-group-append">
-                      <button id="add-new-event" type="button" class="btn btn-primary" onclick="AddPharmacy()">Agregar</button>
-                    </div>
-                    <!-- /btn-group -->
+                  <div class="input-group-append float-right">
+                    <button id="add-new-event" type="button" class="btn btn-primary" onclick="AddPharmacy()">Agregar</button>
                   </div>
                   <!-- /input-group -->
                 </div>
