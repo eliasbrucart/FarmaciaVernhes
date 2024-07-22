@@ -249,7 +249,7 @@ $(function () {
               SetEventInFullDay(idTurner, stateTurner);
             }
           });
-        }, 2000);
+        }, 500);
         
       }
     });

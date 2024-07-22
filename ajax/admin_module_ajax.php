@@ -49,7 +49,11 @@ class AdminModuleAjax{
                 $data_arr[$i]['title'] = $response[$i]['name_pharmacy'];
                 $data_arr[$i]['start'] = date("Y-m-d", strtotime($response[$i]['date_turner']));
                 $data_arr[$i]['end'] = date("Y-m-d", strtotime($response[$i]['date_turner']));
-                $data_arr[$i]['color'] = '#'.substr(uniqid(),-6); // 'green'; pass colour name
+                if($response[$i]['fullDay'] == 1){
+                    $data_arr[$i]['color'] = '#9b46f6';
+                }else{
+                    $data_arr[$i]['color'] = '#2a3efc';
+                }
                 $data_arr[$i]['url'] = 'https://www.shinerweb.com';
             }
 
