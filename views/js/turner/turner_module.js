@@ -46,7 +46,7 @@ $(function(){
             location.reload();
         }
         console.log("Chequeando cambio de fecha a cada minuto!");
-    }, 1800000); //half hour
+    }, 60000); //half hour
 
     GetTodayPharmacies(actualDateToDBFormat);
 

@@ -54,7 +54,7 @@ class AdminModuleAjax{
                 }else{
                     $data_arr[$i]['color'] = '#2a3efc';
                 }
-                $data_arr[$i]['url'] = 'https://www.shinerweb.com';
+                $data_arr[$i]['url'] = '#';
             }
 
             $data = array('status' => true,

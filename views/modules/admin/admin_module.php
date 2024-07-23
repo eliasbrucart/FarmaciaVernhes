@@ -51,6 +51,10 @@
                   </div>
                   <!-- /input-group -->
                 </div>
+                <div class="card-footer">
+                  <p class="violetSquareText"><i class="fas fa-square violetSquare"></i>Violeta: 24hs</p>
+                  <p class="blueSquareText"><i class="fas fa-square blueSquare"></i>Azul: 12hs</p>
+                </div>
               </div>
             </div>
           </div>

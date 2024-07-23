@@ -1,6 +1,16 @@
 .addPharmacy, .addressPharmacy{
     margin-bottom: 15px;
 }
+.violetSquare{
+    font-size: 30px;
+    color: #9b46f6;
+    margin-right: 10px;
+}
+.blueSquare{
+    font-size: 30px;
+    color: #2a3efc;
+    margin-right: 10px;
+}
 /*=============================================
 ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
 =============================================*/
