@@ -52,13 +52,6 @@ $(function(){
 
     console.log("GetSavedDate func " + GetSavedDate());
 
-    /*setInterval(function(){
-        console.log("Me ejecuto al iniciar el dia!");
-        if(actualDateToDBFormat != GetSavedDate()){
-            SaveDate();
-        }
-    }, 60000);*/
-
     function GetTodayPharmacies(actualDate){
         var validateData = new FormData();
         validateData.append("getTodayPharmacies", true);
