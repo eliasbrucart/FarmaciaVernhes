@@ -60,6 +60,14 @@ class TurnerController{
 
         return $response;
     }
+
+    static public function RemoveEventFromTurner($idTurnerToRemove){
+        $table = "turner";
+
+        $response = TurnerModel::RemoveEventFromTurner($table, $idTurnerToRemove);
+
+        return $response;
+    }
 }
 
 ?>

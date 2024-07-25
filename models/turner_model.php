@@ -124,6 +124,23 @@ class TurnerModel{
 
         $stmt = null;
     }
+
+    static public function RemoveEventFromTurner($table, $idTurnerToRemove){
+        $stmt = Connection::Connect()->prepare("DELETE FROM $table WHERE id_turner = :id_turner");
+
+        $stmt->bindParam(":id_turner", $idTurnerToRemove, PDO::PARAM_INT);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+
+    }
 }
 
 ?>

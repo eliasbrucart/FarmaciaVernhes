@@ -35,6 +35,13 @@ class TurnerModuleAjax{
 
         echo json_encode($response);
     }
+
+    public $idTurnerToRemove;
+    public function RemoveEventFromTurner(){
+        $response = TurnerController::RemoveEventFromTurner($this->idTurnerToRemove);
+
+        echo json_encode($response);
+    }
 }
 
 if(isset($_POST["getTodayPharmacies"])){
@@ -60,6 +67,12 @@ if(isset($_POST["getFullDayState"])){
     $getFullDayState = new TurnerModuleAjax();
     $getFullDayState->idTurnerGetFullDay = $_POST["idTurnerGetFullDay"];
     $getFullDayState->GetFullDayState();
+}
+
+if(isset($_POST["removeEventFromTurner"])){
+    $removeEvent = new TurnerModuleAjax();
+    $removeEvent->idTurnerToRemove = $_POST["idEventTurnerToRemove"];
+    $removeEvent->RemoveEventFromTurner();
 }
 
 ?>

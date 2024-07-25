@@ -183,7 +183,8 @@ $(function () {
         }
       ]*/,
       editable  : true,
-      droppable : true, // this allows things to be dropped onto the calendar !!!
+      droppable : true,
+      selectable: true, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {
         console.log("Entro al evento drop!" + info.date);
         var formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -251,6 +252,29 @@ $(function () {
           });
         }, 500);
         
+      },
+      dateClick: function(info){
+        alert('Clicked on: ' + info.dateStr);
+        console.log('id of the event ' + info.event);
+        //info.event.remove();
+      },
+      eventDragStop: function(event){
+        var trashEl = jQuery('#calendarTrash');
+        var ofs = trashEl.offset();
+
+        var x1 = ofs.left;
+        var x2 = ofs.left + trashEl.outerWidth(true);
+        var y1 = ofs.top;
+        var y2 = ofs.top + trashEl.outerHeight(true);
+
+        if (event.jsEvent.pageX >= x1 && event.jsEvent.pageX<= x2 &&
+          event.jsEvent.pageY >= y1 && event.jsEvent.pageY <= y2) {
+            alert('SIII');
+            console.log("event drag stop event id " + event.event.id);
+            RemoveEventFromTurner(event.event.id);
+            event.event.remove();
+            //$('#calendario').fullCalendar('removeEvents', event.id);
+        }
       }
     });
 
@@ -428,6 +452,24 @@ $(function () {
       processData: false,
       success:(response)=>{
         console.log("Set Turner Full Day " + response);
+      }
+    });
+  }
+
+  function RemoveEventFromTurner(id){
+    var validateData = new FormData();
+    validateData.append("removeEventFromTurner", true);
+    validateData.append("idEventTurnerToRemove", id);
+
+    $.ajax({
+      url:hiddenPath+"ajax/turner_module_ajax.php",
+      method: "POST",
+      data: validateData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success:(response)=>{
+        console.log("Remove Event From Turner " + response);
       }
     });
   }
