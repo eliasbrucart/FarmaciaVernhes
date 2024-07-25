@@ -51,10 +51,15 @@
                   </div>
                   <!-- /input-group -->
                 </div>
-                <div class="card-footer">
+                <div class="card-footer clearfix">
                   <p class="violetSquareText"><i class="fas fa-square violetSquare"></i>Violeta: 24hs</p>
                   <p class="blueSquareText"><i class="fas fa-square blueSquare"></i>Azul: 12hs</p>
-                  <div id="calendarTrash" class="calendar-trash"><i class="fa fa-trash"></i></div>
+                  <div class="float-left">
+                    <a class="saveAllCalendar" onclick="SaveAll()"><i class="fa fa-save"></i></a>
+                  </div>
+                  <div class="float-right">
+                    <div id="calendarTrash" class="calendar-trash"><i class="fa fa-trash"></i></div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -272,7 +272,9 @@ $(function () {
             console.log("event drag stop event id " + event.event.id);
             RemoveEventFromTurner(event.event.id);
             event.event.remove();
-            location.reload();
+            setTimeout(function(){
+              location.reload();
+            }, 500);
             //$('#calendario').fullCalendar('removeEvents', event.id);
         }
       }

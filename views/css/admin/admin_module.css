@@ -11,6 +11,10 @@
     color: #2a3efc;
     margin-right: 10px;
 }
+.saveAllCalendar{
+    margin-top: 200px;
+    font-size: 50px;
+}
 .calendar-trash{
     margin-top: 20px;
 }

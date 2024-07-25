@@ -33,3 +33,7 @@ function AddPharmacy(){
         }
     });
 }
+
+function SaveAll(){
+    location.reload();
+}
