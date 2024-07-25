@@ -54,7 +54,7 @@
                 <div class="card-footer">
                   <p class="violetSquareText"><i class="fas fa-square violetSquare"></i>Violeta: 24hs</p>
                   <p class="blueSquareText"><i class="fas fa-square blueSquare"></i>Azul: 12hs</p>
-                  <div id="calendarTrash" class="calendar-trash"><img src="views/img/default-150x150.png" /></div>
+                  <div id="calendarTrash" class="calendar-trash"><i class="fa fa-trash"></i></div>
                 </div>
               </div>
             </div>

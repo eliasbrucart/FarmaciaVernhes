@@ -269,10 +269,10 @@ $(function () {
 
         if (event.jsEvent.pageX >= x1 && event.jsEvent.pageX<= x2 &&
           event.jsEvent.pageY >= y1 && event.jsEvent.pageY <= y2) {
-            alert('SIII');
             console.log("event drag stop event id " + event.event.id);
             RemoveEventFromTurner(event.event.id);
             event.event.remove();
+            location.reload();
             //$('#calendario').fullCalendar('removeEvents', event.id);
         }
       }

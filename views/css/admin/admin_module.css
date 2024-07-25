@@ -11,6 +11,12 @@
     color: #2a3efc;
     margin-right: 10px;
 }
+.calendar-trash{
+    margin-top: 20px;
+}
+.calendar-trash i{
+    font-size: 100px;
+}
 /*=============================================
 ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
 =============================================*/
