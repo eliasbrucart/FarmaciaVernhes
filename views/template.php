@@ -60,9 +60,9 @@
 
             if($route != null || $routes[0] == "turner"){
                 include "modules/".$routes[0]."/".$routes[0]."_module.php";
-            }else if($routes[0] == "home" || $routes[0] == "admin"){
+            }else if($routes[0] == "home" || $routes[0] == "admin" || $routes[0] == "pharmacies"){
                 include "modules/header/header_module.php"; //temp
-                include "modules/admin/admin_module.php";
+                include "modules/".$routes[0]."/".$routes[0]."_module.php";
                 include "modules/footer/footer_module.php";
             }
 
