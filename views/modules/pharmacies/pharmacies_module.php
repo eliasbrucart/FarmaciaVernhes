@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="card-body p-0">
-            <table class="table table-striped projects">
+            <table class="table table-striped projects pharmaciesTable">
                 <thead>
                     <tr>
                         <th style="width: 1%">

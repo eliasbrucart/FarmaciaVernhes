@@ -109,6 +109,12 @@
     <script src="<?php echo $url; ?>views/plugins/moment/moment.min.js"></script>
     <script src="<?php echo $url; ?>views/plugins/fullcalendar/main.js"></script>
 
+    <!-- Data tables libraries -->
+	<script src="<?php echo $url; ?>views/lib/browser_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="<?php echo $url; ?>views/lib/browser_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+	<script src="<?php echo $url; ?>views/lib/browser_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+	<script src="<?php echo $url; ?>views/lib/browser_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+
     <script src="<?php echo $url; ?>views/js/template.js"></script>
 
     <!-- AdminLTE for demo purposes -->
@@ -118,6 +124,7 @@
     <script src="<?php echo $url; ?>views/js/calendar/calendar.js"></script>
     <script src="<?php echo $url; ?>views/js/admin_module.js"></script>
     <script src="<?php echo $url; ?>views/js/turner/turner_module.js"></script>
+    <script src="<?php echo $url; ?>views/js/pharmacies/pharmacies_module.js"></script>
     
 </body>
 </html>
