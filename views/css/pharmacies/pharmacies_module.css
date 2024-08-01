@@ -1,0 +1,31 @@
+#DataTables_Table_0_wrapper div{
+    width: 100%;
+}
+
+.dataTables_info{
+    margin-left: 20px;
+}
+
+.paginate_button{
+    margin-right: 10px;
+}
+
+/*=============================================
+ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
+=============================================*/
+
+@media (max-width:1199px) and (min-width:992px) {}
+
+
+/*=============================================
+ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
+=============================================*/
+
+@media (max-width:991px) and (min-width:768px) {}
+
+
+/*=============================================
+MOVIL (XS revisamos en 320px)
+=============================================*/
+
+@media (max-width:767px) {}

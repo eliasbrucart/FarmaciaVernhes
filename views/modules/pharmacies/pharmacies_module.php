@@ -13,27 +13,29 @@
             </div>
         </div>
         <div class="card-body p-0">
+            <div class="table-responsive">
             <table class="table table-striped projects pharmaciesTable">
                 <thead>
                     <tr>
-                        <th style="width: 1%">
+                        <th style="width: 1%" scope="col">
                             #
                         </th>
-                        <th style="width: 20%">
+                        <th style="width: 20%" scope="col">
                             Farmacia
                         </th>
-                        <th style="width: 30%">
+                        <th style="width: 30%" scope="col">
+                            Direccion
+                        </th>
+                        <th style="width: 8%" class="text-center" scope="col">
                             Turnero
                         </th>
-                        <th style="width: 8%" class="text-center">
-                            Estado
-                        </th>
-                        <th style="width: 20%">
+                        <th style="width: 20%" scope="col">
+                            Acciones
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <!--<tr>
                       <td>
                           #
                       </td>
@@ -62,7 +64,7 @@
                               </li>
                           </ul>
                       </td>
-                      <!--<td class="project_progress">
+                      <td class="project_progress">
                           <div class="progress progress-sm">
                               <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
                               </div>
@@ -70,7 +72,7 @@
                           <small>
                               57% Complete
                           </small>
-                      </td>-->
+                      </td>
                       <td class="project-state">
                           <span class="badge badge-success">Activo</span>
                       </td>
@@ -91,10 +93,21 @@
                               Eliminar
                           </a>
                       </td>
-                  </tr>
+                  </tr>-->
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
+    <!--<table class="table table-striped projects pharmaciesTable">
+        <thead>
+            <tr>
+                <th>Farmacia</th>
+                <th>Direccion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+    </table>-->
 </section>
 </div>

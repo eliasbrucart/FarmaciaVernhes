@@ -14,12 +14,18 @@ class PharmaciesModuleAjax{
             for($i = 0; $i < count($pharmacies); $i++){
                 $namePharmacy = $pharmacies[$i]["name_pharmacy"];
 
+                $addressPharmacy = $pharmacies[$i]["address_pharmacy"];
+
+                $editBtn = "<button type='button' class='btn btn-info btn-sm'>Editar</button>";
+
+                $deleteBtn = "<button type='button' class='btn btn-danger btn-sm'>Eliminar</button>";
+
                 $dataJson .= '[
                     "#",
                     "'.$namePharmacy.'",
-                    "XD",
-                    "Activo",
-                    "xd"
+                    "'.$addressPharmacy.'",
+                    "#",
+                    "'.$editBtn.$deleteBtn.'"
                 ],';
             } 
 
