@@ -77,6 +77,22 @@ class PharmacyModel{
 
         $stmt = null;
     }
+
+    static public function DeletePharmacy($table, $idPharmacyToDelete){
+        $stmt = Connection::Connect()->prepare("DELETE FROM $table WHERE id_pharmacy = :id_pharmacy");
+
+        $stmt->bindParam(":id_pharmacy", $idPharmacyToDelete, PDO::PARAM_INT);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

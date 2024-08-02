@@ -18,9 +18,9 @@ class PharmaciesModuleAjax{
 
                 $addressPharmacy = $pharmacies[$i]["address_pharmacy"];
 
-                $editBtn = "<button type='button' class='btn btn-info btn-sm editPharmacyBtn' onclick='ShowIdPharmacy(".$idPharmacy.", "."`$namePharmacy`".", "."`$addressPharmacy`".")' data-toggle='modal' data-target='#editPharmacyModal'>Editar</button>";
+                $editBtn = "<button type='button' class='btn btn-info btn-sm editPharmacyBtn' onclick='ShowPharmacyDataOnEdit(".$idPharmacy.", "."`$namePharmacy`".", "."`$addressPharmacy`".")' data-toggle='modal' data-target='#editPharmacyModal'>Editar</button>";
 
-                $deleteBtn = "<button type='button' class='btn btn-danger btn-sm deletePharmacyBtn'>Eliminar</button>";
+                $deleteBtn = "<button type='button' class='btn btn-danger btn-sm deletePharmacyBtn' onclick='ShowPharmacyDataOnDelete(".$idPharmacy.", "."`$namePharmacy`".", "."`$addressPharmacy`".")' data-toggle='modal' data-target='#deletePharmacyModal'>Eliminar</button>";
 
                 $dataJson .= '[
                     "#",
@@ -52,6 +52,13 @@ class PharmaciesModuleAjax{
 
         echo json_encode($response);
     }
+
+    public $idPharmacyToDelete;
+    public function DeletePharmacy(){
+        $response = PharmacyController::DeletePharmacy($this->idPharmacyToDelete);
+
+        echo json_encode($response);
+    }
 }
 
 $pharmaciesTable = new PharmaciesModuleAjax();
@@ -63,6 +70,12 @@ if(isset($_POST["editPharmacy"]) && $_POST["editPharmacy"]){
     $editPharmacy->namePharmacyToEdit = $_POST["namePharmacyToEdit"];
     $editPharmacy->addressPharmacyToEdit = $_POST["addressPharmacyToEdit"];
     $editPharmacy->EditPharmacy();
+}
+
+if(isset($_POST["deletePharmacy"]) && $_POST["deletePharmacy"]){
+    $deletePharmacy = new PharmaciesModuleAjax();
+    $deletePharmacy->idPharmacyToDelete = $_POST["idPharmacyToDelete"];
+    $deletePharmacy->DeletePharmacy();
 }
 
 ?>

@@ -49,6 +49,14 @@ class PharmacyController{
 
         return $response;
     }
+
+    static public function DeletePharmacy($idPharmacyToDelete){
+        $table = "pharmacy";
+
+        $response = PharmacyModel::DeletePharmacy($table, $idPharmacyToDelete);
+
+        return $response;
+    }
 }
 
 ?>

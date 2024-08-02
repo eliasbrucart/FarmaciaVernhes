@@ -31,8 +31,8 @@ $('.pharmaciesTable').DataTable({
     }
 });
 
-function ShowIdPharmacy(id, name, address){
-	$('#idCustomerToEdit').text(id);
+function ShowPharmacyDataOnEdit(id, name, address){
+	$('#idPharmacyToEdit').text(id);
 	$('#newNamePharmacy').val(name);
 	$('#newAddressPharmacy').val(address);
 }
@@ -60,4 +60,31 @@ function EditPharmacy(){
           console.log("Edit Pharmacy " + response);
         }
 	});
+}
+
+function ShowPharmacyDataOnDelete(id, name, address){
+	$('#idPharmacyToDelete').text(id);
+	$('#namePharmacyToDelete').text(name);
+	$('#addressPharmacyToDelete').text(address);
+}
+
+function DeletePharmacy(){
+	var id = $('#idPharmacyToDelete').text();
+
+	var validateData = new FormData();
+	validateData.append("deletePharmacy", true);
+	validateData.append("idPharmacyToDelete", id);
+
+	$.ajax({
+		url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+        method: "POST",
+        data: validateData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:(response)=>{
+          console.log("Delete Pharmacy " + response);
+        }
+	});
+
 }
