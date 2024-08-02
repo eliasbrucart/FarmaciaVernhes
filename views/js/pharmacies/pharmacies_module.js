@@ -30,3 +30,34 @@ $('.pharmaciesTable').DataTable({
 		}
     }
 });
+
+function ShowIdPharmacy(id, name, address){
+	$('#idCustomerToEdit').text(id);
+	$('#newNamePharmacy').val(name);
+	$('#newAddressPharmacy').val(address);
+}
+
+function EditPharmacy(){
+	var id = $('#idCustomerToEdit').text();
+	var namePharmacy = $('#newNamePharmacy').val();
+	var addressPharmacy = $('#newAddressPharmacy').val();
+
+	var validateData = new FormData();
+
+	validateData.append("editPharmacy", true);
+	validateData.append("idPharmacyToEdit", id);
+	validateData.append("namePharmacyToEdit", namePharmacy);
+	validateData.append("addressPharmacyToEdit", addressPharmacy);
+
+	$.ajax({
+		url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+        method: "POST",
+        data: validateData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:(response)=>{
+          console.log("Edit Pharmacy " + response);
+        }
+	});
+}

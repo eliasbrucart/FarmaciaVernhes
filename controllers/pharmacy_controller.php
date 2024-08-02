@@ -41,6 +41,14 @@ class PharmacyController{
 
         return $response;
     }
+
+    static public function EditPharmacy($data){
+        $table = "pharmacy";
+
+        $response = PharmacyModel::EditPharmacy($table, $data);
+
+        return $response;
+    }
 }
 
 ?>

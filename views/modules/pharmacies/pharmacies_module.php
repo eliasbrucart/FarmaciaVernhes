@@ -97,7 +97,7 @@
 
             <div class="modal-footer" style="background:#c9c9c9;">
 
-                <button type="button" class="btn btn-success m-2" id="saveEditedPharmacy">Guardar</button>
+                <button type="button" class="btn btn-success m-2" id="saveEditedPharmacy" onclick="EditPharmacy()">Guardar</button>
 
             </div>
 
