@@ -16,9 +16,9 @@ class PharmaciesModuleAjax{
 
                 $addressPharmacy = $pharmacies[$i]["address_pharmacy"];
 
-                $editBtn = "<button type='button' class='btn btn-info btn-sm'>Editar</button>";
+                $editBtn = "<button type='button' class='btn btn-info btn-sm editPharmacyBtn' data-toggle='modal' data-target='#editPharmacyModal'>Editar</button>";
 
-                $deleteBtn = "<button type='button' class='btn btn-danger btn-sm'>Eliminar</button>";
+                $deleteBtn = "<button type='button' class='btn btn-danger btn-sm deletePharmacyBtn'>Eliminar</button>";
 
                 $dataJson .= '[
                     "#",

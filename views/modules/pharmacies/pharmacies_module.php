@@ -35,79 +35,74 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!--<tr>
-                      <td>
-                          #
-                      </td>
-                      <td>
-                          <a>
-                              AdminLTE v3
-                          </a>
-                          <br/>
-                          <small>
-                              Created 01.01.2019
-                          </small>
-                      </td>
-                      <td>
-                          <ul class="list-inline">
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                              </li>
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
-                              </li>
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
-                              </li>
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
-                              </li>
-                          </ul>
-                      </td>
-                      <td class="project_progress">
-                          <div class="progress progress-sm">
-                              <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                              </div>
-                          </div>
-                          <small>
-                              57% Complete
-                          </small>
-                      </td>
-                      <td class="project-state">
-                          <span class="badge badge-success">Activo</span>
-                      </td>
-                      <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm">
-                              <i class="fas fa-folder">
-                              </i>
-                              Imagenes
-                          </a>
-                          <a class="btn btn-info btn-sm">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Editar
-                          </a>
-                          <a class="btn btn-danger btn-sm">
-                              <i class="fas fa-trash">
-                              </i>
-                              Eliminar
-                          </a>
-                      </td>
-                  </tr>-->
                 </tbody>
             </table>
             </div>
         </div>
     </div>
-    <!--<table class="table table-striped projects pharmaciesTable">
-        <thead>
-            <tr>
-                <th>Farmacia</th>
-                <th>Direccion</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-
-    </table>-->
 </section>
+</div>
+
+<div id="editPharmacyModal" class="modal fade" role="dialog">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header" style="background:#c9c9c9; color:black">
+
+                <h4 class="modal-title">Editar Farmacia</h4>
+
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <div class="modal-body" style="background:##c9c9c9;">
+
+                <div class="box-body">
+
+                    <div class="form-group">
+
+                        <p class="idPharmacyToEdit" name="idPharmacy">Identificador: <span id="idCustomerToEdit"></span></p>
+
+                        <div class="form-floating mb-3">
+
+                            <input type="text" class="form-control" id="newNamePharmacy" name="newNamePharmacy" placeholder="Nombre"
+                            value="">
+
+                            <!--<label for="newNamePharmacy">Nombre</label>-->
+
+                        </div>
+
+                        <div class="form-floating mb-3">
+
+                            <input type="text" class="form-control" id="newAddressPharmacy" name="newAddressPharmacy" placeholder="Direccion"
+                            value="">
+
+                            <!--<label for="newAddressPharmacy">Direccion</label>-->
+
+                        </div>
+
+                        <div class="form-floating mb-3">
+
+                        <!-- input para subir imagenes, gifs, etc con plugin para ello -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer" style="background:#c9c9c9;">
+
+                <button type="button" class="btn btn-success m-2" id="saveEditedPharmacy">Guardar</button>
+
+            </div>
+
+        </div>
+        
+    </div>
+
 </div>
