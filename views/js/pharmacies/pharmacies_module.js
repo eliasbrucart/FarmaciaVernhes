@@ -31,6 +31,8 @@ $('.pharmaciesTable').DataTable({
     }
 });
 
+var arrayFiles = [];
+
 function ShowPharmacyDataOnEdit(id, name, address){
 	$('#idPharmacyToEdit').text(id);
 	$('#newNamePharmacy').val(name);
@@ -49,17 +51,26 @@ function EditPharmacy(){
 	validateData.append("namePharmacyToEdit", namePharmacy);
 	validateData.append("addressPharmacyToEdit", addressPharmacy);
 
-	$.ajax({
-		url:hiddenPath+"ajax/pharmacies_module_ajax.php",
-        method: "POST",
-        data: validateData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success:(response)=>{
-          console.log("Edit Pharmacy " + response);
-        }
-	});
+	//pharmacy images logic
+
+	if(arrayFiles.length > 0 && namePharmacy != ""){
+		for(var i = 0; i < arrayFiles.length; i++){
+			validateData.append("pharmacyFiles", arrayFiles[i]);
+			validateData.append("pharmacyFilesRoute", namePharmacy);
+
+			$.ajax({
+				url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+				method: "POST",
+				data: validateData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success:(response)=>{
+				  console.log("Edit Pharmacy " + response);
+				}
+			});
+		}
+	}
 }
 
 function ShowPharmacyDataOnDelete(id, name, address){
@@ -86,5 +97,32 @@ function DeletePharmacy(){
           console.log("Delete Pharmacy " + response);
         }
 	});
-
 }
+
+$('.pharmacyImages').dropzone({
+	url: "/",
+	addRemoveLinks: true,
+	acceptedFiles: "image/jpeg, image/png",
+	maxFilesize: 2,
+	maxFiles: 10,
+	init: function(){
+
+		this.on("addedfile", function(file){
+
+			arrayFiles.push(file);
+
+			console.log("arrayFiles", arrayFiles);
+
+		})
+
+		this.on("removedfile", function(file){
+
+			var index = arrayFiles.indexOf(file);
+
+			arrayFiles.splice(index, 1);
+
+			console.log("arrayFiles", arrayFiles);
+
+		})
+	}
+});

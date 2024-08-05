@@ -85,6 +85,16 @@
 
                         <div class="form-floating mb-3">
 
+                            <form action="post" class="pharmacyImages dropzone">
+
+                                <div class="dz-message needsclick">
+                                
+                                    Arrastrar o dar click para subir imagenes.
+
+                                </div>
+
+                            </form>
+
                         <!-- input para subir imagenes, gifs, etc con plugin para ello -->
 
                         </div>

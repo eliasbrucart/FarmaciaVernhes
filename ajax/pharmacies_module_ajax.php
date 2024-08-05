@@ -43,7 +43,18 @@ class PharmaciesModuleAjax{
     public $idPharmacyToEdit;
     public $namePharmacyToEdit;
     public $addressPharmacyToEdit;
+    public $pharmacyFiles;
+    public $pharmacyFilesRoute;
     public function EditPharmacy(){
+
+        var_dump($this->pharmacyFiles);
+
+        $responsePharmacyFiles = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles, $this->pharmacyFilesRoute, $this->namePharmacyToEdit);
+
+        var_dump($responsePharmacyFiles);
+
+        return;
+
         $data = array("idPharmacyToEdit"=>$this->idPharmacyToEdit,
                       "namePharmacyToEdit"=>$this->namePharmacyToEdit,
                       "addressPharmacyToEdit"=>$this->addressPharmacyToEdit);
@@ -69,6 +80,8 @@ if(isset($_POST["editPharmacy"]) && $_POST["editPharmacy"]){
     $editPharmacy->idPharmacyToEdit = $_POST["idPharmacyToEdit"];
     $editPharmacy->namePharmacyToEdit = $_POST["namePharmacyToEdit"];
     $editPharmacy->addressPharmacyToEdit = $_POST["addressPharmacyToEdit"];
+    $editPharmacy->pharmacyFiles = $_FILES["pharmacyFiles"];
+    $editPharmacy->pharmacyFilesRoute = $_POST["pharmacyFilesRoute"];
     $editPharmacy->EditPharmacy();
 }
 

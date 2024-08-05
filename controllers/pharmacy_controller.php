@@ -57,6 +57,52 @@ class PharmacyController{
 
         return $response;
     }
+
+    static public function CreatePharmacyFiles($pharmacyFiles, $pharmacyFilesRoute, $namePharmacy){
+        if(isset($pharmacyFiles["tmp_name"]) && !empty($pharmacyFiles["tmp_name"])){
+
+            list($width, $height) = getimagesize($pharmacyFiles["tmp_name"]);
+
+            $newWidth = 500;
+            $newHeight = 1000;
+
+            $directory = "../views/img/".$namePharmacy;
+
+            if(!file_exists($directory)){
+                mkdir($directory, 0755);
+            }
+
+            if($pharmacyFiles["type"] == "image/jpeg"){
+                $routeImage = $directory."/".$pharmacyFiles["name"];
+
+                $origin = imagecreatefromjpeg($pharmacyFiles["tmp_name"]);
+
+                $destination = imagecreatetruecolor($newWidth, $newHeight);
+
+                imagecopyresized($destination, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+				imagejpeg($destination, $routeImage);
+            }
+
+            if($pharmacyFiles["type"] == "image/png"){
+                $routeImage = $directory."/".$pharmacyFiles["name"];
+
+                $origin = imagecreatefrompng($pharmacyFiles["tmp_name"]);
+
+                $destination = imagecreatetruecolor($newWidth, $newHeight);
+
+                imagealphablending($destination, false);
+
+                imagesavealpha($destination, true);
+
+                imagecopyresized($destination, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+				imagepng($destination, $routeImage);
+            }
+
+            return $routeImage;
+        }
+    }
 }
 
 ?>
