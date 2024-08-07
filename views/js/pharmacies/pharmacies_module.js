@@ -1,6 +1,6 @@
 $('.pharmaciesTable').DataTable({
 
-    "ajax":hiddenPath+"ajax/pharmacies_module_ajax.php",
+    "ajax":hiddenPath+"ajax/pharmacies_table_ajax.php",
     "deferRender": true,
 	"retrieve": true,
 	"processing": true,
@@ -40,33 +40,59 @@ function ShowPharmacyDataOnEdit(id, name, address){
 }
 
 function EditPharmacy(){
-	var id = $('#idCustomerToEdit').text();
+	var id = $('#idPharmacyToEdit').text();
 	var namePharmacy = $('#newNamePharmacy').val();
 	var addressPharmacy = $('#newAddressPharmacy').val();
 
-	var validateData = new FormData();
-
-	validateData.append("editPharmacy", true);
-	validateData.append("idPharmacyToEdit", id);
-	validateData.append("namePharmacyToEdit", namePharmacy);
-	validateData.append("addressPharmacyToEdit", addressPharmacy);
+	var validateFiles = new FormData();
 
 	//pharmacy images logic
 
 	if(arrayFiles.length > 0 && namePharmacy != ""){
+		var multimediaList = [];
 		for(var i = 0; i < arrayFiles.length; i++){
-			validateData.append("pharmacyFiles", arrayFiles[i]);
-			validateData.append("pharmacyFilesRoute", namePharmacy);
+			validateFiles.append("pharmacyFiles", arrayFiles[i]);
+			validateFiles.append("pharmacyFilesRoute", namePharmacy);
 
 			$.ajax({
 				url:hiddenPath+"ajax/pharmacies_module_ajax.php",
 				method: "POST",
-				data: validateData,
+				data: validateFiles,
 				cache: false,
 				contentType: false,
 				processData: false,
 				success:(response)=>{
-				  console.log("Edit Pharmacy " + response);
+
+					multimediaList.push({"file" : response.substr(3)});
+					multimedia = JSON.stringify(multimediaList);
+
+					if(multimedia != null){
+
+						var validateData = new FormData();
+
+						validateData.append("editPharmacy", true);
+						validateData.append("idPharmacyToEdit", id);
+						validateData.append("namePharmacyToEdit", namePharmacy);
+						validateData.append("addressPharmacyToEdit", addressPharmacy);
+						validateData.append("fileRoutes", multimedia);
+
+						$.ajax({
+							url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+							method: "POST",
+							data: validateData,
+							cache: false,
+							contentType: false,
+							processData: false,
+							success:(response)=>{
+
+							  console.log("Edit Pharmacy " + response);
+
+							}
+						});
+
+					}
+
+				  //console.log("Edit Pharmacy " + response);
 				}
 			});
 		}

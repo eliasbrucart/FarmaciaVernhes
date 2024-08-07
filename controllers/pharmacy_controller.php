@@ -58,7 +58,7 @@ class PharmacyController{
         return $response;
     }
 
-    static public function CreatePharmacyFiles($pharmacyFiles, $pharmacyFilesRoute, $namePharmacy){
+    static public function CreatePharmacyFiles($pharmacyFiles, $pharmacyFilesRoute){
         if(isset($pharmacyFiles["tmp_name"]) && !empty($pharmacyFiles["tmp_name"])){
 
             list($width, $height) = getimagesize($pharmacyFiles["tmp_name"]);
@@ -66,7 +66,7 @@ class PharmacyController{
             $newWidth = 500;
             $newHeight = 1000;
 
-            $directory = "../views/img/".$namePharmacy;
+            $directory = "../views/img/".$pharmacyFilesRoute;
 
             if(!file_exists($directory)){
                 mkdir($directory, 0755);
