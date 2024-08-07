@@ -73,7 +73,7 @@ class PharmacyController{
             }
 
             if($pharmacyFiles["type"] == "image/jpeg"){
-                $routeImage = $directory."/".$pharmacyFiles["name"];
+                $routeFile = $directory."/".$pharmacyFiles["name"];
 
                 $origin = imagecreatefromjpeg($pharmacyFiles["tmp_name"]);
 
@@ -81,11 +81,11 @@ class PharmacyController{
 
                 imagecopyresized($destination, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-				imagejpeg($destination, $routeImage);
+				imagejpeg($destination, $routeFile);
             }
 
             if($pharmacyFiles["type"] == "image/png"){
-                $routeImage = $directory."/".$pharmacyFiles["name"];
+                $routeFile = $directory."/".$pharmacyFiles["name"];
 
                 $origin = imagecreatefrompng($pharmacyFiles["tmp_name"]);
 
@@ -97,10 +97,17 @@ class PharmacyController{
 
                 imagecopyresized($destination, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-				imagepng($destination, $routeImage);
+				imagepng($destination, $routeFile);
             }
 
-            return $routeImage;
+            if($pharmacyFiles["type"] == "video/mp4"){
+                $date = date("Y-m-d");
+                $routeFile = $directory."/".$pharmacyFilesRoute."_".$date."_".time()."_video".".mp4";
+
+                move_uploaded_file($pharmacyFiles["tmp_name"], $routeFile);
+            }
+
+            return $routeFile;
         }
     }
 }

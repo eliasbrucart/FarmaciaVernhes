@@ -128,8 +128,8 @@ function DeletePharmacy(){
 $('.pharmacyImages').dropzone({
 	url: "/",
 	addRemoveLinks: true,
-	acceptedFiles: "image/jpeg, image/png",
-	maxFilesize: 2,
+	acceptedFiles: "image/jpeg, image/png, .mp4, .mkv, .avi",
+	maxFilesize: 2000,
 	maxFiles: 10,
 	init: function(){
 
