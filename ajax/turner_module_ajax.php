@@ -21,6 +21,12 @@ class TurnerModuleAjax{
         echo json_encode($response);
     }
 
+    public function GetPharmacyFileRoutes(){
+        $response = PharmacyController::GetPharmacyFileRoutes($this->idTodayPharmacy);
+
+        echo json_encode($response);
+    }
+
     public $idTurnerFullDay;
     public $stateTurner;
     public function SetTurnerFullDay(){
@@ -54,6 +60,12 @@ if(isset($_POST["getTodayPharmacyAddress"])){
     $todayPharmacyAddress = new TurnerModuleAjax();
     $todayPharmacyAddress->idTodayPharmacy = $_POST["idTodayPharmacy"];
     $todayPharmacyAddress->GetPharmacyAddress();
+}
+
+if(isset($_POST["getTodayPharmacyFileRoutes"])){
+    $todayPharmacyAddress = new TurnerModuleAjax();
+    $todayPharmacyAddress->idTodayPharmacy = $_POST["idTodayPharmacy"];
+    $todayPharmacyAddress->GetPharmacyFileRoutes();
 }
 
 if(isset($_POST["setTurnerFullDay"])){

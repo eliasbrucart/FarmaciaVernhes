@@ -63,7 +63,8 @@ function EditPharmacy(){
 				processData: false,
 				success:(response)=>{
 
-					multimediaList.push({"file" : response.substr(3)});
+					//multimediaList.push({"file" : response.substr(3)});
+					multimediaList.push(response.substr(3));
 					multimedia = JSON.stringify(multimediaList);
 
 					if(multimedia != null){

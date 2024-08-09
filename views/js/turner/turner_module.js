@@ -66,14 +66,17 @@ $(function(){
             processData: false,
             success:(response)=>{
                 var parseJSON = JSON.parse(response);
+                var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
                 for(var i = 0; i < parseJSON.length; i++){
                     if(parseJSON[i].fullDay == 1){
-                        $('.pharmacy24Name').text(parseJSON[i].name_pharmacy);
-                        GetPharmacyAddress(parseJSON[i].id_pharmacy, parseJSON[i].fullDay);
+                        //$('.pharmacy24Name').text(parseJSON[i].name_pharmacy);
+                        GetPharmacyFileRoutes(parseJSON[i].id_pharmacy, parseJSON[i].fullDay);
+                        //var test = JSON.parse(parseJSON[i].file_routes_pharmacy);
+                        //console.log("test " + parseJSON[i].file_routes_pharmacy);
+                        //videoPharmacy24.src = JSON.parse(parseJSON[i].file_routes_pharmacy);
                     }else{
                         $('.pharmacyName').text(parseJSON[i].name_pharmacy);
-                        GetPharmacyAddress(parseJSON[i].id_pharmacy, parseJSON[i].fullDay);
-
+                        //GetPharmacyAddress(parseJSON[i].id_pharmacy, parseJSON[i].fullDay);
                     }
                 }
             }
@@ -94,8 +97,37 @@ $(function(){
             processData: false,
             success: (response)=>{
                 var parseJSON = JSON.parse(response);
+                //var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
                 if(fullDay == 1){
                     $('.pharmacy24Address').text(parseJSON);
+                }else{
+                    $('.pharmacyAddress').text(parseJSON);
+                }
+            }
+        });
+
+    }
+
+    function GetPharmacyFileRoutes(idPharmacy, fullDay){
+        var validateData = new FormData();
+        validateData.append("getTodayPharmacyFileRoutes" , true);
+        validateData.append("idTodayPharmacy", idPharmacy);
+
+        $.ajax({
+            url:hiddenPath+"ajax/turner_module_ajax.php",
+            method: "POST",
+            data: validateData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: (response)=>{
+                var parseJSON = JSON.parse(response);
+                var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
+                if(fullDay == 1){
+                    $('.pharmacy24Address').text(parseJSON);
+                    //console.log("test " + parseJSON)
+                    var videoFile = JSON.parse(parseJSON);
+                    videoPharmacy24.src = videoFile;
                 }else{
                     $('.pharmacyAddress').text(parseJSON);
                 }

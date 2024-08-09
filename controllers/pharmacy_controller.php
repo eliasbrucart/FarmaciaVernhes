@@ -42,6 +42,14 @@ class PharmacyController{
         return $response;
     }
 
+    static public function GetPharmacyFileRoutes($idTodayPharmacy){
+        $table = "pharmacy";
+
+        $response = PharmacyModel::GetPharmacyFileRoutes($table, $idTodayPharmacy);
+
+        return $response;
+    }
+
     static public function EditPharmacy($data){
         $table = "pharmacy";
 

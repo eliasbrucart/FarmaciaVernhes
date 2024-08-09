@@ -60,6 +60,20 @@ class PharmacyModel{
         $stmt = null;
     }
 
+    static public function GetPharmacyFileRoutes($table, $idTodayPharmacy){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE id_pharmacy = :id_pharmacy");
+
+        $stmt->bindParam("id_pharmacy", $idTodayPharmacy, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchColumn(3); //Columna file_routes_pharmacy
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
     static public function EditPharmacy($table, $data){
         $stmt = Connection::Connect()->prepare("UPDATE $table SET name_pharmacy = :name_pharmacy, address_pharmacy = :address_pharmacy, file_routes_pharmacy = :file_routes_pharmacy WHERE id_pharmacy = :id_pharmacy");
 
