@@ -1,23 +1,26 @@
-<div class="container-fluid">
+<div class="container-fluid turnerModule">
 
-    <div id="carouselExampleSlidesOnly" class="vertical carousel slide" data-ride="carousel">
+    <!--<div id="carouselExampleSlidesOnly" class="vertical carousel slide" data-bs-interval="10000" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-            <!--<img class="d-block w-100" src="Vernhes_2024-08-07_1723002401_video.mp4" alt="First slide">-->
-                <video id="videoPharmacy24hs" loop muted controls autoplay>
+            <div class="carousel-item active pharmacy24hs" id="pharmacy24hs">
+                <video id="videoPharmacy24hs" class="videoPharmacy24hs" loop muted controls autoplay>
                     <source src="" type="video/mp4">
                 </video>
             </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="views/img/Vernhes/02.jpeg" alt="Second slide">
+            <div class="carousel-item pharmacy12hs" id="pharmacy12hs">
+                <video id="videoPharmacy12hs" class="videoPharmacy12hs" loop muted controls autoplay>
+                    <source src="" type="video/mp4">
+                </video>
             </div>
-            <!--<div class="carousel-item">
-                <img class="d-block w-100" src="views/img/Vernhes/03.jpeg" alt="Third slide">
-            </div>-->
         </div>
-    </div>
+    </div>-->
 
-    <div class="container">
-    </div>
+    <video id="videoPharmacy24hs" class="videoPharmacy24hs" muted controls autoplay>
+        <source src="" type="video/mp4">
+    </video>
+
+    <video id="videoPharmacy12hs" class="videoPharmacy12hs" muted controls autoplay>
+        <source src="" type="video/mp4">
+    </video>
 
 </div>

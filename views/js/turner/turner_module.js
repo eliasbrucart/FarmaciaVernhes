@@ -18,14 +18,46 @@ $(function(){
     
     console.log("actualDateToDBFormat " + actualDateToDBFormat);
 
-    //UpdateDate();
+    GetTodayPharmacies(actualDateToDBFormat);
 
-    //SaveDate(); //dentro de interval
-    //console.log("Check Date Changed " + CheckDateChanged());
+    $('.videoPharmacy24hs').show();
+    $('.videoPharmacy12hs').hide();
 
-    //console.log("new date DB Format " + newDateDBFormat);
+    var twoVideos = false;
 
-    //CheckDateChanged(actualDateToDBFormat);
+    document.getElementById('videoPharmacy24hs').addEventListener('ended',Activate12hsVideo,false);
+    document.getElementById('videoPharmacy12hs').addEventListener('ended',Activate24hsVideo,false);
+
+    function Activate12hsVideo(e){
+        GetTodayPharmacies(actualDateToDBFormat);
+        if(twoVideos){
+            $('.videoPharmacy24hs').hide();
+            $('.videoPharmacy12hs').show();
+            $('.videoPharmacy12hs').trigger('play');
+        }else{
+            $('.videoPharmacy24hs').trigger('play');
+        }
+    }
+
+    function Activate24hsVideo(e){
+        GetTodayPharmacies(actualDateToDBFormat);
+        $('.videoPharmacy12hs').hide();
+        $('.videoPharmacy24hs').show();
+        $('.videoPharmacy24hs').trigger('play');
+    }
+
+    function Show24hsVideo(){
+        $('.videoPharmacy24hs').show();
+        twoVideos = false;
+        $('.videoPharmacy24hs').trigger('play');
+    }
+
+    function ActivateBothVideos(){
+        $('.videoPharmacy24hs').show();
+        $('.videoPharmacy12hs').hide();
+        twoVideos = true;
+        $('.videoPharmacy24hs').trigger('play');
+    }
 
     setInterval(function(){
         if(CheckDateChanged(actualDateToDBFormat)){
@@ -43,13 +75,14 @@ $(function(){
 
             GetTodayPharmacies(newDateDBFormat);
 
-            location.reload();
+            //location.reload();
         }
         console.log("Chequeando cambio de fecha a cada minuto!");
+        //GetTodayPharmacies(actualDateToDBFormat);
     }, 60000); //half hour
-
-    GetTodayPharmacies(actualDateToDBFormat);
-
+    
+    //GetTodayPharmacies(actualDateToDBFormat);
+    
     console.log("GetSavedDate func " + GetSavedDate());
 
     function GetTodayPharmacies(actualDate){
@@ -66,18 +99,16 @@ $(function(){
             processData: false,
             success:(response)=>{
                 var parseJSON = JSON.parse(response);
-                var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
-                for(var i = 0; i < parseJSON.length; i++){
-                    if(parseJSON[i].fullDay == 1){
-                        //$('.pharmacy24Name').text(parseJSON[i].name_pharmacy);
+                console.log(parseJSON);
+                if(parseJSON.length > 1){
+                    //ActivateBothVideos();
+                    twoVideos = true;
+                    for(var i = 0; i < parseJSON.length; i++){
                         GetPharmacyFileRoutes(parseJSON[i].id_pharmacy, parseJSON[i].fullDay);
-                        //var test = JSON.parse(parseJSON[i].file_routes_pharmacy);
-                        //console.log("test " + parseJSON[i].file_routes_pharmacy);
-                        //videoPharmacy24.src = JSON.parse(parseJSON[i].file_routes_pharmacy);
-                    }else{
-                        $('.pharmacyName').text(parseJSON[i].name_pharmacy);
-                        //GetPharmacyAddress(parseJSON[i].id_pharmacy, parseJSON[i].fullDay);
                     }
+                }else{
+                    Show24hsVideo();
+                    GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
                 }
             }
         });
@@ -123,13 +154,13 @@ $(function(){
             success: (response)=>{
                 var parseJSON = JSON.parse(response);
                 var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
+                var videoPharmacy12hs = document.getElementById('videoPharmacy12hs');
+                var videoFile = JSON.parse(parseJSON);
                 if(fullDay == 1){
                     $('.pharmacy24Address').text(parseJSON);
-                    //console.log("test " + parseJSON)
-                    var videoFile = JSON.parse(parseJSON);
                     videoPharmacy24.src = videoFile;
                 }else{
-                    $('.pharmacyAddress').text(parseJSON);
+                    videoPharmacy12hs.src = videoFile;
                 }
             }
         });

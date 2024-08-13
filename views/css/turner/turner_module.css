@@ -98,6 +98,15 @@
   top: -100%;
   left: 0;
 }
+
+#videoPharmacy24hs{
+  width: 100%;
+  height: 100%;
+}
+#videoPharmacy12hs{
+  width: 100%;
+  height: 100%;
+}
 /*=============================================
 ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
 =============================================*/
