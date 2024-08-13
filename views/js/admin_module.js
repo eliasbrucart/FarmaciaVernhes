@@ -30,6 +30,9 @@ function AddPharmacy(){
 		processData: false,
         success:(response)=>{
             console.log("Add pharmacy response" + response);
+            setTimeout(function(){
+                location.reload();
+            }, 1000);
         }
     });
 }

@@ -47,7 +47,7 @@
                   <input type="text" name="addressPharmacy" class="form-control addressPharmacy" placeholder="Direccion">
 
                   <div class="input-group-append float-right">
-                    <button id="add-new-event" type="button" class="btn btn-primary" onclick="AddPharmacy()">Agregar</button>
+                    <button type="button" class="btn btn-primary" onclick="AddPharmacy()">Agregar</button>
                   </div>
                   <!-- /input-group -->
                 </div>

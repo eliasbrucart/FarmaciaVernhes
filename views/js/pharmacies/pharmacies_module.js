@@ -122,6 +122,9 @@ function DeletePharmacy(){
         processData: false,
         success:(response)=>{
           console.log("Delete Pharmacy " + response);
+		  setTimeout(function(){
+			location.reload();
+		  }, 1000);
         }
 	});
 }
