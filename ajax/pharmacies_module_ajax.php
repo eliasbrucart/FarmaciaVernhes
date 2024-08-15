@@ -27,6 +27,14 @@ class PharmaciesModuleAjax{
         echo $response;
     }
 
+    public $pharmacyFiles12;
+    //public $pharmacyFilesRoute;
+    public function UploadPharmacyFiles12(){
+        $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles12, $this->pharmacyFilesRoute);
+
+        echo $response;
+    }
+
     public $idPharmacyToDelete;
     public function DeletePharmacy(){
         $response = PharmacyController::DeletePharmacy($this->idPharmacyToDelete);
@@ -49,6 +57,13 @@ if(isset($_FILES["pharmacyFiles"]) && $_POST["pharmacyFilesRoute"] != ""){
     $editPharmacyWithFiles->pharmacyFiles = $_FILES["pharmacyFiles"];
     $editPharmacyWithFiles->pharmacyFilesRoute = $_POST["pharmacyFilesRoute"];
     $editPharmacyWithFiles->UploadPharmacyFiles();
+}
+
+if(isset($_FILES["pharmacyFiles12"]) && $_POST["pharmacyFilesRoute"] != ""){
+    $editPharmacyWithFiles = new PharmaciesModuleAjax();
+    $editPharmacyWithFiles->pharmacyFiles12 = $_FILES["pharmacyFiles12"];
+    $editPharmacyWithFiles->pharmacyFilesRoute = $_POST["pharmacyFilesRoute"];
+    $editPharmacyWithFiles->UploadPharmacyFiles12();
 }
 
 if(isset($_POST["deletePharmacy"]) && $_POST["deletePharmacy"]){

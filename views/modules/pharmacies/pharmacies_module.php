@@ -85,7 +85,27 @@
 
                         <div class="form-floating mb-3">
 
-                            <form action="post" class="pharmacyImages dropzone">
+                            <h3>Archivos para turnero 24hs</h3>
+
+                            <form action="post" class="pharmacyFiles24 dropzone">
+
+                                <div class="dz-message needsclick">
+                                
+                                    Arrastrar o dar click para subir imagenes.
+
+                                </div>
+
+                            </form>
+
+                        <!-- input para subir imagenes, gifs, etc con plugin para ello -->
+
+                        </div>
+
+                        <div class="form-floating mb-3">
+
+                            <h3>Archivos para turnero 12hs</h3>
+
+                            <form action="post" class="pharmacyFiles12 dropzone">
 
                                 <div class="dz-message needsclick">
                                 

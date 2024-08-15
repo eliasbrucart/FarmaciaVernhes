@@ -31,7 +31,10 @@ $('.pharmaciesTable').DataTable({
     }
 });
 
-var arrayFiles = [];
+var arrayFiles24 = [];
+var arrayFiles12 = [];
+
+var multimediaList = [];
 
 function ShowPharmacyDataOnEdit(id, name, address){
 	$('#idPharmacyToEdit').text(id);
@@ -45,13 +48,14 @@ function EditPharmacy(){
 	var addressPharmacy = $('#newAddressPharmacy').val();
 
 	var validateFiles = new FormData();
+	var validateFiles12 = new FormData();
 
 	//pharmacy images logic
 
-	if(arrayFiles.length > 0 && namePharmacy != ""){
-		var multimediaList = [];
-		for(var i = 0; i < arrayFiles.length; i++){
-			validateFiles.append("pharmacyFiles", arrayFiles[i]);
+	if(arrayFiles24.length > 0 && namePharmacy != ""){
+		//var multimediaList = [];
+		for(var i = 0; i < arrayFiles24.length; i++){
+			validateFiles.append("pharmacyFiles", arrayFiles24[i]);
 			validateFiles.append("pharmacyFilesRoute", namePharmacy);
 
 			$.ajax({
@@ -63,8 +67,8 @@ function EditPharmacy(){
 				processData: false,
 				success:(response)=>{
 
-					//multimediaList.push({"file" : response.substr(3)});
-					multimediaList.push(response.substr(3));
+					multimediaList.push({"24video" : response.substr(3)});
+					//multimediaList.push(response.substr(3));
 					multimedia = JSON.stringify(multimediaList);
 
 					if(multimedia != null){
@@ -87,6 +91,57 @@ function EditPharmacy(){
 							success:(response)=>{
 
 							  console.log("Edit Pharmacy " + response);
+
+							}
+						});
+
+					}
+
+				  //console.log("Edit Pharmacy " + response);
+				}
+			});
+		}
+	}
+	if(arrayFiles12.length > 0 && namePharmacy != ""){
+		for(var i = 0; i < arrayFiles24.length; i++){
+			validateFiles12.append("pharmacyFiles12", arrayFiles12[i]);
+			validateFiles12.append("pharmacyFilesRoute", namePharmacy);
+
+			$.ajax({
+				url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+				method: "POST",
+				data: validateFiles12,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success:(response)=>{
+
+					console.log("response files 12hs " + response);
+
+					multimediaList.push({"12video" : response.substr(3)});
+					//multimediaList.push(response.substr(3));
+					multimedia = JSON.stringify(multimediaList);
+
+					if(multimedia != null){
+
+						var validateData = new FormData();
+
+						validateData.append("editPharmacy", true);
+						validateData.append("idPharmacyToEdit", id);
+						validateData.append("namePharmacyToEdit", namePharmacy);
+						validateData.append("addressPharmacyToEdit", addressPharmacy);
+						validateData.append("fileRoutes", multimedia);
+
+						$.ajax({
+							url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+							method: "POST",
+							data: validateData,
+							cache: false,
+							contentType: false,
+							processData: false,
+							success:(response)=>{
+
+							  console.log("Edit Pharmacy 12" + response);
 
 							}
 						});
@@ -129,7 +184,7 @@ function DeletePharmacy(){
 	});
 }
 
-$('.pharmacyImages').dropzone({
+$('.pharmacyFiles24').dropzone({
 	url: "/",
 	addRemoveLinks: true,
 	acceptedFiles: "image/jpeg, image/png, .mp4, .mkv, .avi",
@@ -139,19 +194,47 @@ $('.pharmacyImages').dropzone({
 
 		this.on("addedfile", function(file){
 
-			arrayFiles.push(file);
+			arrayFiles24.push(file);
 
-			console.log("arrayFiles", arrayFiles);
+			console.log("arrayFiles24", arrayFiles24);
 
 		})
 
 		this.on("removedfile", function(file){
 
-			var index = arrayFiles.indexOf(file);
+			var index = arrayFiles24.indexOf(file);
 
-			arrayFiles.splice(index, 1);
+			arrayFiles24.splice(index, 1);
 
-			console.log("arrayFiles", arrayFiles);
+			console.log("arrayFiles24", arrayFiles24);
+
+		})
+	}
+});
+
+$('.pharmacyFiles12').dropzone({
+	url: "/",
+	addRemoveLinks: true,
+	acceptedFiles: "image/jpeg, image/png, .mp4, .mkv, .avi",
+	maxFilesize: 2000,
+	maxFiles: 10,
+	init: function(){
+
+		this.on("addedfile", function(file){
+
+			arrayFiles12.push(file);
+
+			console.log("arrayFiles12", arrayFiles12);
+
+		})
+
+		this.on("removedfile", function(file){
+
+			var index = arrayFiles12.indexOf(file);
+
+			arrayFiles12.splice(index, 1);
+
+			console.log("arrayFiles12", arrayFiles12);
 
 		})
 	}

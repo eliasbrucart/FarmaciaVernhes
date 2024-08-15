@@ -110,7 +110,21 @@ class PharmacyController{
 
             if($pharmacyFiles["type"] == "video/mp4"){
                 $date = date("Y-m-d");
-                $routeFile = $directory."/".$pharmacyFilesRoute."_".$date."_".time()."_video".".mp4";
+
+                $num = mt_rand(1, 20);
+
+                //$routeFile = $directory."/".$pharmacyFiles["tmp_name"]."_".$date.".mp4";
+
+                $routeFile = $directory."/".$pharmacyFilesRoute."_".$date."_".$num."_video".".mp4";
+
+                if(file_exists($routeFile)){
+
+                    $newNum = mt_rand(1, 30);
+
+                    $routeFile = $directory."/".$pharmacyFilesRoute."_".$date."_".$newNum."_video".".mp4";
+
+                    move_uploaded_file($pharmacyFiles["tmp_name"], $routeFile);
+                }
 
                 move_uploaded_file($pharmacyFiles["tmp_name"], $routeFile);
             }
