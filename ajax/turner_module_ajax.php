@@ -24,7 +24,17 @@ class TurnerModuleAjax{
     public function GetPharmacyFileRoutes(){
         $response = PharmacyController::GetPharmacyFileRoutes($this->idTodayPharmacy);
 
-        echo json_encode($response);
+        //echo $response[0]["fullday_pharmacy"];
+
+        $fileArray = array(0=>$response[0]["fullday_pharmacy"],
+                           1=>$response[0]["halfday_pharmacy"]);
+
+        
+        //var_dump($fileArray);
+
+        //array_push($fileArray, $response[""]);
+
+        echo json_encode($fileArray);
     }
 
     public $idTurnerFullDay;

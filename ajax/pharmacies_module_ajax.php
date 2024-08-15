@@ -7,12 +7,37 @@ class PharmaciesModuleAjax{
     public $idPharmacyToEdit;
     public $namePharmacyToEdit;
     public $addressPharmacyToEdit;
-    public $fileRoutes;
+    public $multimedia24;
+    public $multimedia12;
     public function EditPharmacy(){
+
+        /*if($this->multimedia24 != null){
+            $data = array("idPharmacyToEdit"=>$this->idPharmacyToEdit,
+                      "namePharmacyToEdit"=>$this->namePharmacyToEdit,
+                      "addressPharmacyToEdit"=>$this->addressPharmacyToEdit,
+                      "multimedia24"=>$this->multimedia24);
+
+            $response = PharmacyController::EditPharmacy($data);
+
+            echo json_encode($response);
+        }
+
+        if($this->multimedia12 != null){
+            $data = array("idPharmacyToEdit"=>$this->idPharmacyToEdit,
+                      "namePharmacyToEdit"=>$this->namePharmacyToEdit,
+                      "addressPharmacyToEdit"=>$this->addressPharmacyToEdit,
+                      "multimedia12"=>$this->multimedia12);
+
+            $response = PharmacyController::EditPharmacy($data);
+
+            echo json_encode($response);
+        }*/
+
         $data = array("idPharmacyToEdit"=>$this->idPharmacyToEdit,
                       "namePharmacyToEdit"=>$this->namePharmacyToEdit,
                       "addressPharmacyToEdit"=>$this->addressPharmacyToEdit,
-                      "fileRoutes"=>$this->fileRoutes);
+                      "multimedia24"=>$this->multimedia24,
+                      "multimedia12"=>$this->multimedia12);
 
         $response = PharmacyController::EditPharmacy($data);
 
@@ -48,7 +73,17 @@ if(isset($_POST["editPharmacy"]) && $_POST["editPharmacy"]){
     $editPharmacy->idPharmacyToEdit = $_POST["idPharmacyToEdit"];
     $editPharmacy->namePharmacyToEdit = $_POST["namePharmacyToEdit"];
     $editPharmacy->addressPharmacyToEdit = $_POST["addressPharmacyToEdit"];
-    $editPharmacy->fileRoutes = $_POST["fileRoutes"];
+    if($_POST["multimedia24"] != null){
+        $editPharmacy->multimedia24 = $_POST["multimedia24"];
+    }else{
+        $editPharmacy->multimedia24 = 0;
+    }
+
+    if($_POST["multimedia12"] != null){
+        $editPharmacy->multimedia12 = $_POST["multimedia12"];
+    }else{
+        $editPharmacy->multimedia12 = 0;
+    }
     $editPharmacy->EditPharmacy();
 }
 

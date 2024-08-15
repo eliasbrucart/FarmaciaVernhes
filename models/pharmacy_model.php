@@ -67,7 +67,7 @@ class PharmacyModel{
 
         $stmt->execute();
 
-        return $stmt->fetchColumn(3); //Columna file_routes_pharmacy
+        return $stmt->fetchAll(); //Columna file_routes_pharmacy
 
         $stmt->close();
 
@@ -75,12 +75,13 @@ class PharmacyModel{
     }
 
     static public function EditPharmacy($table, $data){
-        $stmt = Connection::Connect()->prepare("UPDATE $table SET name_pharmacy = :name_pharmacy, address_pharmacy = :address_pharmacy, file_routes_pharmacy = :file_routes_pharmacy WHERE id_pharmacy = :id_pharmacy");
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET name_pharmacy = :name_pharmacy, address_pharmacy = :address_pharmacy, fullday_pharmacy = :fullday_pharmacy, halfday_pharmacy = :halfday_pharmacy WHERE id_pharmacy = :id_pharmacy");
 
         $stmt->bindParam(":id_pharmacy", $data["idPharmacyToEdit"], PDO::PARAM_INT);
         $stmt->bindParam(":name_pharmacy", $data["namePharmacyToEdit"], PDO::PARAM_STR);
         $stmt->bindParam(":address_pharmacy", $data["addressPharmacyToEdit"], PDO::PARAM_STR);
-        $stmt->bindParam(":file_routes_pharmacy", $data["fileRoutes"], PDO::PARAM_STR);
+        $stmt->bindParam(":fullday_pharmacy", $data["multimedia24"], PDO::PARAM_STR);
+        $stmt->bindParam(":halfday_pharmacy", $data["multimedia12"], PDO::PARAM_STR);
 
         if($stmt->execute()){
             return "ok";

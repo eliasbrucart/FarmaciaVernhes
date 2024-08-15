@@ -34,7 +34,9 @@ $('.pharmaciesTable').DataTable({
 var arrayFiles24 = [];
 var arrayFiles12 = [];
 
-var multimediaList = [];
+//var multimediaList = [];
+var multimedia24 = "";
+var multimedia12 = "";
 
 function ShowPharmacyDataOnEdit(id, name, address){
 	$('#idPharmacyToEdit').text(id);
@@ -67,11 +69,12 @@ function EditPharmacy(){
 				processData: false,
 				success:(response)=>{
 
-					multimediaList.push({"24video" : response.substr(3)});
+					multimedia24 = response.substr(3);
+					//multimediaList.push({"fulldayvideo" : response.substr(3)});
 					//multimediaList.push(response.substr(3));
-					multimedia = JSON.stringify(multimediaList);
+					//multimedia = JSON.stringify(multimediaList);
 
-					if(multimedia != null){
+					//if(multimedia != null){
 
 						var validateData = new FormData();
 
@@ -79,7 +82,8 @@ function EditPharmacy(){
 						validateData.append("idPharmacyToEdit", id);
 						validateData.append("namePharmacyToEdit", namePharmacy);
 						validateData.append("addressPharmacyToEdit", addressPharmacy);
-						validateData.append("fileRoutes", multimedia);
+						validateData.append("multimedia24", multimedia24);
+						validateData.append("multimedia12", multimedia12);
 
 						$.ajax({
 							url:hiddenPath+"ajax/pharmacies_module_ajax.php",
@@ -95,7 +99,7 @@ function EditPharmacy(){
 							}
 						});
 
-					}
+					//}
 
 				  //console.log("Edit Pharmacy " + response);
 				}
@@ -118,11 +122,9 @@ function EditPharmacy(){
 
 					console.log("response files 12hs " + response);
 
-					multimediaList.push({"12video" : response.substr(3)});
-					//multimediaList.push(response.substr(3));
-					multimedia = JSON.stringify(multimediaList);
+					multimedia12 = response.substr(3);
 
-					if(multimedia != null){
+					//if(multimedia != null){
 
 						var validateData = new FormData();
 
@@ -130,7 +132,8 @@ function EditPharmacy(){
 						validateData.append("idPharmacyToEdit", id);
 						validateData.append("namePharmacyToEdit", namePharmacy);
 						validateData.append("addressPharmacyToEdit", addressPharmacy);
-						validateData.append("fileRoutes", multimedia);
+						validateData.append("multimedia12", multimedia12);
+						validateData.append("multimedia24", multimedia24);
 
 						$.ajax({
 							url:hiddenPath+"ajax/pharmacies_module_ajax.php",
@@ -146,7 +149,7 @@ function EditPharmacy(){
 							}
 						});
 
-					}
+					//}
 
 				  //console.log("Edit Pharmacy " + response);
 				}

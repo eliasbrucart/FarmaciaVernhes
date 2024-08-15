@@ -99,7 +99,7 @@ $(function(){
             processData: false,
             success:(response)=>{
                 var parseJSON = JSON.parse(response);
-                console.log(parseJSON);
+                //console.log(parseJSON);
                 if(parseJSON.length > 1){
                     //ActivateBothVideos();
                     twoVideos = true;
@@ -152,16 +152,37 @@ $(function(){
             contentType: false,
             processData: false,
             success: (response)=>{
-                var parseJSON = JSON.parse(response);
+
                 var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
                 var videoPharmacy12hs = document.getElementById('videoPharmacy12hs');
-                var videoFile = JSON.parse(parseJSON);
-                if(fullDay == 1){
-                    $('.pharmacy24Address').text(parseJSON);
-                    videoPharmacy24.src = videoFile;
+                var parseResponse = JSON.parse(response);
+                
+                console.log("response get pharmacy file routes " + parseResponse[0]);
+                console.log("response get pharmacy file routes " + parseResponse[1]);
+
+                if(fullDay == 1){ //es array
+                    //console.log("videos full " + videoFile[i].fulldayvideo);
+                    //$('.pharmacy24Address').text(parseJSON);
+                    videoPharmacy24.src = parseResponse[0];
                 }else{
-                    videoPharmacy12hs.src = videoFile;
+                    //console.log("videos half " + videoFile[i].halfdayvideo);
+                    videoPharmacy12hs.src = parseResponse[1];
                 }
+
+                /*var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
+                var videoPharmacy12hs = document.getElementById('videoPharmacy12hs');
+                var videoFile = JSON.parse(parseResponse);
+                console.log("video file length " + videoFile.fulldayvideo);
+                for(var i = 0; i < videoFile.length; i++){
+                    if(fullDay == 1){ //es array
+                        console.log("videos full " + videoFile[i].fulldayvideo);
+                        //$('.pharmacy24Address').text(parseJSON);
+                        videoPharmacy24.src = videoFile[i].fulldayvideo;
+                    }else{
+                        console.log("videos half " + videoFile[i].halfdayvideo);
+                        videoPharmacy12hs.src = videoFile[i].halfdayvideo;
+                    }
+                }*/
             }
         });
 
