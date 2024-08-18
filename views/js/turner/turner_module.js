@@ -168,21 +168,6 @@ $(function(){
                     //console.log("videos half " + videoFile[i].halfdayvideo);
                     videoPharmacy12hs.src = parseResponse[1];
                 }
-
-                /*var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
-                var videoPharmacy12hs = document.getElementById('videoPharmacy12hs');
-                var videoFile = JSON.parse(parseResponse);
-                console.log("video file length " + videoFile.fulldayvideo);
-                for(var i = 0; i < videoFile.length; i++){
-                    if(fullDay == 1){ //es array
-                        console.log("videos full " + videoFile[i].fulldayvideo);
-                        //$('.pharmacy24Address').text(parseJSON);
-                        videoPharmacy24.src = videoFile[i].fulldayvideo;
-                    }else{
-                        console.log("videos half " + videoFile[i].halfdayvideo);
-                        videoPharmacy12hs.src = videoFile[i].halfdayvideo;
-                    }
-                }*/
             }
         });
 
