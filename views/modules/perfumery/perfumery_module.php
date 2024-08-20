@@ -27,7 +27,10 @@
                         </div>
 
                     </form>
+
                 </div>
+
+                <button type="button" class="btn btn-success m-2" onclick="UploadPerfumery()">Agregar</button>
             </div>
         </div>
     </section>

@@ -1,29 +1,61 @@
 var arrayPerfumeryFiles = [];
 
+var multimediaList = [];
+
+var multimedia = "";
+
 function UploadPerfumery(){
-    var namePerfumery = $('#namePerfumery').val();
+    var perfumeryName = $('#namePerfumery').val();
+	console.log("perfumery name " + perfumeryName);
     var orderPerfumery = 0;
-    var validateData = new FormData();
 
-    validateData.append("uploadPerfumery", true);
+    var validateFilesPerfumery = new FormData();
 
-    if(arrayPerfumeryFiles > 0 && namePerfumery != ""){
+    if(arrayPerfumeryFiles.length > 0 && perfumeryName != ""){
         for(var i = 0; i < arrayPerfumeryFiles.length; i++){
-            validateData.append("namePerfumery", namePerfumery);
-            validateData.append("perfumeryFiiles", arrayPerfumeryFiles[i]);
+            validateFilesPerfumery.append("perfumeryName", perfumeryName);
+            validateFilesPerfumery.append("perfumeryFiles", arrayPerfumeryFiles[i]);
 
             $.ajax({
-                url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+                url:hiddenPath+"ajax/perfumery_module_ajax.php",
 				method: "POST",
-				data: validateFiles,
+				data: validateFilesPerfumery,
 				cache: false,
 				contentType: false,
 				processData: false,
                 success:(response)=>{
+					multimediaList.push(response.substr(3));
+
+					multimedia = JSON.stringify(Object.assign({}, multimediaList));
 
                 }
             });
         }
+
+		setTimeout(function(){
+			if(multimedia != null){
+				var validateData = new FormData();
+				validateData.append("uploadPerfumery", true);
+				validateData.append("uploadPerfumeryName", perfumeryName);
+				validateData.append("uploadPerfumeryMultimedia", multimedia);
+				validateData.append("uploadPerfumeryOrder", orderPerfumery);
+	
+				$.ajax({
+					url:hiddenPath+"ajax/perfumery_module_ajax.php",
+					method: "POST",
+					data: validateData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success:(response)=>{
+	
+					  console.log("Upload Perfumery " + response);
+	
+					}
+				});
+	
+			}
+		}, 2000);
     }
 }
 
@@ -39,7 +71,7 @@ $('.perfumeryFiles').dropzone({
 
 			arrayPerfumeryFiles.push(file);
 
-			console.log("arrayFiles12", arrayPerfumeryFiles);
+			console.log("arrayPerfumeryFiles", arrayPerfumeryFiles);
 
 		})
 
@@ -49,7 +81,7 @@ $('.perfumeryFiles').dropzone({
             
 			arrayPerfumeryFiles.splice(index, 1);
 
-			console.log("arrayFiles12", arrayPerfumeryFiles);
+			console.log("arrayPerfumeryFiles", arrayPerfumeryFiles);
 
 		})
 	}
