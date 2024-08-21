@@ -28,6 +28,40 @@ class PerfumeryModuleAjax{
 
         echo $response;
     }
+
+    public $perfumeryNameEdited;
+    public $perfumeryFilesEdited;
+    public function EditPerfumeryFiles(){
+        $response = PerfumeryController::CreatePerfumeryFiles($this->perfumeryFilesEdited, $this->perfumeryNameEdited);
+
+        echo $response;
+    }
+
+    public $idPerfumeryEdited;
+    public $namePerfumeryEdited; //variable name excepction
+    public $perfumeryFileRoutesEdited;
+    public $perfumeryOrderEdited;
+    public function EditPerfumery(){
+        $data = array("idPerfumeryEdited"=>$this->idPerfumeryEdited,
+                      "namePerfumeryEdited"=>$this->namePerfumeryEdited,
+                      "fileRoutesPerfumeryEdited"=>$this->perfumeryFileRoutesEdited,
+                      "orderPerfumeryEdited"=>$this->perfumeryOrderEdited);
+
+        $response = PerfumeryController::EditPerfumery($data);
+
+        echo json_encode($response);
+    }
+
+    public $perfumeryIdEdited;
+    public $perfumerNameEdited;
+    public function EditNamePerfumery(){
+        $data = array("perfumeryIdEdited"=>$this->perfumeryIdEdited,
+                      "perfumerNameEdited"=>$this->perfumerNameEdited);
+
+        $response = PerfumeryController::EditNamePerfumery($data);
+
+        echo json_encode($response);
+    }
 }
 
 if(isset($_POST["uploadPerfumery"]) && $_POST["uploadPerfumery"] == true){
@@ -43,6 +77,22 @@ if(isset($_FILES["perfumeryFiles"]) && $_POST["perfumeryName"]){
     $uploadPerfumeryFiles->perfumeryFiles = $_FILES["perfumeryFiles"];
     $uploadPerfumeryFiles->perfumeryName = $_POST["perfumeryName"];
     $uploadPerfumeryFiles->UploadPerfumeryFiles();
+}
+
+if(isset($_FILES["perfumeryFilesEdited"]) && $_POST["perfumeryNameEdited"]){
+    $perfumeryFilesEdited = new PerfumeryModuleAjax();
+    $perfumeryFilesEdited->perfumeryNameEdited = $_POST["perfumeryNameEdited"];
+    $perfumeryFilesEdited->perfumeryFilesEdited = $_FILES["perfumeryFilesEdited"];
+    $perfumeryFilesEdited->EditPerfumeryFiles();
+}
+
+if(isset($_POST["perfumeryIdEdited"]) && isset($_POST["perfumeryNameEdited"]) && isset($_POST["perfumeryFileRoutesEdited"])){
+    $perfumeryEdited = new PerfumeryModuleAjax();
+    $perfumeryEdited->idPerfumeryEdited = $_POST["perfumeryIdEdited"];
+    $perfumeryEdited->namePerfumeryEdited = $_POST["perfumeryNameEdited"];
+    $perfumeryEdited->perfumeryFileRoutesEdited = $_POST["perfumeryFileRoutesEdited"];
+    $perfumeryEdited->perfumeryOrderEdited = $_POST["perfumeryOrderEdited"];
+    $perfumeryEdited->EditPerfumery();
 }
 
 ?>

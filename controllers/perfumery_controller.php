@@ -43,6 +43,30 @@ class PerfumeryController{
             return $routeFile;
         }
     }
+
+    static public function GetAllPerfumeries(){
+        $table = "perfumery";
+
+        $response = PerfumeryModel::GetAllPerfumeries($table);
+
+        return $response;
+    }
+
+    static public function EditPerfumery($data){
+        $table = "perfumery";
+
+        $response = PerfumeryModel::EditPerfumery($table, $data);
+
+        return $response;
+    }
+
+    static public function EditNamePerfumery($data){
+        $table = "perfumery";
+
+        $response = PerfumeryModel::EditNamePerfumery($table, $data);
+
+        return $response;
+    }
 }
 
 ?>

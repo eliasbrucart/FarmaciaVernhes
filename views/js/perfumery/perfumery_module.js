@@ -1,4 +1,5 @@
 var arrayPerfumeryFiles = [];
+var editPerfumeryFiles = [];
 
 var multimediaList = [];
 
@@ -59,6 +60,94 @@ function UploadPerfumery(){
     }
 }
 
+$('.savePerfumery').click(function(){
+	var idPerfumery = $(this).attr("id");
+	EditPerfumery(idPerfumery);
+});
+
+var multimediaListEdited = [];
+var multimediaEdited = "";
+
+function EditPerfumery(id){
+	var originalPerfumeryName = $('#originalPerfumeryName').text();
+	var perfumeryNameEdited = $('#namePerfumeryEdited').val();
+
+	var perfumeryFilesEdited = new FormData();
+
+	if(editPerfumeryFiles.length > 0 && perfumeryNameEdited != null){
+		for(var i = 0; i < editPerfumeryFiles.length; i++){
+			perfumeryFilesEdited.append("perfumeryNameEdited", perfumeryNameEdited);
+			perfumeryFilesEdited.append("perfumeryFilesEdited", editPerfumeryFiles[i]);
+
+			$.ajax({
+                url:hiddenPath+"ajax/perfumery_module_ajax.php",
+				method: "POST",
+				data: perfumeryFilesEdited,
+				cache: false,
+				contentType: false,
+				processData: false,
+                success:(response)=>{
+
+					multimediaListEdited.push(response.substr(3));
+
+					multimediaEdited = JSON.stringify(Object.assign({}, multimediaListEdited));
+
+					console.log("EditPerfumery " + multimediaEdited);
+
+                }
+            });
+		}
+
+		setTimeout(function(){
+			var validateData = new FormData();
+
+			validateData.append("perfumeryIdEdited", id);
+			validateData.append("perfumeryNameEdited", perfumeryNameEdited);
+			validateData.append("perfumeryFileRoutesEdited", multimediaEdited);
+			validateData.append("perfumeryOrderEdited", 0);
+	
+			$.ajax({
+				url:hiddenPath+"ajax/perfumery_module_ajax.php",
+				method: "POST",
+				data: validateData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success:(response)=>{
+	
+					console.log("Edited all perfumery attr" + response);
+	
+				}
+			});
+		}, 2000);
+	}
+
+	if(perfumeryNameEdited != null){
+		//Solo enviar id y nombre xdd
+		var validateData = new FormData();
+		validateData.append("perfumeryIdEdited", id);
+		validateData.append("perfumeryNameEdited", perfumeryNameEdited);
+
+		$.ajax({
+			url:hiddenPath+"ajax/perfumery_module_ajax.php",
+			method: "POST",
+			data: validateData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success:(response)=>{
+
+				console.log("Perfumery name edited " + response);
+
+			}
+		});
+	}
+}
+
+function DeletePerfumery(id){
+
+}
+
 $('.perfumeryFiles').dropzone({
 	url: "/",
 	addRemoveLinks: true,
@@ -82,6 +171,34 @@ $('.perfumeryFiles').dropzone({
 			arrayPerfumeryFiles.splice(index, 1);
 
 			console.log("arrayPerfumeryFiles", arrayPerfumeryFiles);
+
+		})
+	}
+});
+
+$('.editPerfumeryFiles').dropzone({
+	url: "/",
+	addRemoveLinks: true,
+	acceptedFiles: "image/jpeg, image/png, .mp4, .mkv, .avi",
+	maxFilesize: 2000,
+	maxFiles: 10,
+	init: function(){
+
+		this.on("addedfile", function(file){
+
+			editPerfumeryFiles.push(file);
+
+			console.log("editPerfumeryFiles", editPerfumeryFiles);
+
+		})
+
+		this.on("removedfile", function(file){
+
+			var index = editPerfumeryFiles.indexOf(file);
+            
+			editPerfumeryFiles.splice(index, 1);
+
+			console.log("editPerfumeryFiles", editPerfumeryFiles);
 
 		})
 	}

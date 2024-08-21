@@ -20,6 +20,54 @@ class PerfumeryModel{
 
         $stmt = null;
     }
+
+    static public function GetAllPerfumeries($table){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table");
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+    static public function EditPerfumery($table, $data){
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET name_perfumery = :name_perfumery, file_perfumery = :file_perfumery, order_perfumery = :order_perfumery WHERE id_perfumery = :id_perfumery");
+
+        $stmt->bindParam(":id_".$table, $data["idPerfumeryEdited"], PDO::PARAM_INT);
+        $stmt->bindParam(":name_".$table, $data["namePerfumeryEdited"], PDO::PARAM_STR);
+        $stmt->bindParam(":file_".$table, $data["fileRoutesPerfumeryEdited"], PDO::PARAM_STR);
+        $stmt->bindParam(":order_".$table, $data["orderPerfumeryEdited"], PDO::PARAM_INT);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+    static public function EditNamePerfumery($table, $data){
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET name_perfumery = :name_perfumery WHERE id_perfumery = :id_perfumery");
+
+        $stmt->bindParam(":id_".$table, $data["perfumeryIdEdited"], PDO::PARAM_INT);
+        $stmt->bindParam(":name_".$table, $data["perfumerNameEdited"], PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>
