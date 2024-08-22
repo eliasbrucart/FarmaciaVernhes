@@ -85,6 +85,22 @@ class PerfumeryModel{
 
         $stmt = null;
     }
+
+    static public function DeletePerfumery($table, $idPerfumeryDeleted){
+        $stmt = Connection::Connect()->prepare("DELETE FROM $table WHERE id_perfumery = :id_perfumery");
+
+        $stmt->bindParam(":id_".$table, $idPerfumeryDeleted, PDO::PARAM_INT);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

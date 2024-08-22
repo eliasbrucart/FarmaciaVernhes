@@ -28,7 +28,6 @@ function UploadPerfumery(){
 					multimediaList.push(response.substr(3));
 
 					multimedia = JSON.stringify(Object.assign({}, multimediaList));
-
                 }
             });
         }
@@ -49,13 +48,10 @@ function UploadPerfumery(){
 					contentType: false,
 					processData: false,
 					success:(response)=>{
-	
 					  console.log("Upload Perfumery " + response);
-
 					  setTimeout(function(){
 						location.reload();
 					  }, 2000);
-	
 					}
 				});
 	
@@ -119,12 +115,10 @@ function EditPerfumery(id){
 				contentType: false,
 				processData: false,
 				success:(response)=>{
-	
 					console.log("Edited all perfumery attr" + response);
 					setTimeout(function(){
 						location.reload();
 					}, 3000);
-	
 				}
 			});
 		}, 2000);
@@ -144,20 +138,40 @@ function EditPerfumery(id){
 			contentType: false,
 			processData: false,
 			success:(response)=>{
-
 				console.log("Perfumery name edited " + response);
 				setTimeout(function(){
 					location.reload();
 				}, 2000);
-				//location.reload();
-
 			}
 		});
 	}
 }
 
-function DeletePerfumery(id){
+$('.deletePerfumery').click(function(){
+	var idPerfumery = $(this).attr("id");
+	DeletePerfumery(idPerfumery);
+});
 
+function DeletePerfumery(id){
+	var validateData = new FormData();
+	validateData.append("deletePerfumery", true);
+	validateData.append("perfumeryIdDeleted", id);
+
+	$.ajax({
+		url:hiddenPath+"ajax/perfumery_module_ajax.php",
+		method: "POST",
+		data: validateData,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success:(response)=>{
+			console.log("Delete perfumery " + response);
+			setTimeout(function(){
+				location.reload();
+			}, 2000);
+		}
+	});
+	
 }
 
 $('.perfumeryFiles').dropzone({

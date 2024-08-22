@@ -89,6 +89,14 @@ class PerfumeryController{
 
         return $response;
     }
+
+    static public function DeletePerfumery($idPerfumeryDeleted){
+        $table = "perfumery";
+
+        $response = PerfumeryModel::DeletePerfumery($table, $idPerfumeryDeleted);
+
+        return $response;
+    }
 }
 
 ?>

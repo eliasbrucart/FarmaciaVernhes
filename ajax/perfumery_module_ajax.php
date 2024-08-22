@@ -75,6 +75,13 @@ class PerfumeryModuleAjax{
 
         echo json_encode($response);
     }
+
+    public $idPerfumeryDeleted;
+    public function DeletePerfumery(){
+        $response = PerfumeryController::DeletePerfumery($this->idPerfumeryDeleted);
+
+        echo json_encode($response);
+    }
 }
 
 if(isset($_POST["uploadPerfumery"]) && $_POST["uploadPerfumery"] == true){
@@ -114,6 +121,12 @@ if(isset($_POST["changeOrderPerfumery"]) && $_POST["changeOrderPerfumery"]){
     $changeOrderPerfumery->idPerfumeryEdited = $_POST["idPerfumery"];
     $changeOrderPerfumery->newOrderPerfumery = $_POST["orderPerfumery"];
     $changeOrderPerfumery->EditOrderPerfumery();
+}
+
+if(isset($_POST["deletePerfumery"]) && $_POST["deletePerfumery"]){
+    $deletePerfumery = new PerfumeryModuleAjax();
+    $deletePerfumery->idPerfumeryDeleted = $_POST["perfumeryIdDeleted"];
+    $deletePerfumery->DeletePerfumery();
 }
 
 ?>
