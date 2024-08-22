@@ -67,6 +67,14 @@ class PerfumeryController{
 
         return $response;
     }
+
+    static public function EditOrderPerfumery($data){
+        $table = "perfumery";
+
+        $response = PerfumeryModel::EditOrderPerfumery($table, $data);
+
+        return $response;
+    }
 }
 
 ?>

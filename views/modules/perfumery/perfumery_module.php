@@ -49,7 +49,7 @@
                                 $getAllPerfumeries = PerfumeryController::GetAllPerfumeries();
 
                                 foreach($getAllPerfumeries as $key => $value){
-                                    echo'<li class="itemSlide" id="">
+                                    echo'<li class="itemSlide" id="'.$value["id_perfumery"].'">
                                     <div class="box-group" id="accordion">
                                         <div class="panel box box-info">
                                             <div class="box-header with-border clearfix">

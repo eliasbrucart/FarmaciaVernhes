@@ -203,3 +203,37 @@ $('.editPerfumeryFiles').dropzone({
 		})
 	}
 });
+
+var itemSlide = $(".itemSlide");
+
+$('.todo-list').sortable({
+	placeholder         : 'sort-highlight',
+    handle              : '.handle',
+    forcePlaceholderSize: true,
+    zIndex              : 999999,
+	stop: function(event){
+		for(var i = 0; i < itemSlide.length; i++){
+			var validateData = new FormData();
+
+			validateData.append("changeOrderPerfumery", true);
+			validateData.append("idPerfumery", event.target.children[i].id);
+			validateData.append("orderPerfumery", (i+1)); //i+1 porque el for arranca en 0, es para que arranque a contar desde 1
+
+			$.ajax({
+
+				url:"ajax/perfumery_module_ajax.php",
+				method: "POST",
+				data: validateData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(response){
+				
+					console.log(response);
+							
+				}
+
+			})
+		}
+	}
+});

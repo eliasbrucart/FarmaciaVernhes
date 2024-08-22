@@ -22,7 +22,7 @@ class PerfumeryModel{
     }
 
     static public function GetAllPerfumeries($table){
-        $stmt = Connection::Connect()->prepare("SELECT * FROM $table");
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table ORDER BY order_perfumery ASC");
 
         $stmt->execute();
 
@@ -57,6 +57,23 @@ class PerfumeryModel{
 
         $stmt->bindParam(":id_".$table, $data["perfumeryIdEdited"], PDO::PARAM_INT);
         $stmt->bindParam(":name_".$table, $data["perfumerNameEdited"], PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+    static public function EditOrderPerfumery($table, $data){
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET order_perfumery = :order_perfumery WHERE id_perfumery = :id_perfumery");
+
+        $stmt->bindParam(":id_".$table, $data["idPerfumery"], PDO::PARAM_INT);
+        $stmt->bindParam(":order_".$table, $data["orderPerfumery"], PDO::PARAM_STR);
 
         if($stmt->execute()){
             return "ok";
