@@ -47,6 +47,7 @@ class PharmaciesModuleAjax{
     public $pharmacyFiles;
     public $pharmacyFilesRoute;
     public function UploadPharmacyFiles(){
+        PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute);
         $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles, $this->pharmacyFilesRoute);
 
         echo $response;
@@ -55,6 +56,7 @@ class PharmaciesModuleAjax{
     public $pharmacyFiles12;
     //public $pharmacyFilesRoute;
     public function UploadPharmacyFiles12(){
+        PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute);
         $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles12, $this->pharmacyFilesRoute);
 
         echo $response;

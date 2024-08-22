@@ -93,76 +93,9 @@
                                 </li>';
                                 }
                             ?>
-                            <!--<li class="itemSlide" id="">
-                                <div class="box-group" id="accordion">
-                                    <div class="panel box box-info">
-                                        <div class="box-header with-border clearfix">
-                                            <span class="handle float-left">
-                                                <i class="fa fa-ellipsis-v"></i>
-                                                <i class="fa fa-ellipsis-v"></i>
-                                            </span>
-                                            <h4 class="box-title float-left">
-                                                <a href="#collapse1" data-toggle="collapse" data-parent="#accordion">
-                                                    <p class="text-uppercase">XD</p>
-                                                </a>
-                                            </h4>
-                                            <div class="btn-group float-right">
-                                                <button class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i></button>
-                                                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="collapse1" class="panel-collapse collapse collapseSlide">
-                                        <div class="row">
-                                            <div class="col-md-4 col-xs-12">
-                                                <div class="box-body">
-                                                    <div class="form-group">
-                                                        <input type="text" id="editNamePerfumery" name="editNamePerfumery" class="form-control" placeholder="Nombre perfumeria">
-                                                    </div>
-                                                    <form action="post" class="editPerfumeryFiles dropzone">
-
-                                                        <div class="dz-message needsclick">
-                                                                
-                                                            Arrastrar o dar click para subir imagenes.
-
-                                                        </div>
-
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>-->
                         </ul>
                     </div>
                 </div>
-            
         </div>
-        <!--<div class="table-responsive">
-            <table class="table table-striped projects">
-                <thead>
-                    <tr>
-                        <th style="width: 1%" scope="col">
-                            #
-                        </th>
-                        <th style="width: 20%" scope="col">
-                            Farmacia
-                        </th>
-                        <th style="width: 30%" scope="col">
-                            Direccion
-                        </th>
-                        <th style="width: 8%" class="text-center" scope="col">
-                            Turnero
-                        </th>
-                        <th style="width: 20%" scope="col">
-                            Acciones
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            </div>-->
     </section>
 </div>

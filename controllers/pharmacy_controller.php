@@ -132,6 +132,24 @@ class PharmacyController{
             return $routeFile;
         }
     }
+
+    static public function DeletePharmacyFiles($pharmacyFilesRoute){
+        $directory = "../views/img/".$pharmacyFilesRoute;
+        if(file_exists($directory)){
+            $files = glob($directory.'/*');
+            foreach($files as $file){
+                if(is_file($file)){
+                    unlink($file);
+                }
+            }
+            /*if(is_dir($directory)){
+                rmdir($directory);
+                //echo "directorio ".$directory." eliminado!";
+            }*/
+        }else{
+            //echo "No existe directorio de la farmacia aun!";
+        }
+    }
 }
 
 ?>
