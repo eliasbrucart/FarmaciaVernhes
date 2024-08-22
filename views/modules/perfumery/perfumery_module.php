@@ -42,6 +42,7 @@
                         <i class="fas fa-minus"></i>
                     </button>
                 </div>
+            </div>
                 <div class="card-body p-0">
                     <div class="perfumeryList">
                         <ul class="todo-list">
@@ -136,7 +137,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            
         </div>
         <!--<div class="table-responsive">
             <table class="table table-striped projects">

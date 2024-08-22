@@ -44,6 +44,20 @@ class PerfumeryController{
         }
     }
 
+    static public function DeletePerfumeryFiles($perfumeryRoutes){
+        $directory = "../views/img/perfumery/".$perfumeryRoutes;
+        $files = glob($directory.'/*');
+        foreach($files as $file){
+            if(is_file($file)){
+                unlink($file);
+            }
+        }
+        if(is_dir($directory)){
+            rmdir($directory);
+            echo "directorio ".$directory." eliminado!";
+        }
+    }
+
     static public function GetAllPerfumeries(){
         $table = "perfumery";
 

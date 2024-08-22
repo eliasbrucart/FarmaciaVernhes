@@ -51,6 +51,10 @@ function UploadPerfumery(){
 					success:(response)=>{
 	
 					  console.log("Upload Perfumery " + response);
+
+					  setTimeout(function(){
+						location.reload();
+					  }, 2000);
 	
 					}
 				});
@@ -77,6 +81,7 @@ function EditPerfumery(id){
 	if(editPerfumeryFiles.length > 0 && perfumeryNameEdited != null){
 		for(var i = 0; i < editPerfumeryFiles.length; i++){
 			perfumeryFilesEdited.append("perfumeryNameEdited", perfumeryNameEdited);
+			perfumeryFilesEdited.append("originalPerfumeryName", originalPerfumeryName);
 			perfumeryFilesEdited.append("perfumeryFilesEdited", editPerfumeryFiles[i]);
 
 			$.ajax({
@@ -116,6 +121,9 @@ function EditPerfumery(id){
 				success:(response)=>{
 	
 					console.log("Edited all perfumery attr" + response);
+					setTimeout(function(){
+						location.reload();
+					}, 3000);
 	
 				}
 			});
@@ -138,6 +146,10 @@ function EditPerfumery(id){
 			success:(response)=>{
 
 				console.log("Perfumery name edited " + response);
+				setTimeout(function(){
+					location.reload();
+				}, 2000);
+				//location.reload();
 
 			}
 		});

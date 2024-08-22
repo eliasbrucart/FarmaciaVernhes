@@ -23,6 +23,7 @@ class PerfumeryModuleAjax{
     public $perfumeryFiles;
     public $perfumeryName;
     public function UploadPerfumeryFiles(){
+        //Eliminar archivos anteriores
         $response = PerfumeryController::CreatePerfumeryFiles($this->perfumeryFiles, $this->perfumeryName);
         //$response = PharmacyController::CreatePharmacyFiles($this->perfumeryFiles, $this->perfumeryName);
 
@@ -30,8 +31,10 @@ class PerfumeryModuleAjax{
     }
 
     public $perfumeryNameEdited;
+    public $originalPerfumeryName;
     public $perfumeryFilesEdited;
     public function EditPerfumeryFiles(){
+        PerfumeryController::DeletePerfumeryFiles($this->originalPerfumeryName);
         $response = PerfumeryController::CreatePerfumeryFiles($this->perfumeryFilesEdited, $this->perfumeryNameEdited);
 
         echo $response;
@@ -92,6 +95,7 @@ if(isset($_FILES["perfumeryFiles"]) && $_POST["perfumeryName"]){
 if(isset($_FILES["perfumeryFilesEdited"]) && $_POST["perfumeryNameEdited"]){
     $perfumeryFilesEdited = new PerfumeryModuleAjax();
     $perfumeryFilesEdited->perfumeryNameEdited = $_POST["perfumeryNameEdited"];
+    $perfumeryFilesEdited->originalPerfumeryName = $_POST["originalPerfumeryName"];
     $perfumeryFilesEdited->perfumeryFilesEdited = $_FILES["perfumeryFilesEdited"];
     $perfumeryFilesEdited->EditPerfumeryFiles();
 }
