@@ -60,7 +60,7 @@
                                                 </span>
                                                 <h4 class="box-title float-left">
                                                     <a href="#collapse'.$value["id_perfumery"].'" data-toggle="collapse" data-parent="#accordion">
-                                                        <p id="originalPerfumeryName" class="text-uppercase">'.$value["name_perfumery"].'</p>
+                                                        <p id="originalPerfumeryName'.$value["id_perfumery"].'" class="text-uppercase">'.$value["name_perfumery"].'</p>
                                                     </a>
                                                 </h4>
                                                 <div class="btn-group float-right">
@@ -74,7 +74,7 @@
                                                 <div class="col-md-4 col-xs-12">
                                                     <div class="box-body">
                                                         <div class="form-group">
-                                                            <input type="text" id="namePerfumeryEdited" name="namePerfumeryEdited" class="form-control namePerfumeryEdited" value="'.$value["name_perfumery"].'">
+                                                            <input type="text" id="namePerfumeryEdited'.$value["id_perfumery"].'" name="namePerfumeryEdited'.$value["id_perfumery"].'" class="form-control namePerfumeryEdited'.$value["id_perfumery"].'" value="'.$value["name_perfumery"].'">
                                                         </div>
                                                         <form action="post" class="editPerfumeryFiles dropzone">
 

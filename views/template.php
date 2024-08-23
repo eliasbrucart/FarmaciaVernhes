@@ -47,6 +47,8 @@
 
     <link rel="stylesheet" href="<?php echo $url; ?>views/css/perfumery/perfumery_module.css">
 
+    <link rel="stylesheet" href="<?php echo $url; ?>views/css/perfumery/perfumery_view_module.css">
+
     <input type="hidden" value="<?php echo $url; ?>" id="hiddenPath">
 
 </head>
@@ -70,6 +72,8 @@
                 include "modules/header/header_module.php"; //temp
                 include "modules/".$routes[0]."/".$routes[0]."_module.php";
                 include "modules/footer/footer_module.php";
+            }else if($routes[0] == "perfumery_view"){
+                include "modules/perfumery/".$routes[0]."_module.php";
             }
 
             //include "modules/header/header_module.php";
@@ -134,6 +138,7 @@
     <script src="<?php echo $url; ?>views/js/turner/turner_module.js"></script>
     <script src="<?php echo $url; ?>views/js/pharmacies/pharmacies_module.js"></script>
     <script src="<?php echo $url; ?>views/js/perfumery/perfumery_module.js"></script>
+    <script src="<?php echo $url; ?>views/js/perfumery/perfumery_view_module.js"></script>
     
 </body>
 </html>

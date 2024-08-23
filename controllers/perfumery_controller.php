@@ -54,7 +54,7 @@ class PerfumeryController{
         }
         if(is_dir($directory)){
             rmdir($directory);
-            echo "directorio ".$directory." eliminado!";
+            //echo "directorio ".$directory." eliminado!";
         }
     }
 
