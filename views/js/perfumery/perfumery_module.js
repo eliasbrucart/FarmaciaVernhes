@@ -129,30 +129,28 @@ function EditPerfumery(id){
 		}, 2000);
 	}
 
-	setTimeout(function(){
-		if(perfumeryNameEdited != null){
-			var validateData = new FormData();
-			validateData.append("perfumeryIdEdited", id);
-			validateData.append("perfumeryNameEdited", perfumeryNameEdited);
-	
-			console.log("perfumeryNameEdited segundo if" + perfumeryNameEdited);
-	
-			$.ajax({
-				url:hiddenPath+"ajax/perfumery_module_ajax.php",
-				method: "POST",
-				data: validateData,
-				cache: false,
-				contentType: false,
-				processData: false,
-				success:(response)=>{
-					console.log("Perfumery name edited " + response);
-					setTimeout(function(){
-						location.reload();
-					}, 3500);
-				}
-			});
-		}
-	}, 2000);
+	if(perfumeryNameEdited != null){
+		var validateData = new FormData();
+		validateData.append("perfumeryIdEdited", id);
+		validateData.append("perfumeryNameEdited", perfumeryNameEdited);
+
+		console.log("perfumeryNameEdited segundo if" + perfumeryNameEdited);
+
+		$.ajax({
+			url:hiddenPath+"ajax/perfumery_module_ajax.php",
+			method: "POST",
+			data: validateData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success:(response)=>{
+				console.log("Perfumery name edited " + response);
+				setTimeout(function(){
+					location.reload();
+				}, 2000);
+			}
+		});
+	}
 }
 
 $('.deletePerfumery').click(function(){

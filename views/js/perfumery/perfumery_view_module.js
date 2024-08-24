@@ -1,20 +1,13 @@
 $(function(){
 
     var perfumeryVideo = [];
-    var perfumeryVideoObject = [];
+    var videoIndex = 0;
     
+    var videoPerfumery = document.getElementById('videoPerfumery').addEventListener('ended',ActivateNextVideo,false);
+
     GetAllPerfumeries();
-
-    //document.getElementById('videoPerfumery').addEventListener('ended',Activate12hsVideo,false);
-
-    /*var videoPerfumery = document.getElementById('videoPerfumery');
-        console.log("perfumeryVideo " + perfumeryVideo[0].file_perfumery);
-        videoPerfumery.src = perfumeryVideo[0].file_perfumery;
-        console.log("videoPerfumery " + videoPerfumery.src);*/
-
-    /*setTimeout(function(){
-        ActivateNextVideo();
-    },1000);*/
+    
+    //ActivateNextVideo();
 
     function GetAllPerfumeries(){
         var validateData = new FormData();
@@ -33,8 +26,15 @@ $(function(){
                 console.log("parseResponse " + parseResponse.length);
                 console.log("parseResponse " + parseResponse[0].file_perfumery);
                 console.log("parseResponse " + parseResponse[1].file_perfumery);
+                console.log("parseResponse " + parseResponse[2].file_perfumery);
                 
-                var videoPerfumery = document.getElementById('videoPerfumery');
+                //var videoPerfumery = document.getElementById('videoPerfumery');
+                
+                for(var i = 0; i < parseResponse.length; i++){
+                    perfumeryVideo[i] = parseResponse[i].file_perfumery;
+                }
+
+                PlayFirstVideo();
                 //perfumeryVideoObject[0] = JSON.parse(parseResponse[2].file_perfumery);
                 //console.log(perfumeryVideoObject);
                 //videoPerfumery.src = videoObj[0];
@@ -52,11 +52,30 @@ $(function(){
         });
     }
 
-    /*function ActivateNextVideo(){
+    function PlayFirstVideo(){
         var videoPerfumery = document.getElementById('videoPerfumery');
-        console.log("perfumeryVideo " + perfumeryVideo[0].file_perfumery);
         videoPerfumery.src = perfumeryVideo[0];
-        console.log("videoPerfumery " + videoPerfumery.src);
-    }*/
+        $('.videoPerfumery').trigger('play');
+    }
 
+    function ActivateNextVideo(){
+        //var initialFile = perfumeryVideo[0];
+        //console.log("initialFile " + initialFile);
+
+        //videoIndex = perfumeryVideo.indexOf(initialFile);
+
+        videoIndex++;
+        if(videoIndex < perfumeryVideo.length){
+            var videoPerfumery = document.getElementById('videoPerfumery');
+
+            videoPerfumery.src = perfumeryVideo[videoIndex];
+
+            console.log("reproduciendo video numero " + videoIndex);
+        }else{
+            videoIndex = 0;
+            GetAllPerfumeries();
+            //PlayFirstVideo();
+        }
+        //console.log("video Index " + videoIndex);
+    }
 });
