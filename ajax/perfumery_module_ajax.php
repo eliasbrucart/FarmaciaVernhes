@@ -77,7 +77,19 @@ class PerfumeryModuleAjax{
     }
 
     public $idPerfumeryDeleted;
+    //public $originalPerfumeryNameDeleted;
     public function DeletePerfumery(){
+        $perfumeryArray = PerfumeryController::GetPerfumeryById($this->idPerfumeryDeleted);
+        $originalPerfumeryFileRoute = $perfumeryArray["file_perfumery"];
+        $originalPerfumeryNameDeleted = $perfumeryArray["name_perfumery"];
+        try{
+            PerfumeryController::DeletePerfumeryFiles($originalPerfumeryNameDeleted);
+        }catch(Exception $e){
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            var_dump($originalPerfumeryFileRoute);
+        }
+        PerfumeryController::DeletePerfumeryFilesByRoute($originalPerfumeryFileRoute);
+
         $response = PerfumeryController::DeletePerfumery($this->idPerfumeryDeleted);
 
         echo json_encode($response);
@@ -139,6 +151,7 @@ if(isset($_POST["changeOrderPerfumery"]) && $_POST["changeOrderPerfumery"]){
 if(isset($_POST["deletePerfumery"]) && $_POST["deletePerfumery"]){
     $deletePerfumery = new PerfumeryModuleAjax();
     $deletePerfumery->idPerfumeryDeleted = $_POST["perfumeryIdDeleted"];
+    //$deletePerfumery->idPerfumeryDeleted = $_POST["originalPerfumeryNameDeleted"];
     $deletePerfumery->DeletePerfumery();
 }
 

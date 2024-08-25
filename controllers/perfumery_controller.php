@@ -58,6 +58,13 @@ class PerfumeryController{
         }
     }
 
+    static public function DeletePerfumeryFilesByRoute($route){
+        $parseRoute = "../".$route;
+        if(is_file($parseRoute)){
+            unlink($parseRoute);
+        }
+    }
+
     static public function GetAllPerfumeries(){
         $table = "perfumery";
 
@@ -94,6 +101,14 @@ class PerfumeryController{
         $table = "perfumery";
 
         $response = PerfumeryModel::DeletePerfumery($table, $idPerfumeryDeleted);
+
+        return $response;
+    }
+
+    static public function GetPerfumeryById($id){
+        $table = "perfumery";
+
+        $response = PerfumeryModel::GetPerfumeryById($table, $id);
 
         return $response;
     }

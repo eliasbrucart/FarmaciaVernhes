@@ -101,6 +101,20 @@ class PerfumeryModel{
 
         $stmt = null;
     }
+
+    static public function GetPerfumeryById($table, $id){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE id_perfumery = :id_perfumery");
+
+        $stmt->bindParam(":id_".$table, $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

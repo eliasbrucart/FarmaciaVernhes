@@ -159,9 +159,11 @@ $('.deletePerfumery').click(function(){
 });
 
 function DeletePerfumery(id){
+	//var originalPerfumeryNameDeleted = $('#originalPerfumeryName'+id).text();
 	var validateData = new FormData();
 	validateData.append("deletePerfumery", true);
 	validateData.append("perfumeryIdDeleted", id);
+	//validateData.append("originalPerfumeryNameDeleted", originalPerfumeryNameDeleted);
 
 	$.ajax({
 		url:hiddenPath+"ajax/perfumery_module_ajax.php",
