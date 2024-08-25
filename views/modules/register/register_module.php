@@ -47,7 +47,7 @@
               $registerUser = new UsersController();
               $registerUser->RegisterUser();
             ?>
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
           </div>
           <!-- /.col -->
         </div>

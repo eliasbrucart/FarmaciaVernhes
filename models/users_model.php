@@ -18,6 +18,20 @@ class UsersModel{
         $stmt->close();
         $stmt = null;
     }
+
+    static public function ShowUser($table, $item, $value){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE $item=:$item");
+
+        $stmt->bindParam(":".$item, $value, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

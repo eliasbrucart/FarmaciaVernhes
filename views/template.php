@@ -69,20 +69,20 @@
             if($route != null || $routes[0] == "turner"){
                 include "modules/".$routes[0]."/".$routes[0]."_module.php";
             }else if($routes[0] == "home" || $routes[0] == "admin" || $routes[0] == "pharmacies" || $routes[0] == "perfumery"){
-                include "modules/header/header_module.php"; //temp
-                include "modules/".$routes[0]."/".$routes[0]."_module.php";
-                include "modules/footer/footer_module.php";
+                if(isset($_SESSION["validateSession"]) && $_SESSION["validateSession"] == "ok"){
+                    include "modules/header/header_module.php"; //temp
+                    include "modules/".$routes[0]."/".$routes[0]."_module.php";
+                    include "modules/footer/footer_module.php";
+                }
             }else if($routes[0] == "perfumery_view"){
                 include "modules/perfumery/".$routes[0]."_module.php";
-            }else if($routes[0] == "register"){
+            }else if($routes[0] == "register" || $routes[0] == "login" || $routes[0] == "logout"){
                 include "modules/".$routes[0]."/".$routes[0]."_module.php";
             }
 
             //include "modules/header/header_module.php";
         }else{
-            include "modules/header/header_module.php"; //temp
-            include "modules/admin/admin_module.php";
-            include "modules/footer/footer_module.php";
+            include "modules/login/login_module.php";
         }
 
     ?>
