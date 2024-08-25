@@ -74,6 +74,8 @@
                 include "modules/footer/footer_module.php";
             }else if($routes[0] == "perfumery_view"){
                 include "modules/perfumery/".$routes[0]."_module.php";
+            }else if($routes[0] == "register"){
+                include "modules/".$routes[0]."/".$routes[0]."_module.php";
             }
 
             //include "modules/header/header_module.php";

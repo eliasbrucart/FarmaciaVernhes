@@ -35,19 +35,6 @@ $(function(){
                 }
 
                 PlayFirstVideo();
-                //perfumeryVideoObject[0] = JSON.parse(parseResponse[2].file_perfumery);
-                //console.log(perfumeryVideoObject);
-                //videoPerfumery.src = videoObj[0];
-
-                //videoPerfumery.src = perfumeryVideoObject[0];
-
-                /*for(var i = 0; i < parseResponse.length; i++){
-                    perfumeryVideo.push(parseResponse);
-                    //perfumeryVideoObject.push(JSON.parse(perfumeryVideo[i]));
-                }
-                for(var j = 0; j < perfumeryVideo.length; j++){
-                    console.log("perfumeryVideoObject " + perfumeryVideo[j].id_perfumery);
-                }*/
             }
         });
     }
