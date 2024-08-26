@@ -5,7 +5,7 @@ $(function(){
     
     var videoPerfumery = document.getElementById('videoPerfumery').addEventListener('ended',ActivateNextVideo,false);
 
-    var videoPerfumery = document.getElementById('videoPerfumery').addEventListener('error',GetAllPerfumeries,false);
+    videoPerfumery = document.getElementById('videoPerfumery').addEventListener('error',GetAllPerfumeries,false);
 
     GetAllPerfumeries();
     

@@ -25,8 +25,12 @@ $(function(){
 
     var twoVideos = false;
 
-    document.getElementById('videoPharmacy24hs').addEventListener('ended',Activate12hsVideo,false);
-    document.getElementById('videoPharmacy12hs').addEventListener('ended',Activate24hsVideo,false);
+    var videoPharmacy24 = document.getElementById('videoPharmacy24hs').addEventListener('ended',Activate12hsVideo,false);
+    var videoPharmacy12 = document.getElementById('videoPharmacy12hs').addEventListener('ended',Activate24hsVideo,false);
+
+    document.getElementById('videoPharmacy24hs').addEventListener('error',GetTodayPharmacies,false);
+    //document.getElementById('videoPharmacy12hs').addEventListener('error',GetTodayPharmacies,false);
+
 
     function Activate12hsVideo(e){
         GetTodayPharmacies(actualDateToDBFormat);
@@ -104,11 +108,40 @@ $(function(){
                     //ActivateBothVideos();
                     twoVideos = true;
                     for(var i = 0; i < parseJSON.length; i++){
+                        GetPharmacyFileRoutes(parseJSON[i].id_pharmacy, parseJSON[i].fullday_pharmacy);
+                    }
+                }else{
+                    GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullday_pharmacy);
+                    Show24hsVideo();
+                }
+            }
+        });
+    }
+
+    function GetTodayPharmacies(e){
+        var validateData = new FormData();
+        validateData.append("getTodayPharmacies", true);
+        validateData.append("actualDateToDBFormat", actualDateToDBFormat);
+
+        $.ajax({
+            url:hiddenPath+"ajax/turner_module_ajax.php",
+            method: "POST",
+            data: validateData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:(response)=>{
+                var parseJSON = JSON.parse(response);
+                //console.log(parseJSON);
+                if(parseJSON.length > 1){
+                    //ActivateBothVideos();
+                    twoVideos = true;
+                    for(var i = 0; i < parseJSON.length; i++){
                         GetPharmacyFileRoutes(parseJSON[i].id_pharmacy, parseJSON[i].fullDay);
                     }
                 }else{
-                    Show24hsVideo();
                     GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
+                    Show24hsVideo();
                 }
             }
         });

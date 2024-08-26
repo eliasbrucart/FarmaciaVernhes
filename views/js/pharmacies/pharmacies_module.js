@@ -110,7 +110,7 @@ function EditPharmacy(){
 		}
 	}
 	if(arrayFiles12.length > 0 && namePharmacy != ""){
-		for(var i = 0; i < arrayFiles24.length; i++){
+		for(var i = 0; i < arrayFiles12.length; i++){
 			validateFiles12.append("pharmacyFiles12", arrayFiles12[i]);
 			validateFiles12.append("pharmacyFilesRoute", namePharmacy);
 

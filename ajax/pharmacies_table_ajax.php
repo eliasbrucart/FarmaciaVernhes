@@ -26,7 +26,7 @@ class PharmaciesTableAjax{
                     "#",
                     "'.$namePharmacy.'",
                     "'.$addressPharmacy.'",
-                    "#",
+                    "Activo",
                     "'.$editBtn.$deleteBtn.'"
                 ],';
             } 
