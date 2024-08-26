@@ -13,7 +13,8 @@ class UsersController{
                 $data = array("name"=>$_POST["regNameUserInput"],
                             "password"=>$encrypt,
                             "email"=>$_POST["regEmailUserInput"],
-                            "encryptedEmail"=>$encryptEmail
+                            "encryptedEmail"=>$encryptEmail,
+                            "actived"=>$_POST["isUserActivated"]
                         );
 
                 $table = "users";
@@ -22,23 +23,8 @@ class UsersController{
 
                 if($response == "ok"){
 
-                    echo '<script> 
-
-							swal({
-								  title: "¡OK!",
-								  text: "¡Por favor revise la bandeja de entrada o la carpeta de SPAM de su correo electrónico '.$_POST["regEmailUserInput"].' para verificar la cuenta!",
-								  type:"success",
-								  confirmButtonText: "Cerrar",
-								  closeOnConfirm: false
-								},
-
-								function(isConfirm){
-
-									if(isConfirm){
-										history.back();
-									}
-							});
-
+                    echo '<script>
+                            window.location.assign("'.$url.'users/");
 						</script>';
 
                 }else{
@@ -81,7 +67,7 @@ class UsersController{
 
                 $response = UsersModel::ShowUser($table, $item, $value);
 
-                if(is_array($response) && $response["email_users"] == $_POST["logEmailUserInput"] && $response["password_users"] == $encrypt){
+                if(is_array($response) && $response["email_users"] == $_POST["logEmailUserInput"] && $response["password_users"] == $encrypt && $response["actived_users"] == 1){
                     //Condicion de chequeo si esta verificado
                     $_SESSION["validateSession"] = "ok";
 					$_SESSION["id"] = $response["id_users"];
@@ -89,6 +75,7 @@ class UsersController{
 					//$_SESSION["foto"] = $response["foto"]; Agregar despues
 					$_SESSION["email"] = $response["email_users"];
 					$_SESSION["password"] = $response["password_users"];
+					$_SESSION["isSuperuser"] = $response["isSuperuser"];
 					//$_SESSION["modo"] = $response["modo"];
 
                     echo '<script> //Objeto actualRoute pertenece a HardGames Store
@@ -101,6 +88,30 @@ class UsersController{
                 }
             }
         }
+    }
+
+    static public function GetAllUsers(){
+        $table = "users";
+
+        $response = UsersModel::GetAllUsers($table);
+
+        return $response;
+    }
+
+    static public function DeleteUser($idUserDeleted){
+        $table = "users";
+
+        $response = UsersModel::DeleteUser($table, $idUserDeleted);
+
+        return $response;
+    }
+
+    static public function EditUser($data){
+        $table = "users";
+
+        $response = UsersModel::EditUser($table, $data);
+
+        return $response;
     }
 }
 

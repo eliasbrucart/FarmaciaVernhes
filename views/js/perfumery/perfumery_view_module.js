@@ -5,6 +5,8 @@ $(function(){
     
     var videoPerfumery = document.getElementById('videoPerfumery').addEventListener('ended',ActivateNextVideo,false);
 
+    var videoPerfumery = document.getElementById('videoPerfumery').addEventListener('error',GetAllPerfumeries,false);
+
     GetAllPerfumeries();
     
     //ActivateNextVideo();
@@ -24,9 +26,9 @@ $(function(){
                 console.log(response);
                 var parseResponse = JSON.parse(response);
                 console.log("parseResponse " + parseResponse.length);
-                console.log("parseResponse " + parseResponse[0].file_perfumery);
-                console.log("parseResponse " + parseResponse[1].file_perfumery);
-                console.log("parseResponse " + parseResponse[2].file_perfumery);
+                //console.log("parseResponse " + parseResponse[0].file_perfumery);
+                //console.log("parseResponse " + parseResponse[1].file_perfumery);
+                //console.log("parseResponse " + parseResponse[2].file_perfumery);
                 
                 //var videoPerfumery = document.getElementById('videoPerfumery');
                 
@@ -50,6 +52,11 @@ $(function(){
         //console.log("initialFile " + initialFile);
 
         //videoIndex = perfumeryVideo.indexOf(initialFile);
+
+        /*var videoPerfumery = document.getElementById('videoPerfumery');
+        if(videoPerfumery.src == null || videoPerfumery.src == ""){
+            GetAllPerfumeries();
+        }*/
 
         videoIndex++;
         if(videoIndex < perfumeryVideo.length){

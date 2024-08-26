@@ -94,7 +94,10 @@ function EditPharmacy(){
 							processData: false,
 							success:(response)=>{
 
-							  console.log("Edit Pharmacy " + response);
+							setTimeout(function(){
+								console.log("Edit Pharmacy " + response);
+								location.reload();
+							}, 2000);
 
 							}
 						});
@@ -144,7 +147,10 @@ function EditPharmacy(){
 							processData: false,
 							success:(response)=>{
 
-							  console.log("Edit Pharmacy 12" + response);
+							  setTimeout(function(){
+								  console.log("Edit Pharmacy 12" + response);
+								  location.reload();
+							  }, 2000);
 
 							}
 						});

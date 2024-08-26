@@ -64,6 +64,19 @@ class PharmaciesModuleAjax{
 
     public $idPharmacyToDelete;
     public function DeletePharmacy(){
+        //PharmacyController::DeletePharmacyFiles($this->namePharmacyDeleted);
+        $pharmacyArray = PharmacyController::GetPharmacyById($this->idPharmacyToDelete);
+        $pharmacy12Files = $pharmacyArray["halfday_pharmacy"];
+        $pharmacy24Files = $pharmacyArray["fullday_pharmacy"];
+        $pharmacyName = $pharmacyArray["name_pharmacy"];
+        try{
+            PharmacyController::DeletePharmacyFiles($pharmacyName);
+        }catch(Exception $e){
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        }
+        PharmacyController::DeletePharmacyFilesByRoute($pharmacy12Files);
+        PharmacyController::DeletePharmacyFilesByRoute($pharmacy24Files);
+
         $response = PharmacyController::DeletePharmacy($this->idPharmacyToDelete);
 
         echo json_encode($response);

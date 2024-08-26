@@ -46,6 +46,20 @@ class PharmacyModel{
         $stmt = null;
     }
 
+    static public function GetPharmacyById($table, $id){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE id_pharmacy = :id_pharmacy");
+
+        $stmt->bindParam(":id_".$table, $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
     static public function GetPharmacyAddress($table, $idTodayPharmacy){
         $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE id_pharmacy = :id_pharmacy");
 

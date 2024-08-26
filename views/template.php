@@ -63,7 +63,7 @@
             $routes = explode("/", $_GET["ruta"]);
             if($route != null || $routes[0] == "turner"){
                 include "modules/".$routes[0]."/".$routes[0]."_module.php";
-            }else if($routes[0] == "home" || $routes[0] == "admin" || $routes[0] == "pharmacies" || $routes[0] == "perfumery"){
+            }else if($routes[0] == "home" || $routes[0] == "admin" || $routes[0] == "pharmacies" || $routes[0] == "perfumery" || $routes[0] == "users"){
                 if(isset($_SESSION["validateSession"]) && $_SESSION["validateSession"] == "ok"){
                     include "modules/header/header_module.php"; //temp
                     include "modules/".$routes[0]."/".$routes[0]."_module.php";
@@ -134,6 +134,7 @@
     <script src="<?php echo $url; ?>views/js/pharmacies/pharmacies_module.js"></script>
     <script src="<?php echo $url; ?>views/js/perfumery/perfumery_module.js"></script>
     <script src="<?php echo $url; ?>views/js/perfumery/perfumery_view_module.js"></script>
+    <script src="<?php echo $url; ?>views/js/users/users_module.js"></script>
     
 </body>
 </html>

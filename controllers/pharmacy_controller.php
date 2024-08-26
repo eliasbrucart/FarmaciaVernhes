@@ -34,6 +34,14 @@ class PharmacyController{
         return $response;
     }
 
+    static public function GetPharmacyById($id){
+        $table = "pharmacy";
+
+        $response = PharmacyModel::GetPharmacyById($table, $id);
+
+        return $response;
+    }
+
     static public function GetPharmacyAddress($idTodayPharmacy){
         $table = "pharmacy";
 
@@ -142,12 +150,13 @@ class PharmacyController{
                     unlink($file);
                 }
             }
-            /*if(is_dir($directory)){
-                rmdir($directory);
-                //echo "directorio ".$directory." eliminado!";
-            }*/
-        }else{
-            //echo "No existe directorio de la farmacia aun!";
+        }
+    }
+
+    static public function DeletePharmacyFilesByRoute($route){
+        $parseRoute = "../".$route;
+        if(is_file($parseRoute)){
+            unlink($parseRoute);
         }
     }
 }

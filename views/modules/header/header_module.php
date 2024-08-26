@@ -67,7 +67,7 @@
           <img src="<?php echo $url; ?>views/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Sandra Vernhes</a>
+          <a href="#" class="d-block"><?php echo $_SESSION["name"] ?></a>
         </div>
       </div>
 
@@ -138,6 +138,18 @@
                 </p>
               </a>
             </li>
+            <?php
+              if($_SESSION["isSuperuser"] == 1){
+                echo '<li class="nav-item">';
+                echo '<a href="'.$url.'users" class="nav-link">';
+                          echo'<i class="nav-icon fas fa-th"></i>
+                          <p>
+                            Usuarios
+                          </p>
+                        </a>
+                      </li>';
+              } 
+            ?>
         </ul>
       </nav>
     </div>
