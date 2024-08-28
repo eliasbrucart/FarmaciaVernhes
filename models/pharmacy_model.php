@@ -123,6 +123,24 @@ class PharmacyModel{
 
         $stmt = null;
     }
+
+    static public function EditDataPharmacy($table, $data){
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET name_pharmacy = :name_pharmacy, address_pharmacy = :address_pharmacy WHERE id_pharmacy = :id_pharmacy");
+
+        $stmt->bindParam(":id_".$table, $data["pharmacyIdEdited"], PDO::PARAM_INT);
+        $stmt->bindParam(":name_".$table, $data["pharmacyNameEdited"], PDO::PARAM_STR);
+        $stmt->bindParam(":address_".$table, $data["pharmacyAddressEdited"], PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

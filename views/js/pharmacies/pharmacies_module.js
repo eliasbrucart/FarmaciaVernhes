@@ -162,6 +162,29 @@ function EditPharmacy(){
 			});
 		}
 	}
+
+	if(namePharmacy != null){
+		var validateData = new FormData();
+		validateData.append("pharmacyEdited", true);
+		validateData.append("pharmacyIdEdited", id);
+		validateData.append("pharmacyNameEdited", namePharmacy);
+		validateData.append("pharmacyAddressEdited", addressPharmacy);
+
+		$.ajax({
+			url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+			method: "POST",
+			data: validateData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success:(response)=>{
+				console.log("Pharmacy name edited " + response);
+				setTimeout(function(){
+					location.reload();
+				}, 2000);
+			}
+		});
+	}
 }
 
 function ShowPharmacyDataOnDelete(id, name, address){
@@ -205,6 +228,16 @@ $('.pharmacyFiles24').dropzone({
 
 			arrayFiles24.push(file);
 
+			if(arrayFiles24.length >= 2){
+				arrayFiles24 = [];
+
+				alert("No se pueden subir mas de 2 archivos!");
+
+				setTimeout(function(){
+					Dropzone.forElement('.pharmacyFiles24').removeAllFiles(true);
+				}, 2000);
+			}
+
 			console.log("arrayFiles24", arrayFiles24);
 
 		})
@@ -232,6 +265,16 @@ $('.pharmacyFiles12').dropzone({
 		this.on("addedfile", function(file){
 
 			arrayFiles12.push(file);
+
+			if(arrayFiles12.length >= 2){
+				arrayFiles12 = [];
+
+				alert("No se pueden subir mas de 2 archivos!");
+
+				setTimeout(function(){
+					Dropzone.forElement('.pharmacyFiles12').removeAllFiles(true);
+				}, 2000);
+			}
 
 			console.log("arrayFiles12", arrayFiles12);
 

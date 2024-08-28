@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class UsersController{
     public function RegisterUser(){
@@ -20,6 +20,8 @@ class UsersController{
                 $table = "users";
 
                 $response = UsersModel::RegisterUser($table, $data);
+
+                $url = Route::GetFrontendRoute();
 
                 if($response == "ok"){
 
@@ -77,6 +79,8 @@ class UsersController{
 					$_SESSION["password"] = $response["password_users"];
 					$_SESSION["isSuperuser"] = $response["isSuperuser"];
 					//$_SESSION["modo"] = $response["modo"];
+
+                    $url = Route::GetFrontendRoute();
 
                     echo '<script> //Objeto actualRoute pertenece a HardGames Store
 

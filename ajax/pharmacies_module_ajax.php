@@ -44,6 +44,19 @@ class PharmaciesModuleAjax{
         echo json_encode($response);
     }
 
+    public $pharmacyIdEdited;
+    public $pharmacyNameEdited;
+    public $pharmacyAddressEdited;
+    public function EditDataPharmacy(){
+        $data = array("pharmacyIdEdited"=>$this->pharmacyIdEdited,
+                      "pharmacyNameEdited"=>$this->pharmacyNameEdited,
+                      "pharmacyAddressEdited"=>$this->pharmacyAddressEdited);
+
+        $response = PharmacyController::EditDataPharmacy($data);
+
+        echo json_encode($response);
+    }
+
     public $pharmacyFiles;
     public $pharmacyFilesRoute;
     public function UploadPharmacyFiles(){
@@ -121,5 +134,14 @@ if(isset($_POST["deletePharmacy"]) && $_POST["deletePharmacy"]){
     $deletePharmacy->idPharmacyToDelete = $_POST["idPharmacyToDelete"];
     $deletePharmacy->DeletePharmacy();
 }
+
+if(isset($_POST["pharmacyEdited"]) && $_POST["pharmacyEdited"]){
+    $editDataPharmacy = new PharmaciesModuleAjax();
+    $editDataPharmacy->pharmacyIdEdited = $_POST["pharmacyIdEdited"];
+    $editDataPharmacy->pharmacyNameEdited = $_POST["pharmacyNameEdited"];
+    $editDataPharmacy->pharmacyAddressEdited = $_POST["pharmacyAddressEdited"];
+    $editDataPharmacy->EditDataPharmacy();
+}
+
 
 ?>

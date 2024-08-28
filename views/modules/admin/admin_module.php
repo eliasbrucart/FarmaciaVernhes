@@ -43,8 +43,8 @@
                     </ul>
                   </div>-->
                   <!-- /btn-group -->
-                  <input id="new-event" name="addPharmacy" type="text" class="form-control addPharmacy" placeholder="Farmacia">
-                  <input type="text" name="addressPharmacy" class="form-control addressPharmacy" placeholder="Direccion">
+                  <input id="new-event addPharmacy" name="addPharmacy" type="text" class="form-control addPharmacy" placeholder="Farmacia">
+                  <input type="text addressPharmacy" name="addressPharmacy" class="form-control addressPharmacy" placeholder="Direccion">
 
                   <div class="input-group-append float-right">
                     <button type="button" class="btn btn-primary" onclick="AddPharmacy()">Agregar</button>

@@ -159,6 +159,14 @@ class PharmacyController{
             unlink($parseRoute);
         }
     }
+
+    static public function EditDataPharmacy($data){
+        $table = "pharmacy";
+
+        $response = PharmacyModel::EditDataPharmacy($table, $data);
+
+        return $response;
+    }
 }
 
 ?>

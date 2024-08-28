@@ -7,8 +7,9 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <?php 
+    <?php
         session_start();
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
         $url = Route::GetFrontendRoute();
 
         $server = Route::GetBackendRoute();
@@ -129,7 +130,7 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?php echo $url; ?>views/js/pages/dashboard.js"></script>
     <script src="<?php echo $url; ?>views/js/calendar/calendar.js"></script>
-    <script src="<?php echo $url; ?>views/js/admin_module.js"></script>
+    <script src="<?php echo $url; ?>views/js/admin/admin_module.js"></script>
     <script src="<?php echo $url; ?>views/js/turner/turner_module.js"></script>
     <script src="<?php echo $url; ?>views/js/pharmacies/pharmacies_module.js"></script>
     <script src="<?php echo $url; ?>views/js/perfumery/perfumery_module.js"></script>
