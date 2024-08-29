@@ -31,10 +31,13 @@ class PerfumeryModuleAjax{
     }
 
     public $perfumeryNameEdited;
-    public $originalPerfumeryName;
+    public $perfumeryIdToEdited;
     public $perfumeryFilesEdited;
     public function EditPerfumeryFiles(){
-        PerfumeryController::DeletePerfumeryFiles($this->originalPerfumeryName);
+        $perfumeryArray = PerfumeryController::GetPerfumeryById($this->perfumeryIdToEdited);
+        $originalPerfumeryFileRoute = $perfumeryArray["file_perfumery"];
+
+        PerfumeryController::DeletePerfumeryFilesByRoute($originalPerfumeryFileRoute);
         $response = PerfumeryController::CreatePerfumeryFiles($this->perfumeryFilesEdited, $this->perfumeryNameEdited);
 
         echo $response;
@@ -81,13 +84,7 @@ class PerfumeryModuleAjax{
     public function DeletePerfumery(){
         $perfumeryArray = PerfumeryController::GetPerfumeryById($this->idPerfumeryDeleted);
         $originalPerfumeryFileRoute = $perfumeryArray["file_perfumery"];
-        $originalPerfumeryNameDeleted = $perfumeryArray["name_perfumery"];
-        try{
-            PerfumeryController::DeletePerfumeryFiles($originalPerfumeryNameDeleted);
-        }catch(Exception $e){
-            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
-            var_dump($originalPerfumeryFileRoute);
-        }
+
         PerfumeryController::DeletePerfumeryFilesByRoute($originalPerfumeryFileRoute);
 
         $response = PerfumeryController::DeletePerfumery($this->idPerfumeryDeleted);
@@ -120,7 +117,7 @@ if(isset($_FILES["perfumeryFiles"]) && $_POST["perfumeryName"]){
 if(isset($_FILES["perfumeryFilesEdited"]) && $_POST["perfumeryNameEdited"]){
     $perfumeryFilesEdited = new PerfumeryModuleAjax();
     $perfumeryFilesEdited->perfumeryNameEdited = $_POST["perfumeryNameEdited"];
-    $perfumeryFilesEdited->originalPerfumeryName = $_POST["originalPerfumeryName"];
+    $perfumeryFilesEdited->perfumeryIdToEdited = $_POST["perfumeryIdToEdited"];
     $perfumeryFilesEdited->perfumeryFilesEdited = $_FILES["perfumeryFilesEdited"];
     $perfumeryFilesEdited->EditPerfumeryFiles();
 }

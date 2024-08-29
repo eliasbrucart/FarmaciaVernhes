@@ -84,11 +84,11 @@ class PharmaciesModuleAjax{
         $pharmacy12Files = $pharmacyArray["halfday_pharmacy"];
         $pharmacy24Files = $pharmacyArray["fullday_pharmacy"];
         $pharmacyName = $pharmacyArray["name_pharmacy"];
-        try{
+        /*try{
             PharmacyController::DeletePharmacyFiles($pharmacyName);
         }catch(Exception $e){
             echo 'Excepción capturada: ',  $e->getMessage(), "\n";
-        }
+        }*/
         PharmacyController::DeletePharmacyFilesByRoute($pharmacy12Files);
         PharmacyController::DeletePharmacyFilesByRoute($pharmacy24Files);
 

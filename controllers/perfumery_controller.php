@@ -27,13 +27,15 @@ class PerfumeryController{
 
                 $num = mt_rand(1, 20);
 
-                $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".$num."_video".".mp4";
+                $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".time()."_video.mp4";
 
                 if(file_exists($routeFile)){
                     $newNum = mt_rand(1, 30);
 
-                    $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".$newNum."_video".".mp4";
+                    //$routeFile = $directory."/".$perfumeryRoutes."_".$date."_".$newNum."_video".".mp4";
 
+                    $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".time()."_".$newNum."_video.mp4";
+                    
                     move_uploaded_file($perfumeryFiles["tmp_name"], $routeFile);
                 }
 

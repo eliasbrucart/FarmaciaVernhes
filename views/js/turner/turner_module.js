@@ -206,8 +206,8 @@ $(function(){
     }
 
     function UpdateVideo24hs(){
-        var startDate = CreateDateTime("23:00");
-        var endDate = CreateDateTime("24:00");
+        var startDate = CreateDateTime("8:00");
+        var endDate = CreateDateTime("8:10");
         var now = new Date();
         if(startDate <= now && now <= endDate){
             console.log("Esta entre la hora que corresponde!")

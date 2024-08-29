@@ -78,7 +78,7 @@ function EditPerfumery(id){
 	if(editPerfumeryFiles.length > 0 && perfumeryNameEdited != null){
 		for(var i = 0; i < editPerfumeryFiles.length; i++){
 			perfumeryFilesEdited.append("perfumeryNameEdited", perfumeryNameEdited);
-			perfumeryFilesEdited.append("originalPerfumeryName", originalPerfumeryName);
+			perfumeryFilesEdited.append("perfumeryIdToEdited", id);
 			perfumeryFilesEdited.append("perfumeryFilesEdited", editPerfumeryFiles[i]);
 
 			$.ajax({
