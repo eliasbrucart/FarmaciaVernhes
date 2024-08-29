@@ -83,7 +83,7 @@ function EditPharmacy(){
 						validateData.append("namePharmacyToEdit", namePharmacy);
 						validateData.append("addressPharmacyToEdit", addressPharmacy);
 						validateData.append("multimedia24", multimedia24);
-						validateData.append("multimedia12", multimedia12);
+						//validateData.append("multimedia12", multimedia12);
 
 						$.ajax({
 							url:hiddenPath+"ajax/pharmacies_module_ajax.php",
@@ -136,7 +136,7 @@ function EditPharmacy(){
 						validateData.append("namePharmacyToEdit", namePharmacy);
 						validateData.append("addressPharmacyToEdit", addressPharmacy);
 						validateData.append("multimedia12", multimedia12);
-						validateData.append("multimedia24", multimedia24);
+						//validateData.append("multimedia24", multimedia24);
 
 						$.ajax({
 							url:hiddenPath+"ajax/pharmacies_module_ajax.php",

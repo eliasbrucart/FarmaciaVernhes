@@ -60,8 +60,9 @@ class PharmaciesModuleAjax{
     public $pharmacyFiles;
     public $pharmacyFilesRoute;
     public function UploadPharmacyFiles(){
-        PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute);
-        $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles, $this->pharmacyFilesRoute);
+        $fullDayFile = "fullDayFile";
+        PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute, $fullDayFile);
+        $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles, $this->pharmacyFilesRoute, $fullDayFile);
 
         echo $response;
     }
@@ -69,8 +70,9 @@ class PharmaciesModuleAjax{
     public $pharmacyFiles12;
     //public $pharmacyFilesRoute;
     public function UploadPharmacyFiles12(){
-        PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute);
-        $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles12, $this->pharmacyFilesRoute);
+        $halfDayFile = "halfDayFile";
+        PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute, $halfDayFile);
+        $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles12, $this->pharmacyFilesRoute, $halfDayFile);
 
         echo $response;
     }
@@ -103,14 +105,10 @@ if(isset($_POST["editPharmacy"]) && $_POST["editPharmacy"]){
     $editPharmacy->addressPharmacyToEdit = $_POST["addressPharmacyToEdit"];
     if($_POST["multimedia24"] != null){
         $editPharmacy->multimedia24 = $_POST["multimedia24"];
-    }else{
-        $editPharmacy->multimedia24 = 0;
     }
 
     if($_POST["multimedia12"] != null){
         $editPharmacy->multimedia12 = $_POST["multimedia12"];
-    }else{
-        $editPharmacy->multimedia12 = 0;
     }
     $editPharmacy->EditPharmacy();
 }

@@ -74,7 +74,7 @@ class PharmacyController{
         return $response;
     }
 
-    static public function CreatePharmacyFiles($pharmacyFiles, $pharmacyFilesRoute){
+    static public function CreatePharmacyFiles($pharmacyFiles, $pharmacyFilesRoute, $fileType){
         if(isset($pharmacyFiles["tmp_name"]) && !empty($pharmacyFiles["tmp_name"])){
 
             list($width, $height) = getimagesize($pharmacyFiles["tmp_name"]);
@@ -83,9 +83,14 @@ class PharmacyController{
             $newHeight = 1000;
 
             $directory = "../views/img/".$pharmacyFilesRoute;
+            $fileTypeDirectory = "../views/img/".$pharmacyFilesRoute."/".$fileType;
 
             if(!file_exists($directory)){
                 mkdir($directory, 0755);
+            }
+
+            if(!file_exists($fileTypeDirectory)){
+                mkdir($fileTypeDirectory, 0755);
             }
 
             if($pharmacyFiles["type"] == "image/jpeg"){
@@ -123,13 +128,14 @@ class PharmacyController{
 
                 //$routeFile = $directory."/".$pharmacyFiles["tmp_name"]."_".$date.".mp4";
 
-                $routeFile = $directory."/".$pharmacyFilesRoute."_".$date."_".$num."_video".".mp4";
+                //$routeFile = $directory."/".$pharmacyFilesRoute."_".$date."_".$num."_video".".mp4";
+                $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_video.mp4";
 
                 if(file_exists($routeFile)){
 
                     $newNum = mt_rand(1, 30);
 
-                    $routeFile = $directory."/".$pharmacyFilesRoute."_".$date."_".$newNum."_video".".mp4";
+                    $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_".$newNum."_video.mp4";
 
                     move_uploaded_file($pharmacyFiles["tmp_name"], $routeFile);
                 }
@@ -141,8 +147,8 @@ class PharmacyController{
         }
     }
 
-    static public function DeletePharmacyFiles($pharmacyFilesRoute){
-        $directory = "../views/img/".$pharmacyFilesRoute;
+    static public function DeletePharmacyFiles($pharmacyFilesRoute, $fileType){
+        $directory = "../views/img/".$pharmacyFilesRoute."/".$fileType;
         if(file_exists($directory)){
             $files = glob($directory.'/*');
             foreach($files as $file){
