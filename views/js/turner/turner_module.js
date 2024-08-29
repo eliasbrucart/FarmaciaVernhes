@@ -56,6 +56,12 @@ $(function(){
         $('.videoPharmacy24hs').trigger('play');
     }
 
+    function Show12hsVideo(){
+        $('.videoPharmacy24hs').hide();
+        $('.videoPharmacy12hs').show();
+        $('.videoPharmacy12hs').trigger('play');
+    }
+
     setInterval(function(){
         if(CheckDateChanged(actualDateToDBFormat)){
             console.log("Cambio la fecha!");
@@ -104,8 +110,13 @@ $(function(){
                         GetPharmacyFileRoutes(parseJSON[i].id_pharmacy, parseJSON[i].fullday_pharmacy);
                     }
                 }else{
-                    GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
-                    Show24hsVideo();
+                    if(parseJSON[0].fullDay == 1){
+                        GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
+                        Show24hsVideo();
+                    }else{
+                        GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
+                        Show12hsVideo();
+                    }
                 }
             }
         });
@@ -133,8 +144,13 @@ $(function(){
                         GetPharmacyFileRoutes(parseJSON[i].id_pharmacy, parseJSON[i].fullDay);
                     }
                 }else{
-                    GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
-                    Show24hsVideo();
+                    if(parseJSON[0].fullDay == 1){
+                        GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
+                        Show24hsVideo();
+                    }else{
+                        GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
+                        Show12hsVideo();
+                    }
                 }
             }
         });
@@ -171,7 +187,6 @@ $(function(){
                         console.log("No esta dentro de las horas establecidas! No actualizamos el video!");
                     }
                 }else{
-                    //console.log("videos half " + videoFile[i].halfdayvideo);
                     videoPharmacy12hs.src = parseResponse[1];
                 }
             }
@@ -191,8 +206,8 @@ $(function(){
     }
 
     function UpdateVideo24hs(){
-        var startDate = CreateDateTime("22:00");
-        var endDate = CreateDateTime("22:24");
+        var startDate = CreateDateTime("23:00");
+        var endDate = CreateDateTime("24:00");
         var now = new Date();
         if(startDate <= now && now <= endDate){
             console.log("Esta entre la hora que corresponde!")
