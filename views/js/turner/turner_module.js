@@ -6,8 +6,8 @@ $(function(){
     var actualDate = date.getDate()+"/"+monthToCalendar+"/"+date.getFullYear();
     
     console.log("actualDate" + actualDate.toString());
-    
-    $(".actualDateSpan").text(actualDate);
+
+    var flag = true;
     
     //var actualDateToDBFormat = monthToCalendar+"/"+date.getDate()+"/"+date.getFullYear();
     const actualDateToDBFormat = date.toLocaleDateString("en-US", { // you can use undefined as first argument
@@ -53,13 +53,6 @@ $(function(){
     function Show24hsVideo(){
         $('.videoPharmacy24hs').show();
         twoVideos = false;
-        $('.videoPharmacy24hs').trigger('play');
-    }
-
-    function ActivateBothVideos(){
-        $('.videoPharmacy24hs').show();
-        $('.videoPharmacy12hs').hide();
-        twoVideos = true;
         $('.videoPharmacy24hs').trigger('play');
     }
 
@@ -111,7 +104,7 @@ $(function(){
                         GetPharmacyFileRoutes(parseJSON[i].id_pharmacy, parseJSON[i].fullday_pharmacy);
                     }
                 }else{
-                    GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullday_pharmacy);
+                    GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
                     Show24hsVideo();
                 }
             }
@@ -147,31 +140,6 @@ $(function(){
         });
     }
 
-    function GetPharmacyAddress(idPharmacy, fullDay){
-        var validateData = new FormData();
-        validateData.append("getTodayPharmacyAddress" , true);
-        validateData.append("idTodayPharmacy", idPharmacy);
-
-        $.ajax({
-            url:hiddenPath+"ajax/turner_module_ajax.php",
-            method: "POST",
-            data: validateData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: (response)=>{
-                var parseJSON = JSON.parse(response);
-                //var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
-                if(fullDay == 1){
-                    $('.pharmacy24Address').text(parseJSON);
-                }else{
-                    $('.pharmacyAddress').text(parseJSON);
-                }
-            }
-        });
-
-    }
-
     function GetPharmacyFileRoutes(idPharmacy, fullDay){
         var validateData = new FormData();
         validateData.append("getTodayPharmacyFileRoutes" , true);
@@ -194,9 +162,14 @@ $(function(){
                 console.log("response get pharmacy file routes " + parseResponse[1]);
 
                 if(fullDay == 1){ //es array
-                    //console.log("videos full " + videoFile[i].fulldayvideo);
-                    //$('.pharmacy24Address').text(parseJSON);
-                    videoPharmacy24.src = parseResponse[0];
+                    if(flag){
+                        videoPharmacy24.src = parseResponse[0];
+                        flag = false;
+                    }else if(UpdateVideo24hs()){
+                        flag = true;
+                    }else{
+                        console.log("No esta dentro de las horas establecidas! No actualizamos el video!");
+                    }
                 }else{
                     //console.log("videos half " + videoFile[i].halfdayvideo);
                     videoPharmacy12hs.src = parseResponse[1];
@@ -204,6 +177,29 @@ $(function(){
             }
         });
 
+    }
+
+    function CreateDateTime(time) {
+        var splitted = time.split(':');
+        if (splitted.length != 2) return undefined;
+    
+        var date = new Date();
+        date.setHours(parseInt(splitted[0], 10));
+        date.setMinutes(parseInt(splitted[1], 10));
+        date.setSeconds(0);
+        return date;
+    }
+
+    function UpdateVideo24hs(){
+        var startDate = CreateDateTime("22:00");
+        var endDate = CreateDateTime("22:24");
+        var now = new Date();
+        if(startDate <= now && now <= endDate){
+            console.log("Esta entre la hora que corresponde!")
+            return true;
+        }else{
+            return false;
+        }
     }
 
     function SaveDate(date){
