@@ -28,8 +28,8 @@ $(function(){
     var videoPharmacy24 = document.getElementById('videoPharmacy24hs').addEventListener('ended',Activate12hsVideo,false);
     var videoPharmacy12 = document.getElementById('videoPharmacy12hs').addEventListener('ended',Activate24hsVideo,false);
 
-    document.getElementById('videoPharmacy24hs').addEventListener('error',GetTodayPharmacies,false);
-    //document.getElementById('videoPharmacy12hs').addEventListener('error',GetTodayPharmacies,false);
+    document.getElementById('videoPharmacy24hs').addEventListener('error',Show12hsVideo,false);
+    document.getElementById('videoPharmacy12hs').addEventListener('error',Show24hsVideo,false);
 
 
     function Activate12hsVideo(e){
@@ -82,6 +82,16 @@ $(function(){
         }
         console.log("Chequeando cambio de fecha a cada minuto!");
         //GetTodayPharmacies(actualDateToDBFormat);
+        var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
+        var videoPharmacy12hs = document.getElementById('videoPharmacy12hs');
+        if(videoPharmacy24.src == ""){
+            GetTodayPharmacies(actualDateToDBFormat);
+            console.log("Chequeando farmacias!");
+        }
+        if(videoPharmacy12hs.src == ""){
+            GetTodayPharmacies(actualDateToDBFormat);
+            console.log("Chequeando farmacias!");
+        }
     }, 60000); //half hour
     
     //GetTodayPharmacies(actualDateToDBFormat);
