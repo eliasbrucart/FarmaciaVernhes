@@ -1,12 +1,28 @@
 <?php 
 
 class PerfumeryController{
+    static function ShowPerfumery($perfumery){
+        $table = "perfumery";
+
+        $response = PerfumeryModel::ShowPerfumery($table, $perfumery);
+
+        return $response;
+    }
     static public function UploadPerfumery($data){
         $table = "perfumery";
 
-        $response = PerfumeryModel::UploadPerfumery($table, $data);
+        $perfumery = $data["name"];
 
-        return $response;
+        $showPerfumery = self::ShowPerfumery($perfumery);
+
+        if(is_array($showPerfumery) && $perfumery == $showPerfumery["name_perfumery"]){
+            return "Ya existe la perfumeria!";
+        }else{
+            $response = PerfumeryModel::UploadPerfumery($table, $data);
+
+            return $response;
+        }
+
     }
 
     static public function CreatePerfumeryFiles($perfumeryFiles, $perfumeryRoutes){

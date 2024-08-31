@@ -22,6 +22,20 @@ class PerfumeryModel{
         $stmt = null;
     }
 
+    static public function ShowPerfumery($table, $perfumery){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE name_$table= :name_$table");
+
+        $stmt->bindParam(":name_".$table, $perfumery, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
     static public function GetAllPerfumeries($table){
         $stmt = Connection::Connect()->prepare("SELECT * FROM $table ORDER BY order_perfumery ASC");
 

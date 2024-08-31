@@ -17,9 +17,19 @@ class UsersController{
                             "actived"=>$_POST["isUserActivated"]
                         );
 
-                $table = "users";
+                $response = "";
 
-                $response = UsersModel::RegisterUser($table, $data);
+                $table = "users";
+                $item = "email_users";
+                $value = $_POST["regEmailUserInput"];
+
+                $showUser = UsersModel::ShowUser($table, $item, $value);
+
+                if(is_array($showUser) && $showUser["email_users"] == $_POST["regEmailUserInput"] && $showUser["name_users"] == $_POST["regNameUserInput"]){
+                    echo '<script>alert("Ya existe el usuario!");</script>';
+                }else{
+                    $response = UsersModel::RegisterUser($table, $data);
+                }
 
                 $url = Route::GetFrontendRoute();
 

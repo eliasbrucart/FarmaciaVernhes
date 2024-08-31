@@ -60,6 +60,9 @@ function UploadPerfumery(){
 					processData: false,
 					success:(response)=>{
 					  console.log("Upload Perfumery " + response);
+					  if(response != "ok"){
+						alert("Ya existe la perfumeria!");
+					  }
 					  setTimeout(function(){
 						location.reload();
 					  }, 2000);

@@ -55,7 +55,7 @@
     <input type="hidden" value="<?php echo $url; ?>" id="hiddenPath">
 
 </head>
-<body>
+<body translate="no">
 
     <?php 
 

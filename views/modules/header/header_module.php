@@ -59,9 +59,9 @@ $url = Route::GetFrontendRoute();
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
-      <img src="<?php echo $url; ?>views/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Farmacia</span>
+    <a href="<?php echo $url; ?>admin" class="brand-link">
+      <img src="<?php echo $url; ?>views/img/Farmacia_Vernhes_logo.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Farmacia Vernhes</span>
     </a>
 
     <div class="sidebar">
