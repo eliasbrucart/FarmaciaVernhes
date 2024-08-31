@@ -28,6 +28,15 @@
 
                     </form>
 
+                    <div class="input-group date col-xs-12" id="datepicker">
+                        <input type="text" class="form-control">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white d-block">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
+
                 </div>
 
                 <button type="button" class="btn btn-success m-2" onclick="UploadPerfumery()">Agregar</button>
@@ -85,6 +94,14 @@
                                                             </div>
 
                                                         </form>
+                                                        <div class="input-group date col-xs-12" id="perfumeryDateEdited'.$value["id_perfumery"].'">
+                                                            <input type="text" class="form-control" value="'.$value["date_perfumery"].'">
+                                                            <span class="input-group-append">
+                                                                <span class="input-group-text bg-white d-block">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </span>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -10,10 +10,13 @@ class PerfumeryModuleAjax{
     public $uploadPerfumeryName;
     public $uploadPerfumeryMultimedia;
     public $uploadPerfumeryOrder;
+    public $uploadPerfumeryDate;
+
     public function UploadPerfumery(){
         $data = array("name"=>$this->uploadPerfumeryName,
                       "multimedia"=>$this->uploadPerfumeryMultimedia,
-                      "order"=>$this->uploadPerfumeryOrder);
+                      "order"=>$this->uploadPerfumeryOrder,
+                      "date"=>$this->uploadPerfumeryDate);
 
         $response = PerfumeryController::UploadPerfumery($data);
 
@@ -46,12 +49,14 @@ class PerfumeryModuleAjax{
     public $idPerfumeryEdited;
     public $namePerfumeryEdited; //variable name excepction
     public $perfumeryFileRoutesEdited;
-    public $perfumeryOrderEdited;
+    public $perfumeryDateEdited;
+    //public $perfumeryOrderEdited;
     public function EditPerfumery(){
         $data = array("idPerfumeryEdited"=>$this->idPerfumeryEdited,
                       "namePerfumeryEdited"=>$this->namePerfumeryEdited,
                       "fileRoutesPerfumeryEdited"=>$this->perfumeryFileRoutesEdited,
-                      "orderPerfumeryEdited"=>$this->perfumeryOrderEdited);
+                      "perfumeryDateEdited"=>$this->perfumeryDateEdited);
+                      //"orderPerfumeryEdited"=>$this->perfumeryOrderEdited);
 
         $response = PerfumeryController::EditPerfumery($data);
 
@@ -65,6 +70,15 @@ class PerfumeryModuleAjax{
                       "perfumerNameEdited"=>$this->perfumerNameEdited);
 
         $response = PerfumeryController::EditNamePerfumery($data);
+
+        echo json_encode($response);
+    }
+
+    public function EditDatePerfumery(){
+        $data = array("perfumeryIdEdited"=>$this->idPerfumeryEdited,
+                      "perfumeryDateEdited"=>$this->perfumeryDateEdited);
+
+        $response = PerfumeryController::EditDatePerfumery($data);
 
         echo json_encode($response);
     }
@@ -104,6 +118,7 @@ if(isset($_POST["uploadPerfumery"]) && $_POST["uploadPerfumery"] == true){
     $uploadPerfumery->uploadPerfumeryName = $_POST["uploadPerfumeryName"];
     $uploadPerfumery->uploadPerfumeryMultimedia = $_POST["uploadPerfumeryMultimedia"];
     $uploadPerfumery->uploadPerfumeryOrder = $_POST["uploadPerfumeryOrder"];
+    $uploadPerfumery->uploadPerfumeryDate = $_POST["uploadPerfumeryDate"];
     $uploadPerfumery->UploadPerfumery();
 }
 
@@ -127,15 +142,22 @@ if(isset($_POST["perfumeryIdEdited"]) && isset($_POST["perfumeryNameEdited"]) &&
     $perfumeryEdited->idPerfumeryEdited = $_POST["perfumeryIdEdited"];
     $perfumeryEdited->namePerfumeryEdited = $_POST["perfumeryNameEdited"];
     $perfumeryEdited->perfumeryFileRoutesEdited = $_POST["perfumeryFileRoutesEdited"];
-    $perfumeryEdited->perfumeryOrderEdited = $_POST["perfumeryOrderEdited"];
+    $perfumeryEdited->perfumeryDateEdited = $_POST["perfumeryDateEdited"];
     $perfumeryEdited->EditPerfumery();
 }
 
-if(isset($_POST["perfumeryIdEdited"]) && isset($_POST["perfumeryNameEdited"])){
+if(isset($_POST["editPerfumeryName"]) && $_POST["editPerfumeryName"] && isset($_POST["perfumeryNameEdited"])){
     $editNamePerfumery = new PerfumeryModuleAjax();
     $editNamePerfumery->perfumeryIdEdited = $_POST["perfumeryIdEdited"];
     $editNamePerfumery->perfumerNameEdited = $_POST["perfumeryNameEdited"];
     $editNamePerfumery->EditNamePerfumery();
+}
+
+if(isset($_POST["editPerfumeryDate"]) && $_POST["editPerfumeryDate"]){
+    $editPerfumeryDate = new PerfumeryModuleAjax();
+    $editPerfumeryDate->idPerfumeryEdited = $_POST["perfumeryIdEdited"];
+    $editPerfumeryDate->perfumeryDateEdited = $_POST["perfumeryDateEdited"];
+    $editPerfumeryDate->EditDatePerfumery();
 }
 
 if(isset($_POST["changeOrderPerfumery"]) && $_POST["changeOrderPerfumery"]){

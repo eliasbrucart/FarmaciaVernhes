@@ -10,6 +10,15 @@ function UploadPerfumery(){
 	console.log("perfumery name " + perfumeryName);
     var orderPerfumery = 0;
 
+	const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+	var datePerfumery = $('#datepicker').children().val();
+
+	const dateSelected = new Date(datePerfumery);
+	const formattedDate = formatter.format(dateSelected);
+
+	console.log("perfumery date formatted " + formattedDate);
+
     var validateFilesPerfumery = new FormData();
 
     if(arrayPerfumeryFiles.length > 0 && perfumeryName != ""){
@@ -40,6 +49,7 @@ function UploadPerfumery(){
 				validateData.append("uploadPerfumeryName", perfumeryName);
 				validateData.append("uploadPerfumeryMultimedia", multimedia);
 				validateData.append("uploadPerfumeryOrder", orderPerfumery);
+				validateData.append("uploadPerfumeryDate", formattedDate);
 	
 				$.ajax({
 					url:hiddenPath+"ajax/perfumery_module_ajax.php",
@@ -72,6 +82,13 @@ function EditPerfumery(id){
 
 	var multimediaListEdited = [];
 	var multimediaEdited = "";
+
+	const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+	var perfumeryDateEdited = $('#perfumeryDateEdited'+id).children().val();
+
+	const dateSelected = new Date(perfumeryDateEdited);
+	const formattedDate = formatter.format(dateSelected);
 
 	var perfumeryFilesEdited = new FormData();
 
@@ -109,8 +126,9 @@ function EditPerfumery(id){
 			validateData.append("perfumeryNameEdited", perfumeryNameEdited);
 			//console.log("perfumeryNameEdited primer if " + perfumeryNameEdited);
 			validateData.append("perfumeryFileRoutesEdited", multimediaEdited);
+			validateData.append("perfumeryDateEdited", formattedDate);
 			//console.log("multimediaEdited " + multimediaEdited);
-			validateData.append("perfumeryOrderEdited", 0);
+			//validateData.append("perfumeryOrderEdited", 0);
 	
 			$.ajax({
 				url:hiddenPath+"ajax/perfumery_module_ajax.php",
@@ -131,6 +149,7 @@ function EditPerfumery(id){
 
 	if(perfumeryNameEdited != null){
 		var validateData = new FormData();
+		validateData.append("editPerfumeryName", true);
 		validateData.append("perfumeryIdEdited", id);
 		validateData.append("perfumeryNameEdited", perfumeryNameEdited);
 
@@ -145,6 +164,30 @@ function EditPerfumery(id){
 			processData: false,
 			success:(response)=>{
 				console.log("Perfumery name edited " + response);
+				setTimeout(function(){
+					location.reload();
+				}, 2000);
+			}
+		});
+	}
+
+	if(perfumeryDateEdited != null){
+		var validateData = new FormData();
+		validateData.append("editPerfumeryDate", true);
+		validateData.append("perfumeryIdEdited", id);
+		validateData.append("perfumeryDateEdited", formattedDate);
+
+		console.log("perfumeryNameEdited segundo if" + perfumeryNameEdited);
+
+		$.ajax({
+			url:hiddenPath+"ajax/perfumery_module_ajax.php",
+			method: "POST",
+			data: validateData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success:(response)=>{
+				console.log("Perfumery date edited " + response);
 				setTimeout(function(){
 					location.reload();
 				}, 2000);
@@ -290,4 +333,31 @@ $('.todo-list').sortable({
 			})
 		}
 	}
+});
+
+$(function(){
+	$('#datepicker').datepicker();
+	//$('#perfumeryDateEdited').datepicker();
+});
+
+$(function(){
+	var validateData = new FormData();
+
+	validateData.append("getAllPerfumeriesInJSON", true);
+
+	$.ajax({
+		url:hiddenPath+"ajax/perfumery_module_ajax.php",
+		method: "POST",
+		data: validateData,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success:(response)=>{
+			console.log("Get all perfumeries " + response);
+			var parseJSON = JSON.parse(response);
+			for(var i = 0; i < parseJSON.length; i++){
+				$('#perfumeryDateEdited'+parseJSON[i].id_perfumery).datepicker();
+			}
+		}
+	});
 });

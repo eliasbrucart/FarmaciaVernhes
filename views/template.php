@@ -40,6 +40,8 @@
 
     <link rel="stylesheet" href="<?php echo $url; ?>views/plugins/dropzone/dropzone.css">
 
+    <link rel="stylesheet" href="<?php echo $url; ?>views/plugins/datepicker/bootstrap-datepicker.min.css">
+
     <link rel="stylesheet" href="<?php echo $url; ?>views/css/turner/turner_module.css">
     
     <link rel="stylesheet" href="<?php echo $url; ?>views/css/admin/admin_module.css">
@@ -116,6 +118,8 @@
     <script src="<?php echo $url; ?>views/plugins/fullcalendar/main.js"></script>
 
     <script src="<?php echo $url; ?>views/plugins/dropzone/dropzone.js"></script>
+
+    <script src="<?php echo $url; ?>views/plugins/datepicker/bootstrap-datepicker.min.js"></script>
 
     <!-- Data tables libraries -->
 	<script src="<?php echo $url; ?>views/lib/browser_components/datatables.net/js/jquery.dataTables.min.js"></script>
