@@ -5,11 +5,19 @@ $(function(){
     
     var videoPerfumery = document.getElementById('videoPerfumery').addEventListener('ended',ActivateNextVideo,false);
 
-    videoPerfumery = document.getElementById('videoPerfumery').addEventListener('error',GetAllPerfumeries,false);
+    //videoPerfumery = document.getElementById('videoPerfumery').addEventListener('error',GetAllPerfumeries,false);
 
     GetAllPerfumeries();
-    
-    //ActivateNextVideo();
+
+    var date = new Date();
+
+    const actualDateToDBFormat = date.toLocaleDateString("en-US", { // you can use undefined as first argument
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    });
+
+    console.log("actualDateToDBFormat " + actualDateToDBFormat);
 
     function GetAllPerfumeries(){
         var validateData = new FormData();
@@ -33,7 +41,9 @@ $(function(){
                 //var videoPerfumery = document.getElementById('videoPerfumery');
                 
                 for(var i = 0; i < parseResponse.length; i++){
-                    perfumeryVideo[i] = parseResponse[i].file_perfumery;
+                    if(parseResponse[i].date_perfumery == actualDateToDBFormat){
+                        perfumeryVideo[i] = parseResponse[i].file_perfumery;
+                    }
                 }
 
                 PlayFirstVideo();
