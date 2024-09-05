@@ -35,8 +35,11 @@ var arrayFiles24 = [];
 var arrayFiles12 = [];
 
 //var multimediaList = [];
-var multimedia24 = "";
-var multimedia12 = "";
+var multimedia24 = ""; //cambiar a array
+var multimedia12 = ""; //cambiar a array
+
+var multimedia24arr = []; //cambiar a array
+var multimedia12arr = []; //cambiar a array
 
 function ShowPharmacyDataOnEdit(id, name, address){
 	$('#idPharmacyToEdit').text(id);
@@ -59,7 +62,6 @@ function EditPharmacy(){
 		for(var i = 0; i < arrayFiles24.length; i++){
 			validateFiles.append("pharmacyFiles", arrayFiles24[i]);
 			validateFiles.append("pharmacyFilesRoute", namePharmacy);
-
 			$.ajax({
 				url:hiddenPath+"ajax/pharmacies_module_ajax.php",
 				method: "POST",
@@ -68,11 +70,11 @@ function EditPharmacy(){
 				contentType: false,
 				processData: false,
 				success:(response)=>{
-
-					multimedia24 = response.substr(3);
-					//multimediaList.push({"fulldayvideo" : response.substr(3)});
+					//multimedia24 = response.substr(3);
+					//multimedia24arr.push({index : response.substr(3)});
+					multimedia24arr.push(response.substr(3));
 					//multimediaList.push(response.substr(3));
-					//multimedia = JSON.stringify(multimediaList);
+					multimedia24 = JSON.stringify(multimedia24arr);
 
 					//if(multimedia != null){
 
@@ -125,7 +127,10 @@ function EditPharmacy(){
 
 					console.log("response files 12hs " + response);
 
-					multimedia12 = response.substr(3);
+					//multimedia12 = response.substr(3);
+					multimedia12arr.push({i : response.substr(3)});
+					//multimediaList.push(response.substr(3));
+					multimedia12 = JSON.stringify(multimedia12arr);
 
 					//if(multimedia != null){
 
@@ -228,16 +233,6 @@ $('.pharmacyFiles24').dropzone({
 
 			arrayFiles24.push(file);
 
-			if(arrayFiles24.length >= 2){
-				arrayFiles24 = [];
-
-				alert("No se pueden subir mas de 2 archivos!");
-
-				setTimeout(function(){
-					Dropzone.forElement('.pharmacyFiles24').removeAllFiles(true);
-				}, 2000);
-			}
-
 			console.log("arrayFiles24", arrayFiles24);
 
 		})
@@ -265,16 +260,6 @@ $('.pharmacyFiles12').dropzone({
 		this.on("addedfile", function(file){
 
 			arrayFiles12.push(file);
-
-			if(arrayFiles12.length >= 2){
-				arrayFiles12 = [];
-
-				alert("No se pueden subir mas de 2 archivos!");
-
-				setTimeout(function(){
-					Dropzone.forElement('.pharmacyFiles12').removeAllFiles(true);
-				}, 2000);
-			}
 
 			console.log("arrayFiles12", arrayFiles12);
 

@@ -15,12 +15,12 @@
         </div>
     </div>-->
 
-    <video id="videoPharmacy24hs" class="videoPharmacy24hs" muted controls autoplay>
+    <video id="videoPharmacy" class="videoPharmacy" muted controls autoplay>
         <source src="" type="video/mp4">
     </video>
 
-    <video id="videoPharmacy12hs" class="videoPharmacy12hs" muted controls autoplay>
+    <!--<video id="videoPharmacy12hs" class="videoPharmacy12hs" muted controls autoplay>
         <source src="" type="video/mp4">
-    </video>
+    </video>-->
 
 </div>

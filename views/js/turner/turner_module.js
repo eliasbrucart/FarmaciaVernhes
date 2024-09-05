@@ -182,10 +182,16 @@ $(function(){
 
                 var videoPharmacy24 = document.getElementById('videoPharmacy24hs');
                 var videoPharmacy12hs = document.getElementById('videoPharmacy12hs');
+
                 var parseResponse = JSON.parse(response);
+
+                var parseFilesJSON = JSON.parse(parseResponse[0]);
+
+                console.log("parseFilesJSON 0 " + parseFilesJSON[0]);
+                console.log("parseFilesJSON 1 " + parseFilesJSON[1]);
                 
-                console.log("response get pharmacy file routes " + parseResponse[0]);
-                console.log("response get pharmacy file routes " + parseResponse[1]);
+                //console.log("response get pharmacy file routes " + parseResponse[0]);
+                //console.log("response get pharmacy file routes " + parseResponse[1]);
 
                 if(fullDay == 1){ //es array
                     if(flag){

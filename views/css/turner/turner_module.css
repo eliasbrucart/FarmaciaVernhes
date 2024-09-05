@@ -98,12 +98,15 @@
   top: -100%;
   left: 0;
 }
-
 #videoPharmacy24hs{
   width: 100%;
   height: 100%;
 }
 #videoPharmacy12hs{
+  width: 100%;
+  height: 100%;
+}
+#videoPharmacy{
   width: 100%;
   height: 100%;
 }

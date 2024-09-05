@@ -61,7 +61,7 @@ class PharmaciesModuleAjax{
     public $pharmacyFilesRoute;
     public function UploadPharmacyFiles(){
         $fullDayFile = "fullDayFile";
-        PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute, $fullDayFile);
+        //PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute, $fullDayFile);
         $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles, $this->pharmacyFilesRoute, $fullDayFile);
 
         echo $response;
@@ -93,6 +93,12 @@ class PharmaciesModuleAjax{
         PharmacyController::DeletePharmacyFilesByRoute($pharmacy24Files);
 
         $response = PharmacyController::DeletePharmacy($this->idPharmacyToDelete);
+
+        echo json_encode($response);
+    }
+
+    public function GetPharmaciesInJSON(){
+        $response = PharmacyController::GetPharmacies();
 
         echo json_encode($response);
     }
@@ -139,6 +145,11 @@ if(isset($_POST["pharmacyEdited"]) && $_POST["pharmacyEdited"]){
     $editDataPharmacy->pharmacyNameEdited = $_POST["pharmacyNameEdited"];
     $editDataPharmacy->pharmacyAddressEdited = $_POST["pharmacyAddressEdited"];
     $editDataPharmacy->EditDataPharmacy();
+}
+
+if(isset($_POST["getAllParmaciesInJSON"]) && $_POST["getAllParmaciesInJSON"]){
+    $getPharmaciesInJSON = new PharmaciesModuleAjax();
+    $getPharmaciesInJSON->GetPharmaciesInJSON();
 }
 
 
