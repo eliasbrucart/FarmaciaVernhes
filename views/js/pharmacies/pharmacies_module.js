@@ -62,6 +62,7 @@ function EditPharmacy(){
 		for(var i = 0; i < arrayFiles24.length; i++){
 			validateFiles.append("pharmacyFiles", arrayFiles24[i]);
 			validateFiles.append("pharmacyFilesRoute", namePharmacy);
+			validateFiles.append("pharmacyFileUploadId", id);
 			$.ajax({
 				url:hiddenPath+"ajax/pharmacies_module_ajax.php",
 				method: "POST",

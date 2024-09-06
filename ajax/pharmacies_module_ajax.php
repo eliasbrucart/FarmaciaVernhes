@@ -59,10 +59,25 @@ class PharmaciesModuleAjax{
 
     public $pharmacyFiles;
     public $pharmacyFilesRoute;
+    public $pharmacyFileUploadId;
+    public $originalFileName;
     public function UploadPharmacyFiles(){
         $fullDayFile = "fullDayFile";
-        //PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute, $fullDayFile);
-        $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles, $this->pharmacyFilesRoute, $fullDayFile);
+       /*try{
+            $pharmacyArray = PharmacyController::GetPharmacyById($this->pharmacyFileUploadId);
+            $pharmacyFiles = $pharmacyArray["fullday_pharmacy"];
+            $pharmacyFilesArray = json_decode($pharmacyFiles);
+    
+            for($i = 0; $i < count($pharmacyFilesArray); $i++){
+                PharmacyController::DeletePharmacyFilesByRoute($pharmacyFilesArray[$i]);
+            }
+        }catch(Exception $e){
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        }*/
+        PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute, $fullDayFile);
+        sleep(1.5);
+        
+        $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles, $this->pharmacyFilesRoute, $fullDayFile, $this->originalFileName);
 
         echo $response;
     }
@@ -123,6 +138,8 @@ if(isset($_FILES["pharmacyFiles"]) && $_POST["pharmacyFilesRoute"] != ""){
     $editPharmacyWithFiles = new PharmaciesModuleAjax();
     $editPharmacyWithFiles->pharmacyFiles = $_FILES["pharmacyFiles"];
     $editPharmacyWithFiles->pharmacyFilesRoute = $_POST["pharmacyFilesRoute"];
+    $editPharmacyWithFiles->pharmacyFileUploadId = $_POST["pharmacyFileUploadId"];
+    $editPharmacyWithFiles->originalFileName = $_FILES["pharmacyFiles"]["tmp_name"];
     $editPharmacyWithFiles->UploadPharmacyFiles();
 }
 

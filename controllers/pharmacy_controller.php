@@ -74,7 +74,7 @@ class PharmacyController{
         return $response;
     }
 
-    static public function CreatePharmacyFiles($pharmacyFiles, $pharmacyFilesRoute, $fileType){
+    static public function CreatePharmacyFiles($pharmacyFiles, $pharmacyFilesRoute, $fileType, $originalFileName){
         if(isset($pharmacyFiles["tmp_name"]) && !empty($pharmacyFiles["tmp_name"])){
 
             list($width, $height) = getimagesize($pharmacyFiles["tmp_name"]);
@@ -133,9 +133,16 @@ class PharmacyController{
 
                 if(file_exists($routeFile)){
 
-                    $newNum = mt_rand(1, 30);
+                    $newNum = mt_rand(1, 50);
 
-                    $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_".$newNum."_video.mp4";
+                    $secondNum = mt_rand(1, 1000);
+
+                    if($newNum == $secondNum){
+                        $secondNum = mt_rand(1, 1000);
+                    }
+
+                    $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_".$newNum."_".$secondNum."_video.mp4";
+                    //$routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$originalFileName;
 
                     move_uploaded_file($pharmacyFiles["tmp_name"], $routeFile);
                 }
