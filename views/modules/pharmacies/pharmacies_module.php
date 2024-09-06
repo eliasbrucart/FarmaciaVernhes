@@ -2,6 +2,28 @@
 <section class="content">
     <div class="card">
         <div class="card-header">
+            <h3 class="card-title">Agregar Farmacias</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <input id="new-event addPharmacy" name="addPharmacy" type="text" class="form-control addPharmacy" placeholder="Farmacia">
+                    <input type="text addressPharmacy" name="addressPharmacy" class="form-control addressPharmacy" placeholder="Direccion">
+
+                    <div class="input-group-append float-left">
+                        <button type="button" class="btn btn-primary addPharmacyBtn" onclick="AddPharmacy()">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
             <h3 class="card-title">Administrar Farmacias</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -85,27 +107,9 @@
 
                         <div class="form-floating mb-3">
 
-                            <h3>Archivos para turnero 24hs</h3>
+                            <h3>Archivos de farmacia</h3>
 
                             <form action="post" class="pharmacyFiles24 dropzone">
-
-                                <div class="dz-message needsclick">
-                                
-                                    Arrastrar o dar click para subir imagenes.
-
-                                </div>
-
-                            </form>
-
-                        <!-- input para subir imagenes, gifs, etc con plugin para ello -->
-
-                        </div>
-
-                        <div class="form-floating mb-3">
-
-                            <h3>Archivos para turnero 12hs</h3>
-
-                            <form action="post" class="pharmacyFiles12 dropzone">
 
                                 <div class="dz-message needsclick">
                                 

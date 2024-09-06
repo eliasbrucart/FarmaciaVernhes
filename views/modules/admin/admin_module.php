@@ -7,7 +7,7 @@
             <div class="sticky-top mb-3">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Draggable Events</h4>
+                  <h4 class="card-title">Farmacias</h4>
                 </div>
                 <div class="card-body">
                   <!-- the events -->
@@ -30,30 +30,21 @@
               <!-- /.card -->
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Agregar Farmacia</h3>
+                  <h3 class="card-title">Perfumeria</h3>
                 </div>
-                <div class="card-body clearfix">
-                  <!--<div class="btn-group" style="width: 100%; margin-bottom: 10px;">
-                    <ul class="fc-color-picker" id="color-chooser">
-                      <li><a class="text-primary" href="#"><i class="fas fa-square"></i></a></li>
-                      <li><a class="text-warning" href="#"><i class="fas fa-square"></i></a></li>
-                      <li><a class="text-success" href="#"><i class="fas fa-square"></i></a></li>
-                      <li><a class="text-danger" href="#"><i class="fas fa-square"></i></a></li>
-                      <li><a class="text-muted" href="#"><i class="fas fa-square"></i></a></li>
-                    </ul>
-                  </div>-->
-                  <!-- /btn-group -->
+                <!--<div class="card-body clearfix">
+
                   <input id="new-event addPharmacy" name="addPharmacy" type="text" class="form-control addPharmacy" placeholder="Farmacia">
                   <input type="text addressPharmacy" name="addressPharmacy" class="form-control addressPharmacy" placeholder="Direccion">
 
                   <div class="input-group-append float-right">
                     <button type="button" class="btn btn-primary" onclick="AddPharmacy()">Agregar</button>
                   </div>
-                  <!-- /input-group -->
-                </div>
+
+                </div>-->
                 <div class="card-footer clearfix">
-                  <p class="violetSquareText"><i class="fas fa-square violetSquare"></i>Violeta: 24hs</p>
-                  <p class="blueSquareText"><i class="fas fa-square blueSquare"></i>Azul: 12hs</p>
+                  <!--<p class="violetSquareText"><i class="fas fa-square violetSquare"></i>Violeta: 24hs</p>
+                  <p class="blueSquareText"><i class="fas fa-square blueSquare"></i>Azul: 12hs</p>-->
                   <div class="float-left">
                     <a class="saveAllCalendar" onclick="SaveAll()"><i class="fa fa-save"></i></a>
                   </div>
