@@ -147,6 +147,23 @@ class PerfumeryModel{
 
         $stmt = null;
     }
+
+    static public function UpdatePerfumeryDate($table, $data){
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET date_perfumery = :date_perfumery WHERE id_perfumery = :id_perfumery");
+
+        $stmt->bindParam(":id_".$table, $data["eventDropID"], PDO::PARAM_INT);
+        $stmt->bindParam(":date_".$table, $data["eventDropDate"], PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

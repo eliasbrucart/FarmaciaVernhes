@@ -24,7 +24,7 @@ $(function () {
       })
     }
 
-    ini_events($('#external-events div.external-event'))
+    ini_events($('#external-events div.external-event #external-events-perfumery'))
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
@@ -124,6 +124,7 @@ $(function () {
     var eventDropDate = "";
 
     var calendarEvents = new Array();
+    var perfumeryEvents = new Array();
 
     ShowEvents();
     var calendar = new Calendar(calendarEl, {
@@ -213,8 +214,12 @@ $(function () {
         eventDropID = info.event.id;
 
         console.log("eventDrop current position date " + currentPositionDate);
-        
+
+        console.log("eventDrop event type " + info.event.id);
+
+        UpdatePerfumeryDate();
         UpdateTurner();
+
       },
       eventReceive : function(info){
         recieveEventName = info.event.title;
@@ -253,11 +258,6 @@ $(function () {
         }, 500);
         
       },
-      dateClick: function(info){
-        alert('Clicked on: ' + info.dateStr);
-        console.log('id of the event ' + info.event);
-        //info.event.remove();
-      },
       eventDragStop: function(event){
         var trashEl = jQuery('#calendarTrash');
         var ofs = trashEl.offset();
@@ -287,6 +287,7 @@ $(function () {
 
     /* ADDING EVENTS */
     var currColor = '#3c8dbc' //Red by default
+    var perfumeryColor = '#2a3efc';
     // Color chooser button
     $('#color-chooser > li > a').click(function (e) {
       e.preventDefault()
@@ -310,14 +311,14 @@ $(function () {
       ShowPharmacies();
 
       // Create events
-     var event = $('<div />')
+     /*var event = $('<div />')
       event.css({
         'background-color': currColor,
         'border-color'    : currColor,
         'color'           : '#fff'
       }).addClass('external-event')
       event.text(val)//nombre del evento, es el que se muestra a la derecha
-      $('#external-events').prepend(event) //hacer hijo a event de external-events
+      $('#external-events').prepend(event) //hacer hijo a event de external-events*/
 
 
       // Add draggable funtionality
@@ -348,6 +349,27 @@ $(function () {
 
     }
 
+    /*function UploadPerfumeryDate(){
+      var validateData = new FormData();
+        validateData.append("UploadPerfumeryDate", true);
+        validateData.append("recieveEventName", recieveEventName);
+        validateData.append("dropDate", dropDate);
+        //cambiar mas adelante
+        validateData.append("pharmacy24hs", 1);
+
+        $.ajax({
+          url:hiddenPath+"ajax/perfumery_module_ajax.php",
+          method: "POST",
+          data: validateData,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success:(response)=>{
+            console.log("response create turner " + response);
+          }
+        });
+    }*/
+
     function UpdateTurner(){
       var validateData = new FormData();
       validateData.append("updateTurner", true);
@@ -366,6 +388,25 @@ $(function () {
         }
       });
 
+    }
+
+    function UpdatePerfumeryDate(){
+      var validateData = new FormData();
+      validateData.append("UpdatePerfumeryDate", true);
+      validateData.append("eventDropID", eventDropID);
+      validateData.append("eventDropDate", eventDropDate);
+
+      $.ajax({
+        url:hiddenPath+"ajax/perfumery_module_ajax.php",
+        method: "POST",
+        data: validateData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:(response)=>{
+          console.log("response update perfumery " + response);
+        }
+      });
     }
 
     function ShowEvents(){
@@ -394,12 +435,49 @@ $(function () {
               start: parseResponse.data[i].start,
               backgroundColor: parseResponse.data[i].color,
               borderColor: parseResponse.data[i].color,
+              type:"pharmacy",
               allDay: true
             });
 
             calendar.addEvent(calendarEvents[i]);
           }
           console.log("calendar events " + calendarEvents.length);
+        }
+      })
+      ShowPerfumery();
+    }
+
+    function ShowPerfumery(){
+      var validateData = new FormData();
+      validateData.append("getPerfumeryRegistered",true);
+  
+      $.ajax({
+        url:hiddenPath+"ajax/perfumery_module_ajax.php",
+        method: "POST",
+        data: validateData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:(response)=>{
+          console.log("response perfumery data" + response);
+          var parseResponse = JSON.parse(response);
+          //var parseResponse = response.data;
+  
+          for(var i = 0; i < parseResponse.data.length; i++){
+  
+            perfumeryEvents.push({
+              id: parseResponse.data[i].id,
+              title: parseResponse.data[i].title,
+              start: parseResponse.data[i].start,
+              backgroundColor: parseResponse.data[i].color,
+              borderColor: parseResponse.data[i].color,
+              type: parseResponse.data[i].type,
+              allDay: true
+            });
+
+            calendar.addEvent(perfumeryEvents[i]);
+          }
+          console.log("perfumery events " + perfumeryEvents.length);
         }
       })
     }
@@ -434,8 +512,44 @@ $(function () {
             ini_events(event);
             // Remove event from text input
             $('#new-event').val('');
+
           }
         }
+      })
+      ShowPerfumeryInPanel();
+  }
+
+  function ShowPerfumeryInPanel(){
+    var validateData = new FormData();
+    validateData.append("getAllPerfumeriesInJSON", true);
+
+    //var eventData = "";
+
+    $.ajax({
+      url:hiddenPath+"ajax/perfumery_module_ajax.php",
+      method: "POST",
+      data: validateData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success:(response)=>{
+        var parsePharmaciesJSON = JSON.parse(response);
+        console.log("Get perfumries response " + parsePharmaciesJSON);
+        for(var i = 0; i < parsePharmaciesJSON.length; i++){
+          var events = $('<div />');
+          events.css({
+            'background-color': perfumeryColor,
+            'border-color'    : perfumeryColor,
+            'color'           : '#fff'
+          }).addClass('external-event')
+          events.text(parsePharmaciesJSON[i].name_perfumery)//nombre del evento, es el que se muestra a la derecha
+          $('#external-events').prepend(events) //hacer hijo a event de external-events
+
+          ini_events(events);
+          // Remove event from text input
+          $('#new-event').val('');
+        }
+      }
     })
   }
 

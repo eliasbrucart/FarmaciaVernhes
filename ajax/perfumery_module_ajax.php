@@ -111,6 +111,44 @@ class PerfumeryModuleAjax{
 
         echo json_encode($response);
     }
+
+    public function GetPerfumeryRegistered(){
+        $response = PerfumeryController::GetAllPerfumeries();
+
+        if(is_array($response)){
+            $data_arr = array();
+            $i = 1;
+
+            for($i = 0; $i < count($response); $i++){
+                $data_arr[$i]['id'] = $response[$i]['id_perfumery'];
+                $data_arr[$i]['title'] = $response[$i]['name_perfumery'];
+                $data_arr[$i]['start'] = date("Y-m-d", strtotime($response[$i]['date_perfumery']));
+                $data_arr[$i]['end'] = date("Y-m-d", strtotime($response[$i]['date_perfumery']));
+                $data_arr[$i]['color'] = '#2a3efc';
+                $data_arr[$i]['type'] = 'perfumery';
+            }
+
+            $data = array('status' => true,
+                          'msg' => 'successfully!',
+                          'data' => $data_arr);
+        }else{
+            $data = array('status' => false,
+                          'msg' => 'Error!');
+        }
+
+        echo json_encode($data);
+    }
+
+    public $eventDropID;
+    public $eventDropDate;
+    public function UpdatePerfumeryDate(){
+        $data = array("eventDropID"=>$this->eventDropID,
+                      "eventDropDate"=>$this->eventDropDate);
+
+        $response = PerfumeryController::UpdatePerfumeryDate($data);
+
+        echo json_encode($response);
+    }
 }
 
 if(isset($_POST["uploadPerfumery"]) && $_POST["uploadPerfumery"] == true){
@@ -177,6 +215,18 @@ if(isset($_POST["deletePerfumery"]) && $_POST["deletePerfumery"]){
 if(isset($_POST["getAllPerfumeriesInJSON"])){
     $getAllPerfumeriesInJSON = new PerfumeryModuleAjax();
     $getAllPerfumeriesInJSON->GetAllPerfumeriesInJSON();
+}
+
+if(isset($_POST["getPerfumeryRegistered"])){
+    $getPerfumeriesRegistered = new PerfumeryModuleAjax();
+    $getPerfumeriesRegistered->GetPerfumeryRegistered();
+}
+
+if(isset($_POST["UpdatePerfumeryDate"])){
+    $updatePerfumery = new PerfumeryModuleAjax();
+    $updatePerfumery->eventDropID = $_POST["eventDropID"];
+    $updatePerfumery->eventDropDate = $_POST["eventDropDate"];
+    $updatePerfumery->UpdatePerfumeryDate();
 }
 
 ?>

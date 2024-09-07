@@ -138,6 +138,14 @@ class PerfumeryController{
 
         return $response;
     }
+
+    static public function UpdatePerfumeryDate($data){
+        $table = "perfumery";
+
+        $response = PerfumeryModel::UpdatePerfumeryDate($table, $data);
+
+        return $response;
+    }
 }
 
 ?>

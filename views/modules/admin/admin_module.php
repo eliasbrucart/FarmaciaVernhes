@@ -24,6 +24,8 @@
                       </label>-->
                     </div>
                   </div>
+                  <div id="external-events-perfumery">
+                  </div>
                 </div>
                 <!-- /.card-body -->
               </div>
