@@ -215,18 +215,31 @@ $(function () {
 
         console.log("eventDrop current position date " + currentPositionDate);
 
-        console.log("eventDrop event type " + info.event.id);
+        console.log("eventDrop event type " + JSON.stringify(info.event));
+        console.log("eventDrop event type " + info.event.extendedProps.type);
 
-        UpdatePerfumeryDate();
-        UpdateTurner();
+        if(info.event.extendedProps.type == 'perfumery'){
+          UpdatePerfumeryDate();
+        }else{
+          UpdateTurner();
+        }
 
       },
       eventReceive : function(info){
         recieveEventName = info.event.title;
         //info.event.id = 2;
         console.log("Receive Event name " + info.event.title);
-        console.log("Receive Event id " + info.event.event_id);
-        CreateTurner();
+        console.log("Receive Event id " + info.event.id);
+        console.log("Receive Event date " + info.event.start);
+
+        console.log("Recieve event type " + JSON.stringify(info.event));
+
+        if(info.event.backgroundColor == "rgb(42, 62, 252)"){
+          CreatePerfumeryDate();
+        }else{
+          CreateTurner();
+        }
+        //UpdatePerfumeryDate(info.event.event_id, info.event.start)
       },
       eventClick: function(info){
         var idTurner = info.event.id;
@@ -349,13 +362,13 @@ $(function () {
 
     }
 
-    /*function UploadPerfumeryDate(){
+    function CreatePerfumeryDate(){
       var validateData = new FormData();
         validateData.append("UploadPerfumeryDate", true);
         validateData.append("recieveEventName", recieveEventName);
         validateData.append("dropDate", dropDate);
         //cambiar mas adelante
-        validateData.append("pharmacy24hs", 1);
+        //validateData.append("pharmacy24hs", 1);
 
         $.ajax({
           url:hiddenPath+"ajax/perfumery_module_ajax.php",
@@ -365,10 +378,10 @@ $(function () {
           contentType: false,
           processData: false,
           success:(response)=>{
-            console.log("response create turner " + response);
+            console.log("response create perfumery date " + response);
           }
         });
-    }*/
+    }
 
     function UpdateTurner(){
       var validateData = new FormData();
@@ -394,6 +407,25 @@ $(function () {
       var validateData = new FormData();
       validateData.append("UpdatePerfumeryDate", true);
       validateData.append("eventDropID", eventDropID);
+      validateData.append("eventDropDate", eventDropDate);
+
+      $.ajax({
+        url:hiddenPath+"ajax/perfumery_module_ajax.php",
+        method: "POST",
+        data: validateData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:(response)=>{
+          console.log("response update perfumery " + response);
+        }
+      });
+    }
+
+    function UpdatePerfumeryDate(eventDropId, eventDropDate){
+      var validateData = new FormData();
+      validateData.append("UpdatePerfumeryDate", true);
+      validateData.append("eventDropID", eventDropId);
       validateData.append("eventDropDate", eventDropDate);
 
       $.ajax({

@@ -113,17 +113,17 @@ class PerfumeryModuleAjax{
     }
 
     public function GetPerfumeryRegistered(){
-        $response = PerfumeryController::GetAllPerfumeries();
+        $response = PerfumeryController::GetAllPerfumeriesInTurner();
 
         if(is_array($response)){
             $data_arr = array();
             $i = 1;
 
             for($i = 0; $i < count($response); $i++){
-                $data_arr[$i]['id'] = $response[$i]['id_perfumery'];
-                $data_arr[$i]['title'] = $response[$i]['name_perfumery'];
-                $data_arr[$i]['start'] = date("Y-m-d", strtotime($response[$i]['date_perfumery']));
-                $data_arr[$i]['end'] = date("Y-m-d", strtotime($response[$i]['date_perfumery']));
+                $data_arr[$i]['id'] = $response[$i]['id_turner_perfumery'];
+                $data_arr[$i]['title'] = $response[$i]['namePerfumery_turner_perfumery'];
+                $data_arr[$i]['start'] = date("Y-m-d", strtotime($response[$i]['datePerfumery_turner_perfumery']));
+                $data_arr[$i]['end'] = date("Y-m-d", strtotime($response[$i]['datePerfumery_turner_perfumery']));
                 $data_arr[$i]['color'] = '#2a3efc';
                 $data_arr[$i]['type'] = 'perfumery';
             }
@@ -148,6 +148,18 @@ class PerfumeryModuleAjax{
         $response = PerfumeryController::UpdatePerfumeryDate($data);
 
         echo json_encode($response);
+    }
+
+    public $recieveEventName;
+    public $dropDate;
+    public function CreatePerfumeryDate(){
+        $data = array("recieveEventName"=>$this->recieveEventName,
+                      "dropDate"=>$this->dropDate);
+
+        $response = PerfumeryController::CreatePerfumeryDate($data);
+
+        echo json_encode($response);
+
     }
 }
 
@@ -227,6 +239,13 @@ if(isset($_POST["UpdatePerfumeryDate"])){
     $updatePerfumery->eventDropID = $_POST["eventDropID"];
     $updatePerfumery->eventDropDate = $_POST["eventDropDate"];
     $updatePerfumery->UpdatePerfumeryDate();
+}
+
+if(isset($_POST["UploadPerfumeryDate"])){
+    $createPerfumeryDate = new PerfumeryModuleAjax();
+    $createPerfumeryDate->recieveEventName = $_POST["recieveEventName"];
+    $createPerfumeryDate->dropDate = $_POST["dropDate"];
+    $createPerfumeryDate->CreatePerfumeryDate();
 }
 
 ?>

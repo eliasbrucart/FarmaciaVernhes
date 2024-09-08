@@ -91,6 +91,14 @@ class PerfumeryController{
         return $response;
     }
 
+    static public function GetAllPerfumeriesInTurner(){
+        $table = "turner_perfumery";
+
+        $response = PerfumeryModel::GetAllPerfumeriesInTurner($table);
+
+        return $response;
+    }
+
     static public function EditPerfumery($data){
         $table = "perfumery";
 
@@ -140,9 +148,27 @@ class PerfumeryController{
     }
 
     static public function UpdatePerfumeryDate($data){
-        $table = "perfumery";
+        $table = "turner_perfumery";
 
         $response = PerfumeryModel::UpdatePerfumeryDate($table, $data);
+
+        return $response;
+    }
+
+    static public function CreatePerfumeryDate($data){
+        $table = "turner_perfumery";
+
+        $perfumeryTable = "perfumery";
+
+        $perfumeryArray = PerfumeryModel::ShowPerfumery($perfumeryTable, $data["recieveEventName"]);
+
+        $idPerfumery = $perfumeryArray["id_perfumery"];
+
+        $newData = array("perfumeryId"=>$idPerfumery,
+                          "perfumeryName"=>$data["recieveEventName"],
+                          "perfumeryDate"=>$data["dropDate"]);
+
+        $response = PerfumeryModel::CreatePerfumeryDate($table, $newData);
 
         return $response;
     }

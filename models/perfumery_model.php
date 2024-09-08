@@ -48,6 +48,18 @@ class PerfumeryModel{
         $stmt = null;
     }
 
+    static public function GetAllPerfumeriesInTurner($table){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table");
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
     static public function EditPerfumery($table, $data){
         $stmt = Connection::Connect()->prepare("UPDATE $table SET name_perfumery = :name_perfumery, file_perfumery = :file_perfumery, date_perfumery = :date_perfumery WHERE id_perfumery = :id_perfumery");
 
@@ -149,10 +161,28 @@ class PerfumeryModel{
     }
 
     static public function UpdatePerfumeryDate($table, $data){
-        $stmt = Connection::Connect()->prepare("UPDATE $table SET date_perfumery = :date_perfumery WHERE id_perfumery = :id_perfumery");
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET datePerfumery_turner_perfumery = :date_perfumery WHERE id_turner_perfumery = :id_turner_perfumery");
 
-        $stmt->bindParam(":id_".$table, $data["eventDropID"], PDO::PARAM_INT);
-        $stmt->bindParam(":date_".$table, $data["eventDropDate"], PDO::PARAM_STR);
+        $stmt->bindParam(":id_turner_perfumery", $data["eventDropID"], PDO::PARAM_INT);
+        $stmt->bindParam(":date_perfumery", $data["eventDropDate"], PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+    static public function CreatePerfumeryDate($table, $data){
+        $stmt = Connection::Connect()->prepare("INSERT INTO $table(idPerfumery_turner_perfumery, namePerfumery_turner_perfumery, datePerfumery_turner_perfumery) VALUES(:id_perfumery, :name_perfumery, :date_perfumery)");
+
+        $stmt->bindParam(":id_perfumery", $data["perfumeryId"], PDO::PARAM_INT);
+        $stmt->bindParam(":name_perfumery", $data["perfumeryName"], PDO::PARAM_STR);
+        $stmt->bindParam(":date_perfumery", $data["perfumeryDate"], PDO::PARAM_STR);
 
         if($stmt->execute()){
             return "ok";
