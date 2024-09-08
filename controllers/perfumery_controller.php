@@ -172,6 +172,14 @@ class PerfumeryController{
 
         return $response;
     }
+
+    static public function RemovePerfumeryFromTurner($idPerfumeryToRemove){
+        $table = "turner_perfumery";
+
+        $response = PerfumeryModel::RemovePerfumeryFromTurner($table, $idPerfumeryToRemove);
+
+        return $response;
+    }
 }
 
 ?>

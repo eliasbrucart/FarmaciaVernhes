@@ -285,11 +285,18 @@ $(function () {
             console.log("event drag stop event id " + event.event.id);
             RemoveEventFromTurner(event.event.id);
             event.event.remove();
+            if(event.event.extendedProps.type == 'perfumery'){
+              RemovePerfumeryFromTurner(event.event.id);
+              event.event.remove();
+            }
             setTimeout(function(){
               location.reload();
             }, 500);
             //$('#calendario').fullCalendar('removeEvents', event.id);
         }
+
+        console.log("event drag stop event " + JSON.stringify(event.event));
+
       }
     });
 
@@ -405,7 +412,7 @@ $(function () {
 
     function UpdatePerfumeryDate(){
       var validateData = new FormData();
-      validateData.append("UpdatePerfumeryDate", true);
+      validateData.append("updatePerfumeryDate", true);
       validateData.append("eventDropID", eventDropID);
       validateData.append("eventDropDate", eventDropDate);
 
@@ -422,7 +429,7 @@ $(function () {
       });
     }
 
-    function UpdatePerfumeryDate(eventDropId, eventDropDate){
+    /*function UpdatePerfumeryDate(eventDropId, eventDropDate){
       var validateData = new FormData();
       validateData.append("UpdatePerfumeryDate", true);
       validateData.append("eventDropID", eventDropId);
@@ -439,7 +446,7 @@ $(function () {
           console.log("response update perfumery " + response);
         }
       });
-    }
+    }*/
 
     function ShowEvents(){
       var dataEvents = [];
@@ -618,6 +625,24 @@ $(function () {
       processData: false,
       success:(response)=>{
         console.log("Remove Event From Turner " + response);
+      }
+    });
+  }
+
+  function RemovePerfumeryFromTurner(id){
+    var validateData = new FormData();
+    validateData.append("removePerfumeryFromTurner", true);
+    validateData.append("idPerfumeryTurnerToRemove", id);
+
+    $.ajax({
+      url:hiddenPath+"ajax/perfumery_module_ajax.php",
+      method: "POST",
+      data: validateData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success:(response)=>{
+        console.log("Remove Perfumery From Turner " + response);
       }
     });
   }

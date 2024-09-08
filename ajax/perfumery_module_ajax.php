@@ -15,8 +15,8 @@ class PerfumeryModuleAjax{
     public function UploadPerfumery(){
         $data = array("name"=>$this->uploadPerfumeryName,
                       "multimedia"=>$this->uploadPerfumeryMultimedia,
-                      "order"=>$this->uploadPerfumeryOrder,
-                      "date"=>$this->uploadPerfumeryDate);
+                      "order"=>$this->uploadPerfumeryOrder);
+                      //"date"=>$this->uploadPerfumeryDate);
 
         $response = PerfumeryController::UploadPerfumery($data);
 
@@ -54,8 +54,8 @@ class PerfumeryModuleAjax{
     public function EditPerfumery(){
         $data = array("idPerfumeryEdited"=>$this->idPerfumeryEdited,
                       "namePerfumeryEdited"=>$this->namePerfumeryEdited,
-                      "fileRoutesPerfumeryEdited"=>$this->perfumeryFileRoutesEdited,
-                      "perfumeryDateEdited"=>$this->perfumeryDateEdited);
+                      "fileRoutesPerfumeryEdited"=>$this->perfumeryFileRoutesEdited);
+                      //"perfumeryDateEdited"=>$this->perfumeryDateEdited);
                       //"orderPerfumeryEdited"=>$this->perfumeryOrderEdited);
 
         $response = PerfumeryController::EditPerfumery($data);
@@ -144,7 +144,7 @@ class PerfumeryModuleAjax{
     public function UpdatePerfumeryDate(){
         $data = array("eventDropID"=>$this->eventDropID,
                       "eventDropDate"=>$this->eventDropDate);
-
+        
         $response = PerfumeryController::UpdatePerfumeryDate($data);
 
         echo json_encode($response);
@@ -161,6 +161,13 @@ class PerfumeryModuleAjax{
         echo json_encode($response);
 
     }
+
+    public $idPerfumeryToRemove;
+    public function RemovePerfumeryFromTurner(){
+        $response = PerfumeryController::RemovePerfumeryFromTurner($this->idPerfumeryToRemove);
+
+        echo json_encode($response);
+    }
 }
 
 if(isset($_POST["uploadPerfumery"]) && $_POST["uploadPerfumery"] == true){
@@ -168,7 +175,7 @@ if(isset($_POST["uploadPerfumery"]) && $_POST["uploadPerfumery"] == true){
     $uploadPerfumery->uploadPerfumeryName = $_POST["uploadPerfumeryName"];
     $uploadPerfumery->uploadPerfumeryMultimedia = $_POST["uploadPerfumeryMultimedia"];
     $uploadPerfumery->uploadPerfumeryOrder = $_POST["uploadPerfumeryOrder"];
-    $uploadPerfumery->uploadPerfumeryDate = $_POST["uploadPerfumeryDate"];
+    //$uploadPerfumery->uploadPerfumeryDate = $_POST["uploadPerfumeryDate"];
     $uploadPerfumery->UploadPerfumery();
 }
 
@@ -234,7 +241,7 @@ if(isset($_POST["getPerfumeryRegistered"])){
     $getPerfumeriesRegistered->GetPerfumeryRegistered();
 }
 
-if(isset($_POST["UpdatePerfumeryDate"])){
+if(isset($_POST["updatePerfumeryDate"]) && $_POST["updatePerfumeryDate"]){
     $updatePerfumery = new PerfumeryModuleAjax();
     $updatePerfumery->eventDropID = $_POST["eventDropID"];
     $updatePerfumery->eventDropDate = $_POST["eventDropDate"];
@@ -246,6 +253,12 @@ if(isset($_POST["UploadPerfumeryDate"])){
     $createPerfumeryDate->recieveEventName = $_POST["recieveEventName"];
     $createPerfumeryDate->dropDate = $_POST["dropDate"];
     $createPerfumeryDate->CreatePerfumeryDate();
+}
+
+if(isset($_POST["removePerfumeryFromTurner"]) && $_POST["removePerfumeryFromTurner"]){
+    $removePerfumeryFromTurner = new PerfumeryModuleAjax();
+    $removePerfumeryFromTurner->idPerfumeryToRemove = $_POST["idPerfumeryTurnerToRemove"];
+    $removePerfumeryFromTurner->RemovePerfumeryFromTurner();
 }
 
 ?>
