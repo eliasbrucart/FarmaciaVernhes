@@ -34,10 +34,10 @@ function UploadPerfumery(){
 				contentType: false,
 				processData: false,
                 success:(response)=>{
-					//multimediaList.push(response.substr(3));
+					multimediaList.push(response.substr(3));
 
-					//multimedia = JSON.stringify(Object.assign({}, multimediaList));
-					multimedia = response.substr(3);
+					multimedia = JSON.stringify(multimediaList);
+					//multimedia = response.substr(3);
                 }
             });
         }
@@ -110,11 +110,9 @@ function EditPerfumery(id){
 				processData: false,
                 success:(response)=>{
 
-					//multimediaListEdited.push(response.substr(3));
+					multimediaListEdited.push(response.substr(3));
 
-					//multimediaEdited = JSON.stringify(Object.assign({}, multimediaListEdited));
-
-					multimediaEdited = response.substr(3);
+					multimediaEdited = JSON.stringify(multimediaListEdited);
 
 					console.log("EditPerfumery " + multimediaEdited);
 
@@ -242,16 +240,6 @@ $('.perfumeryFiles').dropzone({
 
 			console.log("arrayPerfumeryFiles", arrayPerfumeryFiles);
 
-			if(arrayPerfumeryFiles.length >= 2){
-				arrayPerfumeryFiles = [];
-
-				alert("No se pueden subir mas de 2 archivos!");
-
-				setTimeout(function(){
-					location.reload();
-				}, 2000);
-			}
-
 		})
 
 		this.on("removedfile", function(file){
@@ -279,16 +267,6 @@ $('.editPerfumeryFiles').dropzone({
 			editPerfumeryFiles.push(file);
 
 			console.log("editPerfumeryFiles", editPerfumeryFiles);
-
-			if(editPerfumeryFiles.length >= 2){
-				editPerfumeryFiles = [];
-
-				alert("No se pueden subir mas de 2 archivos!");
-
-				setTimeout(function(){
-					location.reload();
-				}, 2000);
-			}
 
 		})
 

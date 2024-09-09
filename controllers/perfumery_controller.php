@@ -46,11 +46,17 @@ class PerfumeryController{
                 $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".time()."_video.mp4";
 
                 if(file_exists($routeFile)){
-                    $newNum = mt_rand(1, 30);
+                    $newNum = mt_rand(1, 1000);
+
+                    $secondNum = mt_rand(1, 1000);
+
+                    if($newNum == $secondNum){
+                        $secondNum = mt_rand(1000, 3000);
+                    }
 
                     //$routeFile = $directory."/".$perfumeryRoutes."_".$date."_".$newNum."_video".".mp4";
 
-                    $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".time()."_".$newNum."_video.mp4";
+                    $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".time()."_".$newNum."_".$secondNum."_video.mp4";
                     
                     move_uploaded_file($perfumeryFiles["tmp_name"], $routeFile);
                 }

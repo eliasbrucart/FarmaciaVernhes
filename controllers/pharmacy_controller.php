@@ -133,12 +133,12 @@ class PharmacyController{
 
                 if(file_exists($routeFile)){
 
-                    $newNum = mt_rand(1, 50);
+                    $newNum = mt_rand(1, 1000);
 
                     $secondNum = mt_rand(1, 1000);
 
                     if($newNum == $secondNum){
-                        $secondNum = mt_rand(1, 1000);
+                        $secondNum = mt_rand(1000, 3000);
                     }
 
                     $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_".$newNum."_".$secondNum."_video.mp4";
