@@ -153,6 +153,14 @@ class PerfumeryController{
         return $response;
     }
 
+    static public function GetPerfumeryFilesRoutes($id){
+        $table = "perfumery";
+
+        $response = PerfumeryModel::GetPerfumeryFilesRoutes($table, $id);
+
+        return $response;
+    }
+
     static public function UpdatePerfumeryDate($data){
         $table = "turner_perfumery";
 
@@ -183,6 +191,14 @@ class PerfumeryController{
         $table = "turner_perfumery";
 
         $response = PerfumeryModel::RemovePerfumeryFromTurner($table, $idPerfumeryToRemove);
+
+        return $response;
+    }
+
+    static public function GetPerfumeryTurner($actualDateToDBFormat){
+        $table = "turner_perfumery";
+
+        $response = PerfumeryModel::GetPerfumeryTurner($table, $actualDateToDBFormat);
 
         return $response;
     }

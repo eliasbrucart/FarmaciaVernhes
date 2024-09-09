@@ -171,6 +171,22 @@ class PerfumeryModuleAjax{
 
         echo json_encode($response);
     }
+
+    public $actualDateToDBFormat;
+    public function GetPerfumeryTurner(){
+        $response = PerfumeryController::GetPerfumeryTurner($this->actualDateToDBFormat);
+
+        echo json_encode($response);
+    }
+
+    public $idTodayPerfumery;
+    public function GetPerfumeryFilesRoutes(){
+        $response = PerfumeryController::GetPerfumeryFilesRoutes($this->idTodayPerfumery);
+
+        $fileArray = array(0=>$response[0]["file_perfumery"]);
+
+        echo json_encode($fileArray);
+    }
 }
 
 if(isset($_POST["uploadPerfumery"]) && $_POST["uploadPerfumery"] == true){
@@ -262,6 +278,18 @@ if(isset($_POST["removePerfumeryFromTurner"]) && $_POST["removePerfumeryFromTurn
     $removePerfumeryFromTurner = new PerfumeryModuleAjax();
     $removePerfumeryFromTurner->idPerfumeryToRemove = $_POST["idPerfumeryTurnerToRemove"];
     $removePerfumeryFromTurner->RemovePerfumeryFromTurner();
+}
+
+if(isset($_POST["getPerfumeryTurner"]) && $_POST["getPerfumeryTurner"]){
+    $getPerfumeryTurner = new PerfumeryModuleAjax();
+    $getPerfumeryTurner->actualDateToDBFormat = $_POST["actualDateToDBFormat"];
+    $getPerfumeryTurner->GetPerfumeryTurner();
+}
+
+if(isset($_POST["getTodayPerfumeries"]) && $_POST["getTodayPerfumeries"]){
+    $getTodayPerfumery = new PerfumeryModuleAjax();
+    $getTodayPerfumery->idTodayPerfumery = $_POST["idTodayPerfumery"];
+    $getTodayPerfumery->GetPerfumeryFilesRoutes();
 }
 
 ?>

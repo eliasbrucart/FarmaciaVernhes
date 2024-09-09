@@ -160,6 +160,20 @@ class PerfumeryModel{
         $stmt = null;
     }
 
+    static public function GetPerfumeryFilesRoutes($table, $id){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE id_perfumery = :id_perfumery");
+
+        $stmt->bindParam(":id_".$table, $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(); //files column
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
     static public function UpdatePerfumeryDate($table, $data){
         $stmt = Connection::Connect()->prepare("UPDATE $table SET datePerfumery_turner_perfumery = :datePerfumery_turner_perfumery WHERE id_turner_perfumery = :id_turner_perfumery");
 
@@ -205,6 +219,20 @@ class PerfumeryModel{
         }else{
             return "error";
         }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+    static public function GetPerfumeryTurner($table, $actualDateToDBFormat){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE datePerfumery_turner_perfumery = :datePerfumery_turner_perfumery");
+
+        $stmt->bindParam(":datePerfumery_turner_perfumery", $actualDateToDBFormat, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
 
         $stmt->close();
 

@@ -5,19 +5,74 @@ $(function(){
     
     var videoPerfumery = document.getElementById('videoPerfumery').addEventListener('ended',ActivateNextVideo,false);
 
-    //videoPerfumery = document.getElementById('videoPerfumery').addEventListener('error',GetAllPerfumeries,false);
-
-    GetAllPerfumeries();
-
+    videoPerfumery = document.getElementById('videoPerfumery').addEventListener('error',GetPerfumeryTurner,false);
+    
     var date = new Date();
-
+    
     const actualDateToDBFormat = date.toLocaleDateString("en-US", { // you can use undefined as first argument
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
     });
-
+    
     console.log("actualDateToDBFormat " + actualDateToDBFormat);
+    
+    GetPerfumeryTurner();
+
+    function GetPerfumeryTurner(){
+        validateData = new FormData();
+        validateData.append("getPerfumeryTurner", true);
+        validateData.append("actualDateToDBFormat", actualDateToDBFormat);
+
+        $.ajax({
+            url:hiddenPath+"ajax/perfumery_module_ajax.php",
+            method: "POST",
+            data: validateData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: (response)=>{
+                console.log(response);
+                var parseResponse = JSON.parse(response);
+                console.log("parseResponse " + parseResponse.length);
+
+                for(var i = 0; i < parseResponse.length; i++){
+                    GetTodayPerfumeries(parseResponse[i].idPerfumery_turner_perfumery);
+                }
+            }
+        });
+    }
+
+    function GetTodayPerfumeries(id){
+        var validateData = new FormData();
+        validateData.append("getTodayPerfumeries", true);
+        validateData.append("idTodayPerfumery", id);
+
+        $.ajax({
+            url:hiddenPath+"ajax/perfumery_module_ajax.php",
+            method: "POST",
+            data: validateData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: (response)=>{
+                console.log("GetTodayPerfumeries response" + response);
+                var parseResponse = JSON.parse(response);
+                //console.log("GetTodayPerfumeries parseResponse " + parseResponse.length);
+                //console.log("GetTodayPerfumeries parseResponse stringify " + JSON.stringify(parseResponse));
+
+                var arrAux = JSON.parse(parseResponse[0]);
+
+                console.log("Get all perfumeries " + arrAux[0]);
+
+                for(var i = 0; i < arrAux.length; i++){
+                    perfumeryVideo.push(arrAux[i]);
+                }
+
+                PlayFirstVideo();
+            }
+        });
+    }
 
     function GetAllPerfumeries(){
         var validateData = new FormData();
@@ -77,7 +132,7 @@ $(function(){
             console.log("reproduciendo video numero " + videoIndex);
         }else{
             videoIndex = 0;
-            GetAllPerfumeries();
+            GetPerfumeryTurner();
             //PlayFirstVideo();
         }
         //console.log("video Index " + videoIndex);
