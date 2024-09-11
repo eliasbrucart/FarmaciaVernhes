@@ -19,6 +19,15 @@ $(function(){
     
     GetPerfumeryTurner();
 
+    setInterval(function(){
+        if(perfumeryVideo.length === 0){
+            GetPerfumeryTurner();
+        }else{
+            return;
+        }
+        console.log("Chequeando que halla videos en perfumeria");
+    }, 60000);
+
     function GetPerfumeryTurner(){
         validateData = new FormData();
         validateData.append("getPerfumeryTurner", true);
@@ -34,7 +43,7 @@ $(function(){
             success: (response)=>{
                 console.log(response);
                 var parseResponse = JSON.parse(response);
-                console.log("parseResponse " + parseResponse.length);
+                console.log("GetPerfumeryTurner parseResponse " + parseResponse.length);
 
                 for(var i = 0; i < parseResponse.length; i++){
                     GetTodayPerfumeries(parseResponse[i].idPerfumery_turner_perfumery);

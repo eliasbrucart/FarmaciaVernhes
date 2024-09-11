@@ -16,7 +16,7 @@ class PerfumeryController{
         $showPerfumery = self::ShowPerfumery($perfumery);
 
         if(is_array($showPerfumery) && $perfumery == $showPerfumery["name_perfumery"]){
-            return "Ya existe la perfumeria!";
+            return;
         }else{
             $response = PerfumeryModel::UploadPerfumery($table, $data);
 

@@ -125,6 +125,20 @@ class TurnerModel{
         $stmt = null;
     }
 
+    static public function GetPharmacyByIdTurner($table, $idTurner){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE id_turner = :id_turner");
+
+        $stmt->bindParam(":id_turner", $idTurner, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchColumn(1);
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
     static public function RemoveEventFromTurner($table, $idTurnerToRemove){
         $stmt = Connection::Connect()->prepare("DELETE FROM $table WHERE id_turner = :id_turner");
 
@@ -140,6 +154,23 @@ class TurnerModel{
 
         $stmt = null;
 
+    }
+
+    static public function SaveSelectedFiles($table, $selectedFilesPharmacyTurner, $selectedFilesValues){
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET fileSelected = :fileSelected WHERE id_turner = :id_turner");
+
+        $stmt->bindParam(":id_turner", $selectedFilesPharmacyTurner, PDO::PARAM_INT);
+        $stmt->bindParam(":fileSelected", $selectedFilesValues, PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
     }
 }
 

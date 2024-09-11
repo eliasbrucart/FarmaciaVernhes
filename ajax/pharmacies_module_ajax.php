@@ -117,6 +117,15 @@ class PharmaciesModuleAjax{
 
         echo json_encode($response);
     }
+
+    public $idPharmacyFiles;
+    public function GetPharmacyFiles(){
+        $response = PharmacyController::GetPharmacyFileRoutes($this->idPharmacyFiles);
+
+        $filesArray = array(0=>$response[0]["fullday_pharmacy"]);
+
+        echo json_encode($filesArray);
+    }
 }
 
 if(isset($_POST["editPharmacy"]) && $_POST["editPharmacy"]){
@@ -167,6 +176,13 @@ if(isset($_POST["pharmacyEdited"]) && $_POST["pharmacyEdited"]){
 if(isset($_POST["getAllParmaciesInJSON"]) && $_POST["getAllParmaciesInJSON"]){
     $getPharmaciesInJSON = new PharmaciesModuleAjax();
     $getPharmaciesInJSON->GetPharmaciesInJSON();
+}
+
+if(isset($_POST["getPharmacyFiles"]) && $_POST["getPharmacyFiles"]){
+    $getPharmacyFiles = new PharmaciesModuleAjax();
+    $getPharmacyFiles->idPharmacyFiles = $_POST["idPharmacyFiles"];
+    $getPharmacyFiles->GetPharmacyFiles();
+
 }
 
 

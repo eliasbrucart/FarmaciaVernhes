@@ -21,6 +21,23 @@ $(function(){
 
     GetTodayPharmacies(actualDateToDBFormat);
 
+    setInterval(function(){
+        var dateUpd = new Date();
+    
+        const actualDateToDBFormatUpd = dateUpd.toLocaleDateString("en-US", { // you can use undefined as first argument
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+        });
+
+        if(pharmacyVideo.length === 0){
+            GetTodayPharmacies(actualDateToDBFormatUpd);
+        }else{
+            return;
+        }
+        console.log("Chequeando que halla videos en farmacias!");
+    }, 60000);
+
     function GetAllPharmacies(id, typePharmachy){
         var validateData = new FormData();
         validateData.append("getTodayPharmacyFileRoutes" , true);

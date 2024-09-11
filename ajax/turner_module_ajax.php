@@ -58,6 +58,21 @@ class TurnerModuleAjax{
 
         echo json_encode($response);
     }
+
+    public $idTurner;
+    public function GetPharmacyByIdInTurner(){
+        $response = TurnerController::GetPharmacyByIdInTurner($this->idTurner);
+
+        echo json_encode($response);
+    }
+
+    public $selectedFilesPharmacyTurner;
+    public $selectedFilesValues;
+    public function SaveSelectedFiles(){
+        $response = TurnerController::SaveSelectedFiles($this->selectedFilesPharmacyTurner, $this->selectedFilesValues);
+
+        echo json_encode($response);
+    }
 }
 
 if(isset($_POST["getTodayPharmacies"])){
@@ -95,6 +110,19 @@ if(isset($_POST["removeEventFromTurner"])){
     $removeEvent = new TurnerModuleAjax();
     $removeEvent->idTurnerToRemove = $_POST["idEventTurnerToRemove"];
     $removeEvent->RemoveEventFromTurner();
+}
+
+if(isset($_POST["getPharmacyByIdInTurner"]) && $_POST["getPharmacyByIdInTurner"]){
+    $getPharmacyByIdTurner = new TurnerModuleAjax();
+    $getPharmacyByIdTurner->idTurner = $_POST["idTurner"];
+    $getPharmacyByIdTurner->GetPharmacyByIdInTurner();
+}
+
+if(isset($_POST["saveSelectedFiles"]) && $_POST["saveSelectedFiles"]){
+    $saveSelectedFiles = new TurnerModuleAjax();
+    $saveSelectedFiles->selectedFilesPharmacyTurner = $_POST["selectedFilesPharmacyTurner"];
+    $saveSelectedFiles->selectedFilesValues = $_POST["selectedFilesValues"];
+    $saveSelectedFiles->SaveSelectedFiles();
 }
 
 ?>

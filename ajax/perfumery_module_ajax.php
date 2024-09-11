@@ -100,9 +100,14 @@ class PerfumeryModuleAjax{
     //public $originalPerfumeryNameDeleted;
     public function DeletePerfumery(){
         $perfumeryArray = PerfumeryController::GetPerfumeryById($this->idPerfumeryDeleted);
-        $originalPerfumeryFileRoute = $perfumeryArray["file_perfumery"];
+        //$originalPerfumeryFileRoute = $perfumeryArray["file_perfumery"];
+        $perfumeryName = $perfumeryArray["name_perfumery"];
 
-        PerfumeryController::DeletePerfumeryFilesByRoute($originalPerfumeryFileRoute);
+        PerfumeryController::DeletePerfumeryFiles($perfumeryName);
+        
+        sleep(1.5);
+
+        //PerfumeryController::DeletePerfumeryFilesByRoute($originalPerfumeryFileRoute);
 
         $response = PerfumeryController::DeletePerfumery($this->idPerfumeryDeleted);
 

@@ -74,3 +74,51 @@
       </div><!-- /.container-fluid -->
     </section>
 </div>
+
+<div id="calendarModal" class="modal fade">
+<div class="modal-dialog">
+
+<div class="modal-content">
+
+    <div class="modal-header" style="background:#c9c9c9; color:black">
+
+        <h4 class="modal-title">Seleccionar archivos farmacia</h4>
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+    </div>
+
+    <div class="modal-body" style="background:##c9c9c9;">
+
+        <div class="box-body">
+
+            <div class="form-group">
+
+                <p class="idPharmacyToEdit" name="idPharmacy" id="namePharmacyEventClick">Farmacia: <span id="idPharmacyEventClick"></span></p>
+
+                <div class="form-floating mb-3">
+
+                  <div class="container selectFilesDiv">
+
+                  </div>
+
+                  <!--<input type="checkbox" value="0">-->
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+      <div class="modal-footer" style="background:#c9c9c9;">
+
+        <button type="button" class="btn btn-success m-2" id="saveFilesSelected" onclick="">Guardar</button>
+
+      </div>
+
+  </div>
+
+  </div>
+</div>

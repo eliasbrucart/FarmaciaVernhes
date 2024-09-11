@@ -37,6 +37,7 @@ function UploadPerfumery(){
 					multimediaList.push(response.substr(3));
 
 					multimedia = JSON.stringify(multimediaList);
+
 					//multimedia = response.substr(3);
                 }
             });
@@ -60,9 +61,9 @@ function UploadPerfumery(){
 					processData: false,
 					success:(response)=>{
 					  console.log("Upload Perfumery " + response);
-					  if(response != "ok"){
+					  /*if(response != "ok"){
 						alert("Ya existe la perfumeria!");
-					  }
+					  }*/
 					  setTimeout(function(){
 						location.reload();
 					  }, 2000);

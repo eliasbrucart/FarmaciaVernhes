@@ -68,6 +68,22 @@ class TurnerController{
 
         return $response;
     }
+
+    static public function GetPharmacyByIdInTurner($idTurner){
+        $table = "turner";
+
+        $response = TurnerModel::GetPharmacyByIdTurner($table, $idTurner);
+
+        return $response;
+    }
+
+    static public function SaveSelectedFiles($selectedFilesPharmacyTurner, $selectedFilesValues){
+        $table = "turner";
+
+        $response = TurnerModel::SaveSelectedFiles($table, $selectedFilesPharmacyTurner, $selectedFilesValues);
+
+        return $response;
+    }
 }
 
 ?>

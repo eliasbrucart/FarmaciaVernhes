@@ -21,6 +21,13 @@
 .calendar-trash i{
     font-size: 100px;
 }
+.videoFileSelect{
+    width: 20%;
+    height: 25%;
+}
+.selectedFile{
+    margin: 12px 7px;
+}
 /*=============================================
 ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
 =============================================*/
