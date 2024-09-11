@@ -309,7 +309,7 @@ $(function () {
               for(var i = 0; i < arrAux.length; i++){
                 videoElement += '<div class="col">';
                 videoElement += '<input class="selectedFile" id="selectedFile'+i+'" type="checkbox" value="'+i+'">';
-                videoElement += '<video class="videoFileSelect" src="'+arrAux[i]+'" controls></video>';
+                videoElement += '<video class="videoFileSelect" src="../'+arrAux[i]+'" controls></video>';
                 videoElement += '</div>';
                 valuesIndex++;
               }
