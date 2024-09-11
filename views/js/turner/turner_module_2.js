@@ -38,7 +38,7 @@ $(function(){
         console.log("Chequeando que halla videos en farmacias!");
     }, 60000);
 
-    function GetAllPharmacies(id, typePharmachy){
+    function GetAllPharmacies(id, fileIndex){
         var validateData = new FormData();
         validateData.append("getTodayPharmacyFileRoutes" , true);
         validateData.append("idTodayPharmacy", id);
@@ -55,10 +55,16 @@ $(function(){
 
                 var arrAux = JSON.parse(parseResponse[0]);
                 
-                console.log("Get all pharmacies " + arrAux[0]);
+                //console.log("Get all pharmacies " + arrAux[0]);
 
                 for(var i = 0; i < arrAux.length; i++){
-                    pharmacyVideo.push(arrAux[i]);
+                    //var position = fileIndex.indexOf(i);
+                    for(var j = 0; j < fileIndex.length; j++){
+                        if(i == fileIndex[j]){
+                            console.log("selected file " + arrAux[i]);
+                            pharmacyVideo.push(arrAux[i]);
+                        }
+                    }
                 }
 
                 PlayFirstVideo();
@@ -80,13 +86,19 @@ $(function(){
             processData: false,
             success:(response)=>{
                 var parseJSON = JSON.parse(response);
+                //console.log("parseJSON " + JSON.stringify(parseJSON));
+                //console.log("parse filesSelectedIndex " + JSON.stringify(parseJSON[i].fileSelected));
+
+                
                 for(var i = 0; i < parseJSON.length; i++){
+                    var filesSelectedIndex = JSON.parse(parseJSON[i].fileSelected);
+                    console.log("filesSelectedIndex " + filesSelectedIndex);
                     if(flag){
-                        GetAllPharmacies(parseJSON[i].id_pharmacy, parseJSON[i].fullDay);
+                        GetAllPharmacies(parseJSON[i].id_pharmacy, filesSelectedIndex);
                         flag = false;
                     }else if(UpdateVideo24hs()){
                         if(updateOneTime){
-                            GetAllPharmacies(parseJSON[i].id_pharmacy, parseJSON[i].fullDay);
+                            GetAllPharmacies(parseJSON[i].id_pharmacy, filesSelectedIndex);
                             console.log("Entro por udpate one time!");
                             updateOneTime = false;
                         }
