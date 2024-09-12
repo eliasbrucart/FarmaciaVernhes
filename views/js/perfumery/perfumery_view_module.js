@@ -46,13 +46,15 @@ $(function(){
                 console.log("GetPerfumeryTurner parseResponse " + parseResponse.length);
 
                 for(var i = 0; i < parseResponse.length; i++){
-                    GetTodayPerfumeries(parseResponse[i].idPerfumery_turner_perfumery);
+                    var filesSelectedIndex = JSON.parse(parseResponse[i].fileSelected);
+                    console.log("filesSelectedIndex " + filesSelectedIndex);
+                    GetTodayPerfumeries(parseResponse[i].idPerfumery_turner_perfumery, filesSelectedIndex);
                 }
             }
         });
     }
 
-    function GetTodayPerfumeries(id){
+    function GetTodayPerfumeries(id, fileIndex){
         var validateData = new FormData();
         validateData.append("getTodayPerfumeries", true);
         validateData.append("idTodayPerfumery", id);
@@ -75,7 +77,12 @@ $(function(){
                 console.log("Get all perfumeries " + arrAux[0]);
 
                 for(var i = 0; i < arrAux.length; i++){
-                    perfumeryVideo.push(arrAux[i]);
+                    for(var j = 0; j < fileIndex.length; j++){
+                        if(i == fileIndex[j]){
+                            console.log("selected file " + arrAux[i]);
+                            perfumeryVideo.push(arrAux[i]);
+                        }
+                    }
                 }
 
                 PlayFirstVideo();

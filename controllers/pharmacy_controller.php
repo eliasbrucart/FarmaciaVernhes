@@ -91,66 +91,67 @@ class PharmacyController{
 
             if(!file_exists($fileTypeDirectory)){
                 mkdir($fileTypeDirectory, 0755);
-            }
-
-            if($pharmacyFiles["type"] == "image/jpeg"){
-                $routeFile = $directory."/".$pharmacyFiles["name"];
-
-                $origin = imagecreatefromjpeg($pharmacyFiles["tmp_name"]);
-
-                $destination = imagecreatetruecolor($newWidth, $newHeight);
-
-                imagecopyresized($destination, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-				imagejpeg($destination, $routeFile);
-            }
-
-            if($pharmacyFiles["type"] == "image/png"){
-                $routeFile = $directory."/".$pharmacyFiles["name"];
-
-                $origin = imagecreatefrompng($pharmacyFiles["tmp_name"]);
-
-                $destination = imagecreatetruecolor($newWidth, $newHeight);
-
-                imagealphablending($destination, false);
-
-                imagesavealpha($destination, true);
-
-                imagecopyresized($destination, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-				imagepng($destination, $routeFile);
-            }
-
-            if($pharmacyFiles["type"] == "video/mp4"){
-                $date = date("Y-m-d");
-
-                $num = mt_rand(1, 20);
-
-                //$routeFile = $directory."/".$pharmacyFiles["tmp_name"]."_".$date.".mp4";
-
-                //$routeFile = $directory."/".$pharmacyFilesRoute."_".$date."_".$num."_video".".mp4";
-                $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_video.mp4";
-
-                if(file_exists($routeFile)){
-
-                    $newNum = mt_rand(1, 1000);
-
-                    $secondNum = mt_rand(1, 1000);
-
-                    if($newNum == $secondNum){
-                        $secondNum = mt_rand(1000, 3000);
+                if($pharmacyFiles["type"] == "video/mp4"){
+                    $date = date("Y-m-d");
+    
+                    $num = mt_rand(1, 20);
+    
+                    //$routeFile = $directory."/".$pharmacyFiles["tmp_name"]."_".$date.".mp4";
+    
+                    //$routeFile = $directory."/".$pharmacyFilesRoute."_".$date."_".$num."_video".".mp4";
+                    $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_video.mp4";
+    
+                    if(file_exists($routeFile)){
+    
+                        $newNum = mt_rand(1, 1000);
+    
+                        $secondNum = mt_rand(1, 1000);
+    
+                        if($newNum == $secondNum){
+                            $secondNum = mt_rand(1000, 3000);
+                        }
+    
+                        $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_".$newNum."_".$secondNum."_video.mp4";
+                        //$routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$originalFileName;
+    
+                        move_uploaded_file($pharmacyFiles["tmp_name"], $routeFile);
                     }
-
-                    $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_".$newNum."_".$secondNum."_video.mp4";
-                    //$routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$originalFileName;
-
+    
                     move_uploaded_file($pharmacyFiles["tmp_name"], $routeFile);
                 }
-
-                move_uploaded_file($pharmacyFiles["tmp_name"], $routeFile);
+                return $routeFile;
+            }else{
+                if($pharmacyFiles["type"] == "video/mp4"){
+                    $date = date("Y-m-d");
+    
+                    $num = mt_rand(1, 20);
+    
+                    //$routeFile = $directory."/".$pharmacyFiles["tmp_name"]."_".$date.".mp4";
+    
+                    //$routeFile = $directory."/".$pharmacyFilesRoute."_".$date."_".$num."_video".".mp4";
+                    $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_video.mp4";
+    
+                    if(file_exists($routeFile)){
+    
+                        $newNum = mt_rand(1, 1000);
+    
+                        $secondNum = mt_rand(1, 1000);
+    
+                        if($newNum == $secondNum){
+                            $secondNum = mt_rand(1000, 3000);
+                        }
+    
+                        $routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$date."_".time()."_".$newNum."_".$secondNum."_video.mp4";
+                        //$routeFile = $fileTypeDirectory."/".$pharmacyFilesRoute."_".$originalFileName;
+    
+                        move_uploaded_file($pharmacyFiles["tmp_name"], $routeFile);
+                    }
+    
+                    move_uploaded_file($pharmacyFiles["tmp_name"], $routeFile);
+                }
+                return $routeFile;
             }
 
-            return $routeFile;
         }
     }
 

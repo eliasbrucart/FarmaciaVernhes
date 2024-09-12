@@ -36,7 +36,71 @@ class PerfumeryController{
 
             if(!file_exists($directory)){
                 mkdir($directory, 0755);
+                if($perfumeryFiles["type"] == "video/mp4"){
+                    $date = date("Y-m-d");
+    
+                    $num = mt_rand(1, 20);
+    
+                    $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".time()."_video.mp4";
+    
+                    if(file_exists($routeFile)){
+                        $newNum = mt_rand(1, 1000);
+    
+                        $secondNum = mt_rand(1, 1000);
+    
+                        if($newNum == $secondNum){
+                            $secondNum = mt_rand(1000, 3000);
+                        }
+    
+                        //$routeFile = $directory."/".$perfumeryRoutes."_".$date."_".$newNum."_video".".mp4";
+    
+                        $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".time()."_".$newNum."_".$secondNum."_video.mp4";
+                        
+                        move_uploaded_file($perfumeryFiles["tmp_name"], $routeFile);
+                    }
+    
+                    move_uploaded_file($perfumeryFiles["tmp_name"], $routeFile);
+                }
+                return $routeFile;
+            }else{
+                if($perfumeryFiles["type"] == "video/mp4"){
+                    $date = date("Y-m-d");
+    
+                    $num = mt_rand(1, 20);
+    
+                    $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".time()."_video.mp4";
+    
+                    if(file_exists($routeFile)){
+                        $newNum = mt_rand(1, 1000);
+    
+                        $secondNum = mt_rand(1, 1000);
+    
+                        if($newNum == $secondNum){
+                            $secondNum = mt_rand(1000, 3000);
+                        }
+    
+                        //$routeFile = $directory."/".$perfumeryRoutes."_".$date."_".$newNum."_video".".mp4";
+    
+                        $routeFile = $directory."/".$perfumeryRoutes."_".$date."_".time()."_".$newNum."_".$secondNum."_video.mp4";
+                        
+                        move_uploaded_file($perfumeryFiles["tmp_name"], $routeFile);
+                    }
+    
+                    move_uploaded_file($perfumeryFiles["tmp_name"], $routeFile);
+                }
+                return $routeFile;
             }
+        }
+    }
+
+    static public function EditPerfumeryFiles($perfumeryFiles, $perfumeryRoutes){
+        if(isset($perfumeryFiles["tmp_name"]) && !empty($perfumeryFiles["tmp_name"])){
+            //list($width, $height) = getimagesize($perfumeryFiles["tmp_name"]);
+
+            //$newWidth = 500;
+            //$newHeight = 1000;
+
+            $directory = "../views/img/perfumery/".$perfumeryRoutes;
 
             if($perfumeryFiles["type"] == "video/mp4"){
                 $date = date("Y-m-d");
@@ -82,10 +146,13 @@ class PerfumeryController{
         }
     }
 
-    static public function DeletePerfumeryFilesByRoute($route){
-        $parseRoute = "../".$route;
-        if(is_file($parseRoute)){
-            unlink($parseRoute);
+    static public function DeletePerfumeryFilesByName($name){
+        $directory = "../views/img/perfumery/".$name;
+        $files = glob($directory.'/*');
+        foreach($files as $file){
+            if(is_file($file)){
+                unlink($file);
+            }
         }
     }
 

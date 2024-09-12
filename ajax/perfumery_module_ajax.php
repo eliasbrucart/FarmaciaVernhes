@@ -37,10 +37,11 @@ class PerfumeryModuleAjax{
     public $perfumeryIdToEdited;
     public $perfumeryFilesEdited;
     public function EditPerfumeryFiles(){
-        PerfumeryController::DeletePerfumeryFiles($this->perfumeryNameEdited);
+        $perfumeryArray = PerfumeryController::GetPerfumeryById($this->perfumeryIdToEdited);
+        $namePerfumery = $perfumeryArray["name_perfumery"];
+        PerfumeryController::DeletePerfumeryFilesByName($namePerfumery);
 
         sleep(1.5);
-        //$perfumeryArray = PerfumeryController::GetPerfumeryById($this->perfumeryIdToEdited);
         //$originalPerfumeryFileRoute = $perfumeryArray["file_perfumery"];
 
         //PerfumeryController::DeletePerfumeryFilesByRoute($originalPerfumeryFileRoute);
