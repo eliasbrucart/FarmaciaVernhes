@@ -202,6 +202,22 @@ class PerfumeryController{
 
         return $response;
     }
+
+    static public function GetPerfumeryByIdInTurner($idPerfumeryTurner){
+        $table = "turner_perfumery";
+
+        $response = PerfumeryModel::GetPerfumeryByIdInTurner($table, $idPerfumeryTurner);
+
+        return $response;
+    }
+
+    static public function SaveSelectedPerfumeryFile($selectedFilesPerfumeryTurner, $selectedFilesValues){
+        $table = "turner_perfumery";
+
+        $response = PerfumeryModel::SaveSelectedPerfumeryFile($table, $selectedFilesPerfumeryTurner, $selectedFilesValues);
+
+        return $response;
+    }
 }
 
 ?>

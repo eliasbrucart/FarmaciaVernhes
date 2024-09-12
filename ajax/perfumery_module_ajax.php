@@ -192,6 +192,23 @@ class PerfumeryModuleAjax{
 
         echo json_encode($fileArray);
     }
+
+    public $idPerfumeryTurner;
+    public function GetPerfumeryByIdInTurner(){
+        $response = PerfumeryController::GetPerfumeryByIdInTurner($this->idPerfumeryTurner);
+
+        echo json_encode($response);
+    }
+
+    public $selectedFilesPerfumeryTurner;
+    public $selectedFilesValues;
+    public function SaveSelectedPerfumeryFile(){
+        $response = PerfumeryController::SaveSelectedPerfumeryFile($this->selectedFilesPerfumeryTurner, $this->selectedFilesValues);
+
+        echo json_encode($response);
+    }
+
+
 }
 
 if(isset($_POST["uploadPerfumery"]) && $_POST["uploadPerfumery"] == true){
@@ -291,10 +308,22 @@ if(isset($_POST["getPerfumeryTurner"]) && $_POST["getPerfumeryTurner"]){
     $getPerfumeryTurner->GetPerfumeryTurner();
 }
 
-if(isset($_POST["getTodayPerfumeries"]) && $_POST["getTodayPerfumeries"]){
+if(isset($_POST["getTodayPerfumeries"]) && $_POST["getTodayPerfumeries"] || isset($_POST["getPerfumeryFiles"]) && $_POST["getPerfumeryFiles"]){
     $getTodayPerfumery = new PerfumeryModuleAjax();
     $getTodayPerfumery->idTodayPerfumery = $_POST["idTodayPerfumery"];
     $getTodayPerfumery->GetPerfumeryFilesRoutes();
 }
 
+if(isset($_POST["getPerfumeryByIdInTurner"]) && $_POST["getPerfumeryByIdInTurner"]){
+    $getPerfumeryByIdInTurner = new PerfumeryModuleAjax();
+    $getPerfumeryByIdInTurner->idPerfumeryTurner = $_POST["idTurner"];
+    $getPerfumeryByIdInTurner->GetPerfumeryByIdInTurner();
+}
+
+if(isset($_POST["saveSelectedPerfumeryFiles"]) && $_POST["saveSelectedPerfumeryFiles"]){
+    $saveSelectedPerfumeryFiles = new PerfumeryModuleAjax();
+    $saveSelectedPerfumeryFiles->selectedFilesPerfumeryTurner = $_POST["selectedFilesPerfumeryTurner"];
+    $saveSelectedPerfumeryFiles->selectedFilesValues = $_POST["selectedFilesValues"];
+    $saveSelectedPerfumeryFiles->SaveSelectedPerfumeryFile();
+}
 ?>

@@ -238,6 +238,37 @@ class PerfumeryModel{
 
         $stmt = null;
     }
+
+    static public function GetPerfumeryByIdInTurner($table, $idPerfumeryTurner){
+        $stmt = Connection::Connect()->prepare("SELECT * FROM $table WHERE id_turner_perfumery = :id_turner_perfumery");
+
+        $stmt->bindParam(":id_turner_perfumery", $idPerfumeryTurner, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchColumn(1);
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+    static public function SaveSelectedPerfumeryFile($table, $selectedFilesPerfumeryTurner, $selectedFilesValues){
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET fileSelected = :fileSelected WHERE id_turner_perfumery = :id_turner_perfumery");
+
+        $stmt->bindParam(":id_turner_perfumery", $selectedFilesPerfumeryTurner, PDO::PARAM_INT);
+        $stmt->bindParam(":fileSelected", $selectedFilesValues, PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

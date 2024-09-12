@@ -245,86 +245,162 @@ $(function () {
       },
       eventClick: function(info){
         var idTurner = info.event.id;
-
+        
         console.log("Id del evento en eventClick " + info.event.id);
         
         const formatter = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
         var currentPositionDate = formatter.format(info.event.start);
-
+        
         console.log("fecha del evento en eventClick " + currentPositionDate);
+        
+        if(info.event.extendedProps.type == "pharmacy"){
+          $('#idPharmacyEventClick').text(idTurner);
+          $('#namePharmacyEventClick').text(info.event.title);
+          $('#selectPharmacyFilesModal').modal();
 
-        $('#idPharmacyEventClick').text(idTurner);
-        $('#namePharmacyEventClick').text(info.event.title);
-        $('#calendarModal').modal();
+          var idPharmacy = 0;
 
-        var idPharmacy = 0;
+          $('.selectFilesDiv').empty();
+          valuesIndex = 0;
 
-        $('.selectFilesDiv').empty();
-        valuesIndex = 0;
+          var validateData = new FormData();
+          validateData.append("getPharmacyByIdInTurner", true);
+          validateData.append("idTurner", idTurner);
 
-        var validateData = new FormData();
-        validateData.append("getPharmacyByIdInTurner", true);
-        validateData.append("idTurner", idTurner);
+          setTimeout(function(){
+            $.ajax({
+              url:hiddenPath+"ajax/turner_module_ajax.php",
+              method: "POST",
+              data: validateData,
+              cache: false,
+              contentType: false,
+              processData: false,
+              success:(response)=>{
+                console.log("getPharmacyByIdInTurner " + response);
 
-        setTimeout(function(){
-          $.ajax({
-            url:hiddenPath+"ajax/turner_module_ajax.php",
-            method: "POST",
-            data: validateData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success:(response)=>{
-              console.log("getPharmacyByIdInTurner " + response);
+                idPharmacy = response;
 
-              idPharmacy = response;
-
-              GetPharmacyFiles(idPharmacy);
-            }
-          });
-        }, 500);
-
-
-        function GetPharmacyFiles(id){
-          var validateFiles = new FormData();
-          validateFiles.append("getPharmacyFiles", true);
-          validateFiles.append("idPharmacyFiles", id);
-
-          $.ajax({
-            url:hiddenPath+"ajax/pharmacies_module_ajax.php",
-            method: "POST",
-            data: validateFiles,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success:(response)=>{
-              console.log("getPharmacyByIdInTurner " + response);
-
-              var parseResponse = JSON.parse(response);
-
-              arrAux = JSON.parse(parseResponse[0]);
-
-              var videoElement = '';
-
-              for(var i = 0; i < arrAux.length; i++){
-                videoElement += '<div class="col">';
-                videoElement += '<input class="selectedFile" id="selectedFile'+i+'" type="checkbox" value="'+i+'">';
-                videoElement += '<video class="videoFileSelect" src="../'+arrAux[i]+'" controls></video>';
-                videoElement += '</div>';
-                valuesIndex++;
+                GetPharmacyFiles(idPharmacy);
               }
+            });
+          }, 500);
 
-              $('.selectFilesDiv').append(videoElement);
+          function GetPharmacyFiles(id){
+            var validateFiles = new FormData();
+            validateFiles.append("getPharmacyFiles", true);
+            validateFiles.append("idPharmacyFiles", id);
+  
+            $.ajax({
+              url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+              method: "POST",
+              data: validateFiles,
+              cache: false,
+              contentType: false,
+              processData: false,
+              success:(response)=>{
+                console.log("getPharmacyByIdInTurner " + response);
+  
+                var parseResponse = JSON.parse(response);
+  
+                arrAux = JSON.parse(parseResponse[0]);
+  
+                var videoElement = '';
+  
+                for(var i = 0; i < arrAux.length; i++){
+                  videoElement += '<div class="col">';
+                  videoElement += '<input class="selectedFile" id="selectedFile'+i+'" type="checkbox" value="'+i+'">';
+                  videoElement += '<video class="videoFileSelect" src="'+hiddenPath+arrAux[i]+'" controls></video>';
+                  videoElement += '</div>';
+                  valuesIndex++;
+                }
+  
+                $('.selectFilesDiv').append(videoElement);
+  
+                console.log("valuesIndex " + valuesIndex);
+  
+              }
+            });
+          }
+  
+          $('#saveFilesSelected').on('click', function(){
+            SaveSelectedFile(idTurner);
+          })
 
-              console.log("valuesIndex " + valuesIndex);
+        }else{
+          $('#selectPerfumeryFilesModal').modal();
+          $('#idPerfumeryEventClick').text(idTurner);
+          $('#namePerfumeryEventClick').text(info.event.title);
 
-            }
-          });
+          var idPerfumery = 0;
+
+          $('.selectPerfumeryFilesDiv').empty();
+          valuesIndex = 0;
+
+          var validateData = new FormData();
+          validateData.append("getPerfumeryByIdInTurner", true);
+          validateData.append("idTurner", idTurner);
+
+          setTimeout(function(){
+            $.ajax({
+              url:hiddenPath+"ajax/perfumery_module_ajax.php",
+              method: "POST",
+              data: validateData,
+              cache: false,
+              contentType: false,
+              processData: false,
+              success:(response)=>{
+                console.log("getPharmacyByIdInTurner " + response);
+
+                idPerfumery = response;
+
+                GetPerfumeryFiles(idPerfumery);
+              }
+            });
+          }, 500);
+
+          function GetPerfumeryFiles(id){
+            var validateFiles = new FormData();
+            validateFiles.append("getPerfumeryFiles", true);
+            validateFiles.append("idTodayPerfumery", id);
+  
+            $.ajax({
+              url:hiddenPath+"ajax/perfumery_module_ajax.php",
+              method: "POST",
+              data: validateFiles,
+              cache: false,
+              contentType: false,
+              processData: false,
+              success:(response)=>{
+                console.log("GetPerfumeryFiles " + response);
+  
+                var parseResponse = JSON.parse(response);
+  
+                arrAux = JSON.parse(parseResponse[0]);
+  
+                var videoElement = '';
+  
+                for(var i = 0; i < arrAux.length; i++){
+                  videoElement += '<div class="col">';
+                  videoElement += '<input class="selectedFile" id="selectedPerfumeryFile'+i+'" type="checkbox" value="'+i+'">';
+                  videoElement += '<video class="videoFileSelect" src="'+hiddenPath+arrAux[i]+'" controls></video>';
+                  videoElement += '</div>';
+                  valuesIndex++;
+                }
+  
+                $('.selectPerfumeryFilesDiv').append(videoElement);
+  
+                console.log("valuesIndex " + valuesIndex);
+  
+              }
+            });
+          }
+
+          $('#savePerfumeryFilesSelected').on('click', function(){
+            SaveSelectedPerfumeryFile(idTurner);
+          })
+
         }
 
-        $('#saveFilesSelected').on('click', function(){
-          SaveSelectedFile(idTurner);
-        })
         
       },
       eventDragStop: function(event){
@@ -727,6 +803,42 @@ $(function () {
 
     $.ajax({
       url:hiddenPath+"ajax/turner_module_ajax.php",
+      method: "POST",
+      data: saveSelectedFiles,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success:(response)=>{
+        console.log("SaveSelectedFile response " + response);
+
+      }
+    });
+  }
+
+  function SaveSelectedPerfumeryFile(id){
+    //var id = $('#idPharmacyEventClick').text();
+    var saveSelectedFiles = new FormData();
+    saveSelectedFiles.append("saveSelectedPerfumeryFiles", true);
+    saveSelectedFiles.append("selectedFilesPerfumeryTurner", id);
+
+    var valuesArray = [];
+
+    for(var i = 0; i < valuesIndex; i++){
+      if($('#selectedPerfumeryFile'+i).is(':checked')){
+        valuesArray.push($('#selectedPerfumeryFile'+i).val());
+        console.log("files seleccionados " + valuesArray);
+      }
+    }
+
+    var valuesToJSON = JSON.stringify(valuesArray);
+
+    console.log("valuesToJSON " + valuesToJSON);
+    console.log("id " + id);
+
+    saveSelectedFiles.append("selectedFilesValues", valuesToJSON);
+
+    $.ajax({
+      url:hiddenPath+"ajax/perfumery_module_ajax.php",
       method: "POST",
       data: saveSelectedFiles,
       cache: false,

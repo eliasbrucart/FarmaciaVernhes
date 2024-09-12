@@ -1,5 +1,5 @@
 <div class="content-wrapper pharmaciesModuleBox">
-<section class="content">
+<section class="content clearfix">
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Agregar Farmacias</h3>
@@ -18,6 +18,11 @@
                     <div class="input-group-append float-left">
                         <button type="button" class="btn btn-primary addPharmacyBtn" onclick="AddPharmacy()">Agregar</button>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 float-right">
+                <div class="form-group">
+                    <button class="btn btn-success" onclick="openFullscreen()">Turnero Full Screen</button>
                 </div>
             </div>
         </div>
