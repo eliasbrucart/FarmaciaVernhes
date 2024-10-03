@@ -269,6 +269,24 @@ class PerfumeryModel{
 
         $stmt = null;
     }
+
+    static public function ClearFilesPerfumeryColumn($table, $id){
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET file_perfumery = :file_perfumery WHERE id_perfumery = :id_perfumery");
+
+        $stmt->bindParam(":id_".$table, $id, PDO::PARAM_INT);
+        $nullValue = "";
+        $stmt->bindParam(":file_".$table, $nullValue, PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

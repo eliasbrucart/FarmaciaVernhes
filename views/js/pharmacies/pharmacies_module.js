@@ -97,10 +97,11 @@ function EditPharmacy(){
 							processData: false,
 							success:(response)=>{
 
-							setTimeout(function(){
 								console.log("Edit Pharmacy " + response);
+								alert("Farmacia modificada!");
+							/*setTimeout(function(){
 								location.reload();
-							}, 2000);
+							}, 2000);*/
 
 							}
 						});
@@ -153,10 +154,11 @@ function EditPharmacy(){
 							processData: false,
 							success:(response)=>{
 
-							  setTimeout(function(){
-								  console.log("Edit Pharmacy 12" + response);
+								console.log("Edit Pharmacy 12" + response);
+								alert("Farmacia modificada!");
+							  /*setTimeout(function(){
 								  location.reload();
-							  }, 2000);
+							  }, 2000);*/
 
 							}
 						});
@@ -185,9 +187,10 @@ function EditPharmacy(){
 			processData: false,
 			success:(response)=>{
 				console.log("Pharmacy name edited " + response);
-				setTimeout(function(){
+				alert("Farmacia modificada!");
+				/*setTimeout(function(){
 					location.reload();
-				}, 2000);
+				}, 2000);*/
 			}
 		});
 	}
@@ -277,3 +280,46 @@ $('.pharmacyFiles12').dropzone({
 		})
 	}
 });
+
+function DeleteFilesPharmacy(){
+	var confirmButton = "<button onclick='OnConfirmDeleteFilesPharmacy()' id='confirmDeleteFilesPharmacy' class='btn btn-success'><i class='fa fa-check'></i></butoon>";
+	var cancelbutton = "<button onclick='RemoveChildrenButtonsFromFilesPharmacy()' id='cancelDeleteFilesPharmacy' class='btn btn-danger'><i class='fa fa-window-close' aria-hidden='true'></i></button>";
+
+	if($('.confirmDeleteFilesPharmacy').children().length <= 0){
+		$('.confirmDeleteFilesPharmacy').append(confirmButton);
+		$('.confirmDeleteFilesPharmacy').append(cancelbutton);
+	}
+}
+
+function RemoveChildrenButtonsFromFilesPharmacy(){
+	$('.confirmDeleteFilesPharmacy').children("#confirmDeleteFilesPharmacy").remove();
+	$('.confirmDeleteFilesPharmacy').children("#cancelDeleteFilesPharmacy").remove();
+}
+
+function OnConfirmDeleteFilesPharmacy(){
+	var idPharmacy = $('#idPharmacyToEdit').text();
+	var namePharmacy = $("#newNamePharmacy").val();
+
+	var validateData = new FormData();
+
+	validateData.append("ConfimrDeleteFilesPharmacy", true);
+	validateData.append("idPharmacyToDeleteFiles", idPharmacy);
+	validateData.append("namePharmacyToDeleteFiles", namePharmacy);
+
+	$.ajax({
+		url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+        method: "POST",
+        data: validateData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:(response)=>{
+          console.log("OnConfirmDeleteFilesPharmacy " + response);
+        }
+	});
+}
+
+/*$('#cancelDeleteFilesPharmacy').on("click", function(){
+	$('.confirmDeleteFilesPharmacy').children("#confirmDeleteFilesPharmacy").remove();
+	$('.confirmDeleteFilesPharmacy').children("#cancelDeleteFilesPharmacy").remove();
+});*/

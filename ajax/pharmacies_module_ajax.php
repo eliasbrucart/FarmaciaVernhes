@@ -74,8 +74,9 @@ class PharmaciesModuleAjax{
         }catch(Exception $e){
             echo 'Excepción capturada: ',  $e->getMessage(), "\n";
         }*/
-        PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute, $fullDayFile);
-        sleep(1.5);
+        
+        //PharmacyController::DeletePharmacyFiles($this->pharmacyFilesRoute, $fullDayFile);
+        //sleep(1.5);
         
         $response = PharmacyController::CreatePharmacyFiles($this->pharmacyFiles, $this->pharmacyFilesRoute, $fullDayFile, $this->originalFileName);
 
@@ -126,6 +127,18 @@ class PharmaciesModuleAjax{
         $filesArray = array(0=>$response[0]["fullday_pharmacy"]);
 
         echo json_encode($filesArray);
+    }
+
+    public $idPharmacyToDeleteFiles;
+    public $namePharmacyToDeleteFiles;
+    public function OnConfirmDeleteFilesPharmacy(){
+        $fileType = "fullDayFile";
+
+        PharmacyController::DeletePharmacyFiles($this->namePharmacyToDeleteFiles, $fileType);
+
+        $response = PharmacyController::ClearFilesPharmacyColumn($this->idPharmacyToDeleteFiles);
+
+        echo json_encode($response);
     }
 }
 
@@ -183,8 +196,13 @@ if(isset($_POST["getPharmacyFiles"]) && $_POST["getPharmacyFiles"]){
     $getPharmacyFiles = new PharmaciesModuleAjax();
     $getPharmacyFiles->idPharmacyFiles = $_POST["idPharmacyFiles"];
     $getPharmacyFiles->GetPharmacyFiles();
-
 }
 
+if(isset($_POST["ConfimrDeleteFilesPharmacy"]) && $_POST["ConfimrDeleteFilesPharmacy"]){
+    $confimrDeleteFilesPharmacy = new PharmaciesModuleAjax();
+    $confimrDeleteFilesPharmacy->idPharmacyToDeleteFiles = $_POST["idPharmacyToDeleteFiles"];
+    $confimrDeleteFilesPharmacy->namePharmacyToDeleteFiles = $_POST["namePharmacyToDeleteFiles"];
+    $confimrDeleteFilesPharmacy->OnConfirmDeleteFilesPharmacy();
+}
 
 ?>

@@ -35,7 +35,7 @@ class PerfumeryController{
             $directory = "../views/img/perfumery/".$perfumeryRoutes;
 
             if(!file_exists($directory)){
-                mkdir($directory, 0755);
+                mkdir($directory); #permisos en servidor linux
                 if($perfumeryFiles["type"] == "video/mp4"){
                     $date = date("Y-m-d");
     
@@ -282,6 +282,14 @@ class PerfumeryController{
         $table = "turner_perfumery";
 
         $response = PerfumeryModel::SaveSelectedPerfumeryFile($table, $selectedFilesPerfumeryTurner, $selectedFilesValues);
+
+        return $response;
+    }
+
+    static public function ClearFilesPerfumeryColumn($id){
+        $table = "perfumery";
+
+        $response = PerfumeryModel::ClearFilesPerfumeryColumn($table, $id);
 
         return $response;
     }

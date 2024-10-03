@@ -39,9 +39,9 @@ class PerfumeryModuleAjax{
     public function EditPerfumeryFiles(){
         $perfumeryArray = PerfumeryController::GetPerfumeryById($this->perfumeryIdToEdited);
         $namePerfumery = $perfumeryArray["name_perfumery"];
-        PerfumeryController::DeletePerfumeryFilesByName($namePerfumery);
+        //PerfumeryController::DeletePerfumeryFilesByName($namePerfumery);
 
-        sleep(1.5);
+        //sleep(1.5);
         //$originalPerfumeryFileRoute = $perfumeryArray["file_perfumery"];
 
         //PerfumeryController::DeletePerfumeryFilesByRoute($originalPerfumeryFileRoute);
@@ -95,6 +95,19 @@ class PerfumeryModuleAjax{
         $response = PerfumeryController::EditOrderPerfumery($data);
 
         echo json_encode($response);
+    }
+
+    public $idPerfumeryToDeleteFiles;
+    public function DeletePerfumeryFiles(){
+        $perfumeryArray = PerfumeryController::GetPerfumeryById($this->idPerfumeryToDeleteFiles);
+        $perfumeryName = $perfumeryArray["name_perfumery"];
+
+        PerfumeryController::DeletePerfumeryFiles($perfumeryName);
+
+        $response = PerfumeryController::ClearFilesPerfumeryColumn($this->idPerfumeryToDeleteFiles);
+
+        echo json_encode($response);
+
     }
 
     public $idPerfumeryDeleted;
@@ -326,5 +339,10 @@ if(isset($_POST["saveSelectedPerfumeryFiles"]) && $_POST["saveSelectedPerfumeryF
     $saveSelectedPerfumeryFiles->selectedFilesPerfumeryTurner = $_POST["selectedFilesPerfumeryTurner"];
     $saveSelectedPerfumeryFiles->selectedFilesValues = $_POST["selectedFilesValues"];
     $saveSelectedPerfumeryFiles->SaveSelectedPerfumeryFile();
+}
+if(isset($_POST["ConfimrDeleteFilesPerfumery"]) && $_POST["ConfimrDeleteFilesPerfumery"]){
+    $deletePerfumeryFiles = new PerfumeryModuleAjax();
+    $deletePerfumeryFiles->idPerfumeryToDeleteFiles = $_POST["idPerfumeryToDeleteFiles"];
+    $deletePerfumeryFiles->DeletePerfumeryFiles();
 }
 ?>

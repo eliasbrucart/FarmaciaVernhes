@@ -86,11 +86,11 @@ class PharmacyController{
             $fileTypeDirectory = "../views/img/".$pharmacyFilesRoute."/".$fileType;
 
             if(!file_exists($directory)){
-                mkdir($directory, 0755);
+                mkdir($directory); #mkdir con permisos para linux
             }
 
             if(!file_exists($fileTypeDirectory)){
-                mkdir($fileTypeDirectory, 0755);
+                mkdir($fileTypeDirectory); #mkdir con permisos para linux
                 if($pharmacyFiles["type"] == "video/mp4"){
                     $date = date("Y-m-d");
     
@@ -178,6 +178,14 @@ class PharmacyController{
         $table = "pharmacy";
 
         $response = PharmacyModel::EditDataPharmacy($table, $data);
+
+        return $response;
+    }
+
+    static public function ClearFilesPharmacyColumn($id){
+        $table = "pharmacy";
+
+        $response = PharmacyModel::ClearFilesPharmacyColumn($table, $id);
 
         return $response;
     }

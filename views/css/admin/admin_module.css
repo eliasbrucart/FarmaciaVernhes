@@ -22,11 +22,19 @@
     font-size: 100px;
 }
 .videoFileSelect{
-    width: 20%;
-    height: 25%;
+    width: 80%;
+    height: 90%;
 }
 .selectedFile{
     margin: 12px 7px;
+}
+
+.selectedFile{
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    padding: 10px;
+    position: relative;
+    height: 100px;
 }
 /*=============================================
 ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)

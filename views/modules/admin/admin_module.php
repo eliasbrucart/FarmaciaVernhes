@@ -98,7 +98,7 @@
 
                 <div class="form-floating mb-3">
 
-                  <div class="container selectFilesDiv">
+                  <div class="container-fluid selectFilesDiv clearfix">
 
                   </div>
 
@@ -146,7 +146,7 @@
 
                 <div class="form-floating mb-3">
 
-                  <div class="container selectPerfumeryFilesDiv">
+                  <div class="container-fluid selectPerfumeryFilesDiv clearfix">
 
                   </div>
 

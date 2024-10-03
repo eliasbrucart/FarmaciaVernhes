@@ -128,6 +128,18 @@
 
                         </div>
 
+                        <div class="form-floating mb-3">
+
+                            <h3>Borrar archivos de la farmacia</h3>
+
+                            <button class="btn btn-danger" onclick="DeleteFilesPharmacy()">Borrar Archivos!</button>
+
+                            <div class="confirmDeleteFilesPharmacy">
+
+                            </div>
+                            
+                        </div>
+
                     </div>
 
                 </div>
@@ -188,5 +200,49 @@
 
     </div>
 
+
+</div>
+
+<div id="deleteFilePharmacyModal" class="modal fade" role="dialog">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header" style="background:#c9c9c9; color:black">
+
+                <h4 class="modal-title">Eliminar Archivos Farmacia</h4>
+
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <div class="modal-body" style="background:##c9c9c9;">
+
+                <div class="box-body">
+
+                    <div class="form-group">
+
+                        <h3>Identificador: <span id="idPharmacyToDelete"></span></h3>
+
+                        <p>Nombre: <span id="namePharmacyToDelete"></span></p>
+
+                        <p>Direccion: <span id="addressPharmacyToDelete"></span></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer" style="background:#c9c9c9;">
+
+                <button type="button" class="btn btn-danger m-2" id="deletePharmacy" onclick="DeletePharmacy()">Eliminar</button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>

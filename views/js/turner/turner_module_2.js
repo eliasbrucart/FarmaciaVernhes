@@ -7,7 +7,7 @@ $(function(){
     
     var videoPharmacy = document.getElementById('videoPharmacy').addEventListener('ended',ActivateNextVideo,false);
 
-    videoPharmacy = document.getElementById('videoPharmacy').addEventListener('error',GetTodayPharmacies,false);
+    videoPharmacy = document.getElementById('videoPharmacy').addEventListener('error',GetTodayPharmaciesOneTime,false);
     
     var date = new Date();
     
@@ -19,7 +19,7 @@ $(function(){
     
     console.log("actualDateToDBFormat " + actualDateToDBFormat);
 
-    GetTodayPharmacies(actualDateToDBFormat);
+    GetTodayPharmaciesOneTime(actualDateToDBFormat);
 
     setInterval(function(){
         var dateUpd = new Date();
@@ -31,7 +31,7 @@ $(function(){
         });
 
         if(pharmacyVideo.length === 0){
-            GetTodayPharmacies(actualDateToDBFormatUpd);
+            GetTodayPharmaciesOneTime(actualDateToDBFormatUpd);
         }else{
             return;
         }
@@ -72,7 +72,7 @@ $(function(){
         });
     }
 
-    function GetTodayPharmacies(actualDate){
+    function GetTodayPharmaciesOneTime(actualDate){
         var validateData = new FormData();
         validateData.append("getTodayPharmacies", true);
         validateData.append("actualDateToDBFormat", actualDate);
@@ -89,40 +89,60 @@ $(function(){
                 //console.log("parseJSON " + JSON.stringify(parseJSON));
                 //console.log("parse filesSelectedIndex " + JSON.stringify(parseJSON[i].fileSelected));
 
+                console.log("GetTodayPharmaciesOneTime se ejecuto!");
                 
                 for(var i = 0; i < parseJSON.length; i++){
                     var filesSelectedIndex = JSON.parse(parseJSON[i].fileSelected);
                     console.log("filesSelectedIndex " + filesSelectedIndex);
-                    if(flag){
-                        GetAllPharmacies(parseJSON[i].id_pharmacy, filesSelectedIndex);
-                        flag = false;
-                    }else if(UpdateVideo24hs()){
-                        if(updateOneTime){
-                            GetAllPharmacies(parseJSON[i].id_pharmacy, filesSelectedIndex);
-                            console.log("Entro por udpate one time!");
-                            updateOneTime = false;
-                        }
-                        //flag = true;
-                    }else{
-                        console.log("No esta dentro de las horas establecidas! No actualizamos el video!");
-                    }
+                    GetAllPharmacies(parseJSON[i].id_pharmacy, filesSelectedIndex);
                 }
-                //console.log(parseJSON);
-                //GetAllPharmacies(parseJSON[i].id_pharmacy, parseJSON[i]);
-                /*if(parseJSON.length > 1){
-                    //ActivateBothVideos();
-                    for(var i = 0; i < parseJSON.length; i++){
-                        GetPharmacyFileRoutes(parseJSON[i].id_pharmacy, parseJSON[i].fullday_pharmacy);
-                    }
-                }else{
-                    if(parseJSON[0].fullDay == 1){
-                        GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
-                    }else{
-                        GetPharmacyFileRoutes(parseJSON[0].id_pharmacy, parseJSON[0].fullDay);
-                    }
-                }*/
             }
         });
+    }
+
+    function GetTodayPharmacies(actualDate){
+        if(UpdateVideo24hs()){
+            if(updateOneTime){
+                pharmacyVideo = [];
+                //(parseJSON[i].id_pharmacy, filesSelectedIndex);
+                //console.log("Entro por udpate one time!");
+                GetTodayPharmaciesOneTime(actualDate);
+                console.log("Ejecutando GetTodayPharmaciesOneTime en TodayPharmacies para actualizar a las 8!");
+                updateOneTime = false;
+            }
+        }else{
+            console.log("No esta dentro de las horas establecidas! No actualizamos el video!");
+        }
+
+        /*var validateData = new FormData();
+        validateData.append("getTodayPharmacies", true);
+        validateData.append("actualDateToDBFormat", actualDate);
+
+        $.ajax({
+            url:hiddenPath+"ajax/turner_module_ajax.php",
+            method: "POST",
+            data: validateData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:(response)=>{
+                var parseJSON = JSON.parse(response);
+                //console.log("parseJSON " + JSON.stringify(parseJSON));
+                //console.log("parse filesSelectedIndex " + JSON.stringify(parseJSON[i].fileSelected));
+
+                if(UpdateVideo24hs()){
+                    if(updateOneTime){
+                        //(parseJSON[i].id_pharmacy, filesSelectedIndex);
+                        //console.log("Entro por udpate one time!");
+                        GetTodayPharmaciesOneTime(actualDate);
+                        console.log("Ejecutando GetTodayPharmaciesOneTime!");
+                        updateOneTime = false;
+                    }
+                }else{
+                    console.log("No esta dentro de las horas establecidas! No actualizamos el video!");
+                }
+            }
+        });*/
     }
 
     function PlayFirstVideo(){
@@ -141,6 +161,14 @@ $(function(){
         if(videoPerfumery.src == null || videoPerfumery.src == ""){
             GetAllPerfumeries();
         }*/
+
+        var date = new Date();
+    
+        const actualDateToDBFormat = date.toLocaleDateString("en-US", { // you can use undefined as first argument
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+        });
 
         GetTodayPharmacies(actualDateToDBFormat);
 
@@ -171,11 +199,15 @@ $(function(){
     }
 
     function UpdateVideo24hs(){
-        var startDate = CreateDateTime("08:00");
-        var endDate = CreateDateTime("08:20");
+        var startDate = CreateDateTime("07:50");
+        var endDate = CreateDateTime("08:10");
         var now = new Date();
         if(startDate <= now && now <= endDate){
             console.log("Esta entre la hora que corresponde!");
+            //updateOneTime = true;
+            /*if(!updateOneTime){
+                updateOneTime = false;
+            }*/
             return true;
         }else{
             updateOneTime = true;

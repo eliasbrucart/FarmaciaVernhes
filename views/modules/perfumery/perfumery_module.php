@@ -94,6 +94,17 @@
                                                             </div>
 
                                                         </form>
+                                                        <div class="form-floating mb-3">
+
+                                                            <h3>Borrar archivos de la perfumeria!</h3>
+
+                                                            <button class="btn btn-danger" onclick="DeleteFilesPerfumery('.$value["id_perfumery"].')">Borrar Archivos!</button>
+
+                                                            <div class="confirmDeleteFilesPerfumery">
+
+                                                            </div>
+                                                            
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -153,6 +153,24 @@ class PharmacyModel{
 
         $stmt = null;
     }
+
+    static public function ClearFilesPharmacyColumn($table, $id){
+        $stmt = Connection::Connect()->prepare("UPDATE $table SET fullday_pharmacy = :fullday_pharmacy WHERE id_pharmacy = :id_pharmacy");
+
+        $stmt->bindParam(":id_".$table, $id, PDO::PARAM_INT);
+        $nullValue = "";
+        $stmt->bindParam(":fullday_".$table, $nullValue, PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return "ok";
+        }else{
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }
 
 ?>

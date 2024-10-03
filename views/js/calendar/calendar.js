@@ -307,7 +307,7 @@ $(function () {
                 var videoElement = '';
   
                 for(var i = 0; i < arrAux.length; i++){
-                  videoElement += '<div class="col">';
+                  videoElement += '<div class="col-md-6 float-left">';
                   videoElement += '<input class="selectedFile" id="selectedFile'+i+'" type="checkbox" value="'+i+'">';
                   videoElement += '<video class="videoFileSelect" src="'+hiddenPath+arrAux[i]+'" controls></video>';
                   videoElement += '</div>';
@@ -324,6 +324,9 @@ $(function () {
   
           $('#saveFilesSelected').on('click', function(){
             SaveSelectedFile(idTurner);
+            setTimeout(function(){
+              location.reload();
+            },500);
           })
 
         }else{
@@ -380,7 +383,7 @@ $(function () {
                 var videoElement = '';
   
                 for(var i = 0; i < arrAux.length; i++){
-                  videoElement += '<div class="col">';
+                  videoElement += '<div class="col-md-6 float-left">';
                   videoElement += '<input class="selectedFile" id="selectedPerfumeryFile'+i+'" type="checkbox" value="'+i+'">';
                   videoElement += '<video class="videoFileSelect" src="'+hiddenPath+arrAux[i]+'" controls></video>';
                   videoElement += '</div>';

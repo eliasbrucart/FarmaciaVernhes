@@ -61,12 +61,13 @@ function UploadPerfumery(){
 					processData: false,
 					success:(response)=>{
 					  console.log("Upload Perfumery " + response);
+					  alert("Perfumeria " + perfumeryName + " modificada!");
 					  /*if(response != "ok"){
 						alert("Ya existe la perfumeria!");
 					  }*/
-					  setTimeout(function(){
+					  /*setTimeout(function(){
 						location.reload();
-					  }, 2000);
+					  }, 2000);*/
 					}
 				});
 	
@@ -141,9 +142,10 @@ function EditPerfumery(id){
 				processData: false,
 				success:(response)=>{
 					console.log("Edited all perfumery attr" + response);
-					setTimeout(function(){
+					//alert("Perfumeria " + perfumeryNameEdited + " modificada!");
+					/*setTimeout(function(){
 						location.reload();
-					}, 3000);
+					}, 3000);*/
 				}
 			});
 		}, 2000);
@@ -166,9 +168,10 @@ function EditPerfumery(id){
 			processData: false,
 			success:(response)=>{
 				console.log("Perfumery name edited " + response);
-				setTimeout(function(){
+				alert("Perfumeria " + perfumeryNameEdited + " modificada!");
+				/*setTimeout(function(){
 					location.reload();
-				}, 2000);
+				}, 2000);*/
 			}
 		});
 	}
@@ -343,3 +346,41 @@ $('.todo-list').sortable({
 		}
 	});
 });*/
+
+function DeleteFilesPerfumery(id){
+	var confirmButton = "<button onclick='OnConfirmDeleteFilesPerfumery("+id+")' id='confirmDeleteFilesPerfumery' class='btn btn-success'><i class='fa fa-check'></i></butoon>";
+	var cancelbutton = "<button onclick='RemoveChildrenButtonsFromFilesPerfumery()' id='cancelDeleteFilesPerfumery' class='btn btn-danger'><i class='fa fa-window-close' aria-hidden='true'></i></button>";
+
+	if($('.confirmDeleteFilesPerfumery').children().length <= 0){
+		$('.confirmDeleteFilesPerfumery').append(confirmButton);
+		$('.confirmDeleteFilesPerfumery').append(cancelbutton);
+	}
+}
+
+function RemoveChildrenButtonsFromFilesPerfumery(){
+	$('.confirmDeleteFilesPerfumery').children("#confirmDeleteFilesPerfumery").remove();
+	$('.confirmDeleteFilesPerfumery').children("#cancelDeleteFilesPerfumery").remove();
+}
+
+function OnConfirmDeleteFilesPerfumery(id){
+	//var idPharmacy = $('#idPharmacyToEdit').text();
+
+	var validateData = new FormData();
+
+	validateData.append("ConfimrDeleteFilesPerfumery", true);
+	validateData.append("idPerfumeryToDeleteFiles", id);
+	//validateData.append("namePharmacyToDeleteFiles", namePharmacy);
+
+	$.ajax({
+		url:hiddenPath+"ajax/perfumery_module_ajax.php",
+        method: "POST",
+        data: validateData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:(response)=>{
+          console.log("OnConfirmDeleteFilesPharmacy " + response);
+		  alert("Archivos de perfumeria eliminados!");
+        }
+	});
+}
