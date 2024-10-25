@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-07-2024 a las 07:03:41
+-- Tiempo de generación: 26-08-2024 a las 21:31:54
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -68,25 +68,29 @@ INSERT INTO `event_calendar` (`id_event_calendar`, `title`, `start`, `background
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `perfumery`
+--
+
+CREATE TABLE `perfumery` (
+  `id_perfumery` int(11) NOT NULL,
+  `name_perfumery` text NOT NULL,
+  `file_perfumery` text NOT NULL,
+  `order_perfumery` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pharmacy`
 --
 
 CREATE TABLE `pharmacy` (
   `id_pharmacy` int(11) NOT NULL,
   `name_pharmacy` text NOT NULL,
-  `address_pharmacy` text NOT NULL
+  `address_pharmacy` text NOT NULL,
+  `halfday_pharmacy` text NOT NULL,
+  `fullday_pharmacy` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `pharmacy`
---
-
-INSERT INTO `pharmacy` (`id_pharmacy`, `name_pharmacy`, `address_pharmacy`) VALUES
-(6, 'Vernhes', 'Oro 499'),
-(7, 'Sindical', 'Baldovino'),
-(11, 'Quarteroni', 'Vicente Lopez 121'),
-(12, 'Mayo', 'Bvard. Villegas 402'),
-(13, 'Larrosa', 'Ameghino 282');
 
 -- --------------------------------------------------------
 
@@ -102,31 +106,28 @@ CREATE TABLE `turner` (
   `fullDay` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `turner`
+-- Estructura de tabla para la tabla `users`
 --
 
-INSERT INTO `turner` (`id_turner`, `id_pharmacy`, `name_pharmacy`, `date_turner`, `fullDay`) VALUES
-(2, 7, 'Sindical', '07/13/2024', 1),
-(5, 7, 'Sindical', '07/19/2024', 1),
-(8, 6, 'Vernhes', '06/30/2024', 0),
-(10, 6, 'Vernhes', '08/21/2024', 1),
-(14, 6, 'Vernhes', '08/26/2024', 1),
-(16, 6, 'Vernhes', '09/10/2024', 1),
-(17, 6, 'Vernhes', '07/10/2024', 0),
-(19, 6, 'Vernhes', '07/12/2024', 0),
-(20, 7, 'Sindical', '07/12/2024', 0),
-(21, 6, 'Vernhes', '07/15/2024', 0),
-(22, 6, 'Vernhes', '07/17/2024', 0),
-(30, 13, 'Larrosa', '07/31/2024', 1),
-(32, 6, 'Vernhes', '07/31/2024', 1),
-(37, 6, 'Vernhes', '07/23/2024', 1),
-(40, 7, 'Sindical', '07/30/2024', 1),
-(41, 11, 'Quarteroni', '08/02/2024', 1),
-(42, 11, 'Quarteroni', '07/02/2024', 1),
-(43, 7, 'Sindical', '07/09/2024', 1),
-(44, 11, 'Quarteroni', '07/18/2024', 1),
-(45, 6, 'Vernhes', '07/25/2024', 1);
+CREATE TABLE `users` (
+  `id_users` int(11) NOT NULL,
+  `name_users` text NOT NULL,
+  `email_users` text NOT NULL,
+  `email_encrypted_users` text NOT NULL,
+  `password_users` text NOT NULL,
+  `actived_users` int(11) NOT NULL,
+  `isSuperuser` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id_users`, `name_users`, `email_users`, `email_encrypted_users`, `password_users`, `actived_users`, `isSuperuser`) VALUES
+(1, 'Elias', 'eliasbrucart@gmail.com', '9d1c12324fd691d3764a4c1a8ea9d8bc', '$2a$07$asxx54ahjppf45sd87a5auRajNP0zeqOkB9Qda.dSiTb2/n.wAC/2', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -145,6 +146,12 @@ ALTER TABLE `event_calendar`
   ADD PRIMARY KEY (`id_event_calendar`);
 
 --
+-- Indices de la tabla `perfumery`
+--
+ALTER TABLE `perfumery`
+  ADD PRIMARY KEY (`id_perfumery`);
+
+--
 -- Indices de la tabla `pharmacy`
 --
 ALTER TABLE `pharmacy`
@@ -156,6 +163,12 @@ ALTER TABLE `pharmacy`
 ALTER TABLE `turner`
   ADD PRIMARY KEY (`id_turner`),
   ADD KEY `id_pharmacy` (`id_pharmacy`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_users`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -174,16 +187,28 @@ ALTER TABLE `event_calendar`
   MODIFY `id_event_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `perfumery`
+--
+ALTER TABLE `perfumery`
+  MODIFY `id_perfumery` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `pharmacy`
 --
 ALTER TABLE `pharmacy`
-  MODIFY `id_pharmacy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pharmacy` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `turner`
 --
 ALTER TABLE `turner`
-  MODIFY `id_turner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_turner` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

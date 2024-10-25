@@ -58,6 +58,7 @@ function EditPharmacy(){
 	//pharmacy images logic
 
 	if(arrayFiles24.length > 0 && namePharmacy != ""){
+		showLoading();
 		//var multimediaList = [];
 		for(var i = 0; i < arrayFiles24.length; i++){
 			validateFiles.append("pharmacyFiles", arrayFiles24[i]);
@@ -79,7 +80,7 @@ function EditPharmacy(){
 
 					//if(multimedia != null){
 
-						var validateData = new FormData();
+						/*var validateData = new FormData();
 
 						validateData.append("editPharmacy", true);
 						validateData.append("idPharmacyToEdit", id);
@@ -96,19 +97,39 @@ function EditPharmacy(){
 							contentType: false,
 							processData: false,
 							success:(response)=>{
-
 								console.log("Edit Pharmacy " + response);
-								alert("Farmacia modificada!");
-							/*setTimeout(function(){
-								location.reload();
-							}, 2000);*/
-
 							}
-						});
+						});*/
 
 					//}
 
 				  //console.log("Edit Pharmacy " + response);
+				},
+				complete: (response) => {
+					var validateData = new FormData();
+
+					validateData.append("editPharmacy", true);
+					validateData.append("idPharmacyToEdit", id);
+					validateData.append("namePharmacyToEdit", namePharmacy);
+					validateData.append("addressPharmacyToEdit", addressPharmacy);
+					validateData.append("multimedia24", multimedia24);
+					//validateData.append("multimedia12", multimedia12);
+
+					$.ajax({
+						url:hiddenPath+"ajax/pharmacies_module_ajax.php",
+						method: "POST",
+						data: validateData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success:(response)=>{
+							console.log("Edit Pharmacy " + response);
+							//alert("Farmacia modificada!");
+						}
+					});
+					setTimeout(function(){
+						Swal.close();
+					}, 60000);
 				}
 			});
 		}
@@ -155,7 +176,6 @@ function EditPharmacy(){
 							success:(response)=>{
 
 								console.log("Edit Pharmacy 12" + response);
-								alert("Farmacia modificada!");
 							  /*setTimeout(function(){
 								  location.reload();
 							  }, 2000);*/
@@ -195,6 +215,18 @@ function EditPharmacy(){
 		});
 	}
 }
+
+const showLoading = function() {
+	Swal.fire({
+		title: 'Subiendo...',
+		html: 'Porfavor esperar...',
+		allowEscapeKey: false,
+		allowOutsideClick: false,
+		didOpen: () => {
+		  Swal.showLoading()
+		}
+	});
+};
 
 function ShowPharmacyDataOnDelete(id, name, address){
 	$('#idPharmacyToDelete').text(id);

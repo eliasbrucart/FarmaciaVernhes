@@ -45,7 +45,7 @@ class PerfumeryModuleAjax{
         //$originalPerfumeryFileRoute = $perfumeryArray["file_perfumery"];
 
         //PerfumeryController::DeletePerfumeryFilesByRoute($originalPerfumeryFileRoute);
-        $response = PerfumeryController::CreatePerfumeryFiles($this->perfumeryFilesEdited, $this->perfumeryNameEdited);
+        $response = PerfumeryController::CreatePerfumeryFiles($this->perfumeryFilesEdited, $namePerfumery);
 
         echo $response;
     }

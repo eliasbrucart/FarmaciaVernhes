@@ -2,11 +2,11 @@
 
 class Route{
     static public function GetFrontendRoute(){
-        return "https://fv.hardgames.com.ar/";
+        return "http://localhost/FarmaciaVernhes/";
     }
 
     static public function GetBackendRoute(){
-        return "https://fv.hardgames.com.ar/";
+        return "http://localhost/FarmaciaVernhes/";
     }
 
 }

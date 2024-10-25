@@ -7,7 +7,12 @@
             <div class="sticky-top mb-3">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Farmacias</h4>
+                  <h4 class="card-title">Farmacias y Perfumeria</h4>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
                 </div>
                 <div class="card-body">
                   <!-- the events -->
@@ -32,7 +37,7 @@
               <!-- /.card -->
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Perfumeria</h3>
+                  <h3 class="card-title">Acciones</h3>
                 </div>
                 <!--<div class="card-body clearfix">
 
