@@ -14,7 +14,7 @@ class UsersController{
                             "password"=>$encrypt,
                             "email"=>$_POST["regEmailUserInput"],
                             "encryptedEmail"=>$encryptEmail,
-                            "actived"=>$_POST["isUserActivated"]
+                            "actived"=>1
                         );
 
                 $response = "";

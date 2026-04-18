@@ -59,7 +59,7 @@
     <input type="hidden" value="<?php echo $url; ?>" id="hiddenPath">
 
 </head>
-<body translate="no">
+<body translate="no" class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 
     <?php 
 
